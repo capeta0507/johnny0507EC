@@ -27,8 +27,22 @@ $('#passCheck02_1').on('click', function(){
 
 // 送出資料
 $('#mySubmit').on('click', function(){
+    let emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+
+    let myName = $('#myName').val();
+    let myEmail = $('#myEmail').val();
+    let myPassword = $('#myPassword').val();
+    let myPasswordCheck = $('#myPasswordCheck').val();
     // 密碼確認
     if(myPassword !== myPasswordCheck){
-        
+        alert('您設定的密碼跟驗證的不相符喔！')
+        return false
+    }
+    // email 格式
+    if(myEmail.search(emailRule)){
+        alert('您輸入的email格式有誤')
+        return false
+    } else {
+        alert('email成功！')
     }
 });
