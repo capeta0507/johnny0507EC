@@ -31,10 +31,11 @@ app.get('/', (req, res) => {
 // Collection : customers
 // 新增客戶
 app.post('/customers/add',(req,res)=>{
-    console.log('add customer',req.body);
+    // console.log('add customer',req.body);
     let xuserName = req.body.userName;
     let xeMail = req.body.eMail;
     let xpassword = req.body.password;
+    // TODO : password 要加密，在儲存進資料庫
     // 要建立資料的 Class
     let xCustomer ={
         userName: xuserName,
