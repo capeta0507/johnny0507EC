@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 // Collection : customers
 // 新增客戶
 app.post('/customers/add',(req,res)=>{
+    console.log('add customer',req.body);
     let xuserName = req.body.userName;
     let xeMail = req.body.eMail;
     let xpassword = req.body.password;
@@ -43,7 +44,7 @@ app.post('/customers/add',(req,res)=>{
         telphone:'',
         mobile:'',
         address:'',
-        personalID=''
+        personalID:''
     };
     MongoClient.connect(MongoURL,(err,db)=>{
         if (err){
