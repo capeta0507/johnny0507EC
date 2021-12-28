@@ -70,9 +70,29 @@ $('#mySubmit').on('click', function(){
 
     axios.post('/customers/add', SignUpData)
         .then(res => {
-            console.log(res)
+            console.log(res.data)
         })
         .catch(error => {
             console.log(error.response);
         });
+    // var myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
+
+    // var raw = JSON.stringify({
+    //     "userName": myName,
+    //     "eMail": myEmail,
+    //     "password": myPassword
+    // });
+
+    // var requestOptions = {
+    //     method: 'POST',
+    //     headers: myHeaders,
+    //     body: raw,
+    //     redirect: 'follow'
+    // };
+
+    // fetch("/customers/add", requestOptions)
+    //     .then(response => response.text())
+    //     .then(result => console.log(result))
+    //     .catch(error => console.log('error', error));
 });
