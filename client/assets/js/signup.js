@@ -71,6 +71,7 @@ $('#mySubmit').on('click', function(){
     axios.post('/customers/add', SignUpData)
         .then(res => {
             console.log(res.data);
+            alert("恭喜您註冊完成!");
             window.location.href = "index.html";
         })
         .catch(error => {
