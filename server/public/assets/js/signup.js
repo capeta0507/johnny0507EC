@@ -71,6 +71,7 @@ $('#mySubmit').on('click', function(){
     axios.post('/customers/add', SignUpData)
         .then(res => {
             console.log(res.data)
+            window.location.href = "index.html";
         })
         .catch(error => {
             console.log(error.response);
