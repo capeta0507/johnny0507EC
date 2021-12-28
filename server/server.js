@@ -73,7 +73,7 @@ app.post('/customers/add',(req,res)=>{
 	})
 });
 
-// TODO : 新增登入
+// TODO : 登入
 // Database : EC0507
 // Collection : customers -> userName , eMail , password
 app.post('/customers/login',(req,res)=>{
