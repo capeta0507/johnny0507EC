@@ -58,6 +58,73 @@
     color: #fff;
     text-align: center;
 }
+.drapdown{
+    width: 150px;
+    height: auto;
+    background-color: #fff;
+    border-radius: 5px;
+    position: absolute;
+    top: 60px;
+    z-index: 10;
+    padding: 10px 0px;
+}
+.drapdown .drapBtn{
+    width: 100%;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.drapdown .drapBtn:hover{
+    background-color: #363636;
+    color: #fff;
+}
+.drapdown a{
+    text-decoration: none;
+}
+.sign_tag{
+    border: 1px solid #424242;
+    border-radius: 5px;
+    margin: 0 4px;
+}
+.myUser{
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    margin-right: 150px;
+}
+.myUser .userTag{
+    padding: 0 10px;
+    cursor: pointer;
+}
+.myUser .down-arrow{
+    width: 12px;
+    height: 11.8px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 13.5px;
+    background-image: url(../img/ic-dropdown-arrow-gray-12.svg);
+    background-repeat: no-repeat;
+    transform: rotateX(0);
+}
+.myUser .down-arrow.arrow-up{
+    transform: rotateX(180deg);
+}
+.myUser .name{
+    display: inline-block;
+    vertical-align: top;
+    padding: 6.3px 4px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 80px;
+}
+@media screen and (max-width:992px){
+    .sign_tag{
+        border: none;
+        border-radius: 0;
+        margin: 0;
+    }
+}
 @media screen and (max-width:550px){
     #signUp{
         width: 100%;
