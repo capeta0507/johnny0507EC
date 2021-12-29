@@ -72,6 +72,8 @@ $('#mySubmit').on('click', function(){
         .then(res => {
             console.log(res.data);
             alert("恭喜您註冊完成!");
+            // 暫時用sessionStorage存
+            sessionStorage.setItem('userName', myName);
             window.location.href = "index.html";
         })
         .catch(error => {

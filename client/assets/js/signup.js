@@ -72,9 +72,31 @@ $('#mySubmit').on('click', function(){
         .then(res => {
             console.log(res.data);
             alert("恭喜您註冊完成!");
+            // 暫時用sessionStorage存
+            sessionStorage.setItem('userName', myName);
             window.location.href = "index.html";
         })
         .catch(error => {
             console.log(error.response);
         });
+    // var myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
+
+    // var raw = JSON.stringify({
+    //     "userName": myName,
+    //     "eMail": myEmail,
+    //     "password": myPassword
+    // });
+
+    // var requestOptions = {
+    //     method: 'POST',
+    //     headers: myHeaders,
+    //     body: raw,
+    //     redirect: 'follow'
+    // };
+
+    // fetch("/customers/add", requestOptions)
+    //     .then(response => response.text())
+    //     .then(result => console.log(result))
+    //     .catch(error => console.log('error', error));
 });

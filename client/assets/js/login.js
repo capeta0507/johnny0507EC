@@ -41,8 +41,10 @@ $('#mySubmit').on('click', function(){
         .then(res => {
             console.log(res.data);
             userName = res.data[0].userName;
-            console.log(userName);
-            // window.location.href = "index.html";
+            // console.log(userName);
+            // 暫時用sessionStorage存
+            sessionStorage.setItem('userName', userName);
+            window.location.href = "index.html";
         })
         .catch(error => {
             console.log(error.response);
