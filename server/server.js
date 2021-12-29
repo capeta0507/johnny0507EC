@@ -79,6 +79,11 @@ app.post('/customers/add',(req,res)=>{
 app.post('/customers/login',(req,res)=>{
 	// 根據前端 eMail + password 讀取資料來判斷帳密是否正確
 	// 回傳 _id , userName
+    const{eMail,password} = req.body;
+    let xLogin ={
+		eMail: eMail,
+		password: password
+	};
 });
 
 

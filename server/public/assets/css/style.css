@@ -28,7 +28,7 @@
 }
 .sign_title{
     text-align: center;
-    font-size: 36px;
+    font-size: 36px !important;
 }
 .relative{
     position: relative;
