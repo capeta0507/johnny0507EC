@@ -102,9 +102,6 @@ app.post('/customers/login',(req,res)=>{
                     res.json(result);
                   }
             });
-            // console.log(xLogin.eMail)
-            // res.send(userEmail);
-            // console.log('userEmail', userEmail);
         }
     })
 });
