@@ -16,6 +16,8 @@ $('#mySubmit').on('click', function(){
     let myEmail = $('#myEmail').val();
     let myPassword = $('#myPassword').val();
     let userName = '';
+    let eMail = "";
+    let id = "";
     // console.log(myEmail, myPassword);
 
     let loginData = {
@@ -40,11 +42,20 @@ $('#mySubmit').on('click', function(){
     axios.post('/customers/login', loginData)
         .then(res => {
             console.log(res.data);
-            userName = res.data[0].userName;
-            // console.log(userName);
-            // 暫時用sessionStorage存
-            sessionStorage.setItem('userName', userName);
-            window.location.href = "index.html";
+            if (res.data.success === true){
+                userName = res.data.result.userName;
+                eMail = res.data.result.eMail;
+                id = res.data.result.id;
+                // console.log(userName);
+                // 暫時用sessionStorage存
+                sessionStorage.setItem('userName', userName);
+                sessionStorage.setItem('eMail', eMail);
+                sessionStorage.setItem('id', id);
+                window.location.href = "index.html";
+            }else{
+							// alert('您輸入的帳密有誤，請重新輸入！')
+							alert('登入產生錯誤:' + res.data.message);
+						}
         })
         .catch(error => {
             console.log(error.response);
