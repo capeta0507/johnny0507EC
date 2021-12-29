@@ -71,9 +71,7 @@ $('#mySubmit').on('click', function(){
     axios.post('/customers/add', SignUpData)
         .then(res => {
             console.log(res.data);
-            alert("恭喜您註冊完成!");
-            // 暫時用sessionStorage存
-            sessionStorage.setItem('userName', myName);
+            alert("恭喜您完成註冊！請至首頁登入喔！");
             window.location.href = "index.html";
         })
         .catch(error => {
