@@ -84,6 +84,29 @@ app.post('/customers/login',(req,res)=>{
 		eMail: eMail,
 		password: password
 	};
+    // console.log(xLogin)
+    MongoClient.connect(MongoURL,(err,db) =>{
+        if (err){
+            console.log("MongoDB Connect error ..." + err);
+        }
+        else{
+            let dbo = db.db("EC0507");
+            dbo.collection('customers').find(xLogin).toArray((err,result)=>{
+                if (err){
+                    console.log("查無此帳號");
+                    console.log(err);
+                  }
+                  else {
+                    db.close();
+                    // 回傳 document 紀錄
+                    res.json(result);
+                  }
+            });
+            // console.log(xLogin.eMail)
+            // res.send(userEmail);
+            // console.log('userEmail', userEmail);
+        }
+    })
 });
 
 
