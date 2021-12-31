@@ -36,77 +36,81 @@ app.post('/customers/add',(req,res)=>{
   //   2. 個人資料維護 _id: 識別，email: 識別 不能改
 
   // email帳號必須唯一
-    let xAuth ={
+    let xLogin ={
 			eMail: eMail,
 		};
-    console.log('email', xAuth);
+    // console.log('email', xLogin);
     MongoClient.connect(MongoURL,(err,db)=>{
       if (err){
         console.log("MongoDB Connect error ..." + err);
       } else {
         let dbo = db.db("EC0507");
-        dbo.collection('customers').find(xAuth).toArray((err, result)=>{
-          console.log('result',result);
-          console.log('email', eMail);
-          // if (err){
-          //   res.json({
-          //     success:false,
-          //     message:"/customers/authCheck ... 錯誤",
-          //   });
-          // } else {
-          //   db.close();
-          //   if(result[0].eMail === eMail){
-          //     res.json({
-          //       success:false,
-          //       message:"... 此email已註冊過"
-          //     });
-          //     return false;
-          //   }
-          // }
+        dbo.collection('customers').find(xLogin).toArray((err, result)=>{
+          if (err){
+            res.json({
+              success:false,
+							message:"資料庫 ... 錯誤",
+							error:err
+            });
+          } else {
+						// console.log('result',result);
+            db.close();
+						if (result.length > 0){
+							// 客戶已存在
+							// console.log('客戶已存在')
+							res.json({
+								success:false,
+								message:"註冊錯誤 ... 此email已註冊過"
+							});
+							// return false;
+						}else {
+							// 可以註冊的資料
+							// 加密處理
+							let encrypted = my_Encrypt(password);
+							// 要建立資料的 Class
+							let xCustomer ={
+								userName: userName,
+								eMail: eMail,
+								password: encrypted,
+								eMailConfirm:false,
+								telphone:'',
+								mobile:'',
+								address:'',
+								personalID:''
+							};
+							// console.log(xCustomer);
+							MongoClient.connect(MongoURL,(err,db)=>{
+								if (err){
+										console.log("MongoDB Connect error ..." + err);
+								}
+								else{
+									let dbo = db.db("EC0507");
+									dbo.collection('customers').insertOne(xCustomer,(err,result)=>{
+										if (err){
+											// 新增錯誤
+											res.json({
+												success : false,
+												message:"/customers/add ... 新增錯誤",
+												error : err                                                              
+											});
+										}
+										// 新增OK
+										else {
+											db.close();
+											res.json({
+												success:true,
+												message:"/customers/add ... 新增OK",
+												result : result
+											});
+										}
+									});
+								}
+							})
+						}
+          }
         })
       }
-    })
-  // 加密處理
-  let encrypted = my_Encrypt(password);
-
-	// 要建立資料的 Class
-	let xCustomer ={
-		userName: userName,
-		eMail: eMail,
-		password: encrypted,
-		eMailConfirm:false,
-		telphone:'',
-		mobile:'',
-		address:'',
-		personalID:''
-	};
-	MongoClient.connect(MongoURL,(err,db)=>{
-		if (err){
-				console.log("MongoDB Connect error ..." + err);
-		}
-		else{
-			let dbo = db.db("EC0507");
-			dbo.collection('customers').insertOne(xCustomer,(err,result)=>{
-				if (err){
-					// 新增錯誤
-					res.json({
-						success : false,
-						message:"/customers/add ... 新增錯誤",
-						error : err                                                              
-					});
-				}
-				// 新增OK
-				else {
-					db.close();
-					res.json({
-						success:true,
-						message:"/customers/add ... 新增OK",
-						result : result
-					});
-				}
-			});
-		}
-	})
+		})
 });
 
 // 登入

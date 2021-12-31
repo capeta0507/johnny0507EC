@@ -74,6 +74,10 @@ $('#mySubmit').on('click', function(){
 
     axios.post('/customers/add', SignUpData)
         .then(res => {
+            if (res.data.success == false){
+                alert(res.data.message);
+                return false;
+            }
             console.log(res.data);
             alert("恭喜您完成註冊！請至首頁登入喔！");
             window.location.href = "index.html";
