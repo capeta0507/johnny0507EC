@@ -32,10 +32,40 @@ app.listen(PORT,()=>{
 app.post('/customers/add',(req,res)=>{
 	const{userName,eMail,password} = req.body;
 	// TODO : 
-	//   2. eMail 不應該重複
+	//   1. eMail 不應該重複
+  //   2. 個人資料維護 _id: 識別，email: 識別 不能改
 
   // email帳號必須唯一
-
+    let xAuth ={
+			eMail: eMail,
+		};
+    console.log('email', xAuth);
+    MongoClient.connect(MongoURL,(err,db)=>{
+      if (err){
+        console.log("MongoDB Connect error ..." + err);
+      } else {
+        let dbo = db.db("EC0507");
+        dbo.collection('customers').find(xAuth).toArray((err, result)=>{
+          console.log('result',result);
+          console.log('email', eMail);
+          // if (err){
+          //   res.json({
+          //     success:false,
+          //     message:"/customers/authCheck ... 錯誤",
+          //   });
+          // } else {
+          //   db.close();
+          //   if(result[0].eMail === eMail){
+          //     res.json({
+          //       success:false,
+          //       message:"... 此email已註冊過"
+          //     });
+          //     return false;
+          //   }
+          // }
+        })
+      }
+    })
   // 加密處理
   let encrypted = my_Encrypt(password);
 

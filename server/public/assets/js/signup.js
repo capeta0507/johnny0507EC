@@ -57,6 +57,10 @@ $('#mySubmit').on('click', function(){
         return false
     }
 
+    let SignUpEmail = {
+        eMail: myEmail
+    }
+
     let SignUpData = {
         userName: myName,
         eMail: myEmail,
