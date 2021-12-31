@@ -2,3 +2,4 @@
 node_modules/
 test.js
 auth/auth.js
+auth/auth_fun.js

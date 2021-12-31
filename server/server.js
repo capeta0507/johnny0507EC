@@ -7,12 +7,8 @@ const app = express();
 app.use(express.static(__dirname + '/public')); //主機資源設定為 public 資料夾
 app.use(express.json());
 
-// 加密演算
-const crypto = require('crypto');
-// let myIv = 'd55daa8fb6a348ee';  // 16位元 IV
-// let myKEY = '0123456789-0123456789-0123456789'  // 32位元 使用者自訂
-// let myAlgorithm = 'aes-256-cbc'  // 加密演算法
-const {myIv, myKEY, myAlgorithm} = require('./auth/auth');
+// 加密函式
+const {my_Encrypt, my_Decrypt} = require('./auth/auth_fun');
 
 // Server listen
 const PORT = 8080;
@@ -29,10 +25,6 @@ app.listen(PORT,()=>{
   });
 });
 
-// app.get('/', (req, res) => {
-//   res.send('Node.js + Express.js + EC');
-// });
-
 // 客戶註冊/登入
 // Database : EC0507
 // Collection : customers
@@ -40,16 +32,12 @@ app.listen(PORT,()=>{
 app.post('/customers/add',(req,res)=>{
 	const{userName,eMail,password} = req.body;
 	// TODO : 
-	//   1. password 要加密，在儲存進資料庫  okˇ
 	//   2. eMail 不應該重複
 
-  // 加密處理
-  let cipher = crypto.createCipheriv(myAlgorithm,myKEY,myIv);
-  let encrypted = cipher.update(password, 'utf-8', 'hex');
-  encrypted += cipher.final('hex');
+  // email帳號必須唯一
 
-  // console.log('加密前', password);
-  // console.log('加密後', encrypted);
+  // 加密處理
+  let encrypted = my_Encrypt(password);
 
 	// 要建立資料的 Class
 	let xCustomer ={
@@ -130,14 +118,9 @@ app.post('/customers/login',(req,res)=>{
 									}
 
                   // 解密處理
-                  let decipher = crypto.createDecipheriv(myAlgorithm,myKEY,myIv);
-                  let decrypted = decipher.update(result[0].password , 'hex', 'utf-8');
-                  decrypted += decipher.final('utf-8');
+                  let decrypted = my_Decrypt(result[0].password);
 
-                  // console.log('解密前', result[0].password);
-                  // console.log('解密後', decrypted);
-
-									if (decrypted !== password) {
+                  if (decrypted !== password) {
 										// console.log('密碼錯誤');
 										res.json({
 											success:false,
