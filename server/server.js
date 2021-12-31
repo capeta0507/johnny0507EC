@@ -9,9 +9,10 @@ app.use(express.json());
 
 // 加密演算
 const crypto = require('crypto');
-let myIv = 'd55daa8fb6a348ee';  // 16位元 IV
-let myKEY = '0123456789-0123456789-0123456789'  // 32位元 使用者自訂
-let myAlgorithm = 'aes-256-cbc'  // 加密演算法
+// let myIv = 'd55daa8fb6a348ee';  // 16位元 IV
+// let myKEY = '0123456789-0123456789-0123456789'  // 32位元 使用者自訂
+// let myAlgorithm = 'aes-256-cbc'  // 加密演算法
+const {myIv, myKEY, myAlgorithm} = require('./auth/auth');
 
 // Server listen
 const PORT = 8080;
