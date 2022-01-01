@@ -35,30 +35,26 @@ $('#mySubmit').on('click', function(){
     let myPasswordCheck = $('#myPasswordCheck').val();
     // 輸入姓名
     if(myName == ""){
-        alert('請輸入您的姓名');
+        $('#myErrTxt').text('請輸入您的姓名');
         return false
     }
     // email 格式
     if(myEmail == ""){
-        alert('請輸入電子郵件');
+        $('#myErrTxt').text('請輸入電子郵件');
         return false
     }
     if(myEmail.search(emailRule)){
-        alert('您輸入的email格式有誤');
+        $('#myErrTxt').text('您輸入的email格式有誤');
         return false
     }
     // 密碼確認
     if(myPassword == ""){
-        alert('請輸入密碼');
+        $('#myErrTxt').text('請輸入密碼');
         return false
     }
     if(myPassword !== myPasswordCheck){
-        alert('您設定的密碼跟驗證的不相符喔！');
+        $('#myErrTxt').text('您設定的密碼跟驗證的不相符喔！');
         return false
-    }
-
-    let SignUpEmail = {
-        eMail: myEmail
     }
 
     let SignUpData = {
