@@ -38,15 +38,6 @@ $('#mySubmit').on('click', function(){
         alert('請輸入您的姓名');
         return false
     }
-    // 密碼確認
-    if(myPassword == ""){
-        alert('請輸入密碼');
-        return false
-    }
-    if(myPassword !== myPasswordCheck){
-        alert('您設定的密碼跟驗證的不相符喔！');
-        return false
-    }
     // email 格式
     if(myEmail == ""){
         alert('請輸入電子郵件');
@@ -54,6 +45,15 @@ $('#mySubmit').on('click', function(){
     }
     if(myEmail.search(emailRule)){
         alert('您輸入的email格式有誤');
+        return false
+    }
+    // 密碼確認
+    if(myPassword == ""){
+        alert('請輸入密碼');
+        return false
+    }
+    if(myPassword !== myPasswordCheck){
+        alert('您設定的密碼跟驗證的不相符喔！');
         return false
     }
 
@@ -80,7 +80,7 @@ $('#mySubmit').on('click', function(){
             }
             console.log(res.data);
             alert("恭喜您完成註冊！請至首頁登入喔！");
-            window.location.href = "index.html";
+            window.location.href = "login.html";
         })
         .catch(error => {
             console.log(error.response);
