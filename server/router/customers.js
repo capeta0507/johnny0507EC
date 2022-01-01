@@ -160,6 +160,42 @@ router.post('/login',(req,res)=>{
   })
 })
 
+// 獲取個人資料
+router.get('/member/:eMail',(req,res)=>{
+  console.log('/member/:eMail (GET)');
+  MongoClient.connect(MongoURL,(err,db)=>{
+    if (err){
+			console.log("MongoDB Connect error ..." + err);
+		} else {
+      let dbo = db.db("EC0507");
+      let eMail = req.params.eMail;
+      let xEmail ={
+        eMail: eMail,
+      };
+      console.log('Query No : ' + xEmail);
+      dbo.collection("customers").find(xEmail).toArray((err,result)=>{
+        if(err){
+          res.json({
+						success:false,
+						message:"/customers/lmemberogin ... 找尋錯誤",
+					});
+        } else {
+            db.close();
+            // res.json({
+            //   success : true,
+            //   message : "找到人",
+            //   result : {
+            //     userName:result[0].userName, 
+            //     eMail:result[0].eMail,
+            //     id: result[0]._id
+            //   }
+            // });
+            res.json(result);
+        }
+    })
+    }
+  })
+})
 
 
 module.exports = router;
