@@ -124,6 +124,9 @@
     white-space: nowrap;
     max-width: 80px;
 }
+.sign_error{
+    border: 1px solid red;
+}
 @media screen and (max-width:992px){
     .sign_tag{
         border: none;
