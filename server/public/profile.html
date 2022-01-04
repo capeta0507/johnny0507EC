@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人資料</title>
+    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+</head>
+<body>
+    <!-- Start Top Nav -->
+    <div w3-include-html="component/nav.html"></div>
+    <!-- Close Top Nav -->
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+                Zay
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.html">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar align-self-center d-flex">
+
+                    <!-- 登入 註冊前 -->
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item sign_tag">
+                            <a class="nav-link" href="signup.html">註冊</a>
+                        </li>
+                        <li class="nav-item sign_tag">
+                            <a class="nav-link" href="login.html">登入</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Close Header -->
+    <div class="container">
+        <div id="passChange">
+            <div class="row">
+                <div class="note">
+                    <p class="sign_title">修改密碼</p>
+                </div>
+                <div class="col-md-10 mg_canter md01">
+                    <div class="form-group relative">
+                        <input id="myOldPassword" type="password" class="form-control" placeholder="請輸入舊密碼" value=""/>
+                        <div id="passOld01" class="pass_check"><img src="assets/img/login_eye.png" alt=""></div>
+                        <div id="passOld01_1" class="pass_check" style="display: none;"><img src="assets/img/login_eyeLock.png" alt=""></div>
+                    </div>
+                </div>
+                <div class="col-md-10 mg_canter md01">
+                    <div class="form-group relative">
+                        <input id="myPassword" type="password" class="form-control" placeholder="請輸入新密碼" value=""/>
+                        <div id="passCheck01" class="pass_check"><img src="assets/img/login_eye.png" alt=""></div>
+                        <div id="passCheck01_1" class="pass_check" style="display: none;"><img src="assets/img/login_eyeLock.png" alt=""></div>
+                    </div>
+                </div>
+                <div class="col-md-10 mg_canter md01">
+                    <div class="form-group relative">
+                        <input id="myPasswordCheck" type="password" class="form-control" placeholder="新密碼確認" value=""/>
+                        <div id="passCheck02" class="pass_check"><img src="assets/img/login_eye.png" alt=""></div>
+                        <div id="passCheck02_1" class="pass_check" style="display: none;"><img src="assets/img/login_eyeLock.png" alt=""></div>
+                    </div>
+                </div>
+                <div id="myChange" class="btnSubmit">修改</div>
+            </div>
+        </div>
+        <div id="profileData">
+            <div class="row">
+                <div class="note">
+                    <p class="sign_title">個人資料</p>
+                </div>
+                <div class="col-md-3 md01 profile_text">電話：</div>
+                <div class="col-md-9 md01">
+                    <div class="form-group relative">
+                        <input id="myTel" type="tel" class="form-control" placeholder="" value=""/>
+                    </div>
+                </div>
+                <div class="col-md-3 md01 profile_text">手機：</div>
+                <div class="col-md-9 md01">
+                    <div class="form-group relative">
+                        <input id="myPhone" type="tel" class="form-control" placeholder="" value=""/>
+                    </div>
+                </div>
+                <div class="col-md-3 md01 profile_text">地址：</div>
+                <div class="col-md-9 md01">
+                    <div class="form-group relative">
+                        <input id="myAddress" type="text" class="form-control" placeholder="" value=""/>
+                    </div>
+                </div>
+                <div class="col-md-3 md01 profile_text">personalID：</div>
+                <div class="col-md-9 md01">
+                    <div class="form-group relative">
+                        <input id="myPerson" type="text" class="form-control" placeholder="" value=""/>
+                    </div>
+                </div>
+                <div id="myUpdate" class="btnSubmit">修改</div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Footer -->
+    <div w3-include-html="component/footer.html"></div>
+    <!-- End Footer -->
+    <!-- Start Script -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <!-- End Script -->
+    <script>
+        w3.includeHTML();
+    </script>
+</body>
+</html>

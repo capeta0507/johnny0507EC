@@ -12,6 +12,14 @@
     border: 1px solid #ced4da;
     margin-bottom: 2%;
 }
+#passChange, #profileData{
+    width: 500px;
+    margin: auto;
+    margin-top: 12vh;
+    padding: 0 10px 20px 10px;
+    border: 1px solid #ced4da;
+    margin-bottom: 2%;
+}
 .note{
     text-align: center;
     height: 80px;
@@ -126,6 +134,10 @@
 }
 .sign_error{
     border: 1px solid red;
+}
+.profile_text{
+    text-align: right;
+    line-height: 40px;
 }
 @media screen and (max-width:992px){
     .sign_tag{
