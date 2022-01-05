@@ -27,7 +27,7 @@ TemplateMo 559 Zay Shop
 https://templatemo.com/tm-559-zay-shop
 
 -->
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
 </head>
 
 <body>
@@ -50,46 +50,11 @@ https://templatemo.com/tm-559-zay-shop
 
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
                 <div class="flex-fill">
-                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="shop.html">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
-                        </li>
-                    </ul>
+                    <div w3-include-html="component/header_link.html"></div>
                 </div>
                 <div class="navbar align-self-center d-flex">
-                    <!-- 登入 註冊前 -->
-                    <div id="mySign">
-                        <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                            <li class="nav-item sign_tag">
-                                <a class="nav-link" href="signup.html">註冊</a>
-                            </li>
-                            <li class="nav-item sign_tag">
-                                <a class="nav-link" href="login.html">登入</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- 登入後 -->
-                    <div id="myUser" class="myUser" style="display: none;">
-                        <div class="userTag">
-                            <span id="myName" class="name"></span>
-                            <span class="down-arrow"></span>
-                        </div>
-                        <div class="drapdown" style="display: none;">
-                            <a href="#"><div class="drapBtn">訂單查詢</div></a>
-                            <a href="#"><div class="drapBtn">個人資料</div></a>
-                            <a href="#"><div id="myLogout" class="drapBtn">登出</div></a>
-                        </div>
-                    </div>
+                     <!-- 登入 -->
+                     <div w3-include-html="component/header_login.html"></div>
                 </div>
             </div>
 
@@ -195,31 +160,73 @@ https://templatemo.com/tm-559-zay-shop
     <script src="assets/js/custom.js"></script>
     <!-- End Script -->
     <script>
-        $('.userTag').on('click', function(){
-            $('.drapdown').stop().fadeToggle(300);
-            $('.down-arrow').toggleClass("arrow-up");
+        $(document).ready(()=>{
+            // w3.includeHTML();
+            includeHTML();
         });
-        // 登出
-        $('#myLogout').on('click', function(){
-            sessionStorage.removeItem('userName');
-            sessionStorage.removeItem('eMail');
-            sessionStorage.removeItem('id');
-            window.location.href = "index.html";
-        });
-        // 登入後
-        let userName = sessionStorage.getItem('userName');
-        // console.log('session', userName);
-        $('#myName').text(userName);
-        if(userName){
-            $('#mySign').hide();
-            $('#myUser').show();
-        } else {
-            $('#mySign').show();
-            $('#myUser').hide();
-        }
     </script>
     <script>
-        w3.includeHTML();
+        function loginSwitch(){
+            console.log('ready');
+            $('.userTag').on('click', function(){
+                $('.drapdown').stop().fadeToggle(300);
+                $('.down-arrow').toggleClass("arrow-up");
+            });
+            // 登出
+            $('#myLogout').on('click', function(){
+                sessionStorage.removeItem('userName');
+                sessionStorage.removeItem('eMail');
+                sessionStorage.removeItem('id');
+                // sessionStorage.clear();
+                window.location.href = "index.html";
+            });
+            // 登入後
+            let userName = sessionStorage.getItem('userName');
+            console.log('session', userName);
+            $('#myName').text(userName);
+            if(userName){
+                console.log('find');
+                $('#mySign').hide();
+                $('#myUser').show();
+            } else {
+                console.log('not find');
+                $('#mySign').show();
+                $('#myUser').hide();
+            }
+            console.log('end')
+        }
+
+        function includeHTML() {
+            var z, i, elmnt, file, xhttp;
+            /* Loop through a collection of all HTML elements: */
+            z = document.getElementsByTagName("*");
+            for (i = 0; i < z.length; i++) {
+                elmnt = z[i];
+                /*search for elements with a certain atrribute:*/
+                file = elmnt.getAttribute("w3-include-html");
+                if (file) {
+                /* Make an HTTP request using the attribute value as the file name: */
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                    if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                    if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+                    /* Remove the attribute, and call this function once more: */
+                    elmnt.removeAttribute("w3-include-html");
+                    includeHTML();
+                    }
+                }
+                xhttp.open("GET", file, true);
+                xhttp.send();
+                
+                
+                /* Exit the function: */
+                return;
+                }
+            }
+            // 顯示註冊與登入
+            loginSwitch();
+        }
     </script>
 </body>
 
