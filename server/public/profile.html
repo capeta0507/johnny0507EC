@@ -66,6 +66,18 @@
                             <a class="nav-link" href="login.html">登入</a>
                         </li>
                     </ul>
+                    <!-- 登入後 -->
+                    <div id="myUser" class="myUser" style="display: none;">
+                        <div class="userTag">
+                            <span id="myName" class="name"></span>
+                            <span class="down-arrow"></span>
+                        </div>
+                        <div class="drapdown" style="display: none;">
+                            <a href="#"><div class="drapBtn">訂單查詢</div></a>
+                            <a href="profile.html"><div class="drapBtn">個人資料</div></a>
+                            <a href="#"><div id="myLogout" class="drapBtn">登出</div></a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -125,7 +137,7 @@
                         <input id="myAddress" type="text" class="form-control" placeholder="" value=""/>
                     </div>
                 </div>
-                <div class="col-md-3 md01 profile_text">personalID：</div>
+                <div class="col-md-3 md01 profile_text">身分證號：</div>
                 <div class="col-md-9 md01">
                     <div class="form-group relative">
                         <input id="myPerson" type="text" class="form-control" placeholder="" value=""/>
@@ -145,6 +157,27 @@
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
     <!-- End Script -->
+    <script>
+        // 登出
+        $('#myLogout').on('click', function(){
+            sessionStorage.removeItem('userName');
+            sessionStorage.removeItem('eMail');
+            sessionStorage.removeItem('id');
+            // sessionStorage.clear();
+            window.location.href = "index.html";
+        });
+        // 登入後
+        let userName = sessionStorage.getItem('userName');
+        // console.log('session', userName);
+        $('#myName').text(userName);
+        if(userName){
+            $('#mySign').hide();
+            $('#myUser').show();
+        } else {
+            $('#mySign').show();
+            $('#myUser').hide();
+        }
+    </script>
     <script>
         w3.includeHTML();
     </script>
