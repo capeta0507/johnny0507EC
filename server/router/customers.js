@@ -176,9 +176,9 @@ router.get('/member/:eMail',(req,res)=>{
       dbo.collection("customers").find(xEmail).toArray((err,result)=>{
         if(err){
           res.json({
-						success:false,
-						message:"/customers/lmemberogin ... 找尋錯誤",
-					});
+            success:false,
+            message:"/customers/lmemberogin ... 找尋錯誤",
+          });
         } else {
             db.close();
             // res.json({
@@ -195,6 +195,42 @@ router.get('/member/:eMail',(req,res)=>{
     })
     }
   })
+})
+
+// 修改密碼
+router.put('/member/:eMail', (req,res)=>{
+	console.log('/member/:eMail (PUT)');
+	MongoClient.connect(MongoURL,(err,db)=>{
+		if (err){
+			console.log("MongoDB Connect error ..." + err);
+		} else {
+			let dbo = db.db("EC0507");
+			let myEmail = req.params.eMail;
+			// console.log('PUT', myEmail);
+			let xPassword = req.body.password;
+			// 加密
+			xPassword = my_Encrypt(xPassword);
+			// console.log('xPassword', xPassword)
+			let myFind = {eMail: myEmail}; // 搜尋條件
+			let myNewPassword = {       // 修改紀錄 Class
+				$set:{
+					password: xPassword,
+				}
+			}
+			dbo.collection('customers').updateOne(myFind, myNewPassword,(err, result)=>{
+				if(err){
+					res.json({
+						success:false,
+						message:"/customers/updatePassword ... 錯誤",
+					});
+				} else {
+          db.close();
+          res.json(result);
+        }
+			})
+			
+		}
+	})
 })
 
 
