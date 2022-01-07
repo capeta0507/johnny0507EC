@@ -37,13 +37,13 @@ $('#mySubmit').on('click', function(){
     $('.form-control').removeClass('sign_error');
     $('#myErrTxt').html('');
     // 輸入姓名
-    if(myName == ""){
+    if(!myName){
         $('#myErrTxt').text('請輸入您的姓名');
         $('#myName').addClass('sign_error');
         return false
     }
     // email 格式
-    if(myEmail == ""){
+    if(!myEmail){
         $('#myErrTxt').text('請輸入電子郵件');
         $('#myEmail').addClass('sign_error');
         return false
@@ -54,7 +54,7 @@ $('#mySubmit').on('click', function(){
         return false
     }
     // 密碼確認
-    if(myPassword == ""){
+    if(!myPassword){
         $('#myErrTxt').text('請輸入密碼');
         $('#myPassword').addClass('sign_error');
         return false
