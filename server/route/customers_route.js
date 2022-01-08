@@ -1,8 +1,9 @@
 // Customers 處理 Router
 const express = require('express');
+require('dotenv').config('../.env'); // 引用 .env 環境變數
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
-const MongoURL = 'mongodb://localhost:27017'
+const MongoURL = process.env.MONGODB_URL
 
 // 加密函式
 const {my_Encrypt, my_Decrypt} = require('../auth/auth_fun');
@@ -162,43 +163,47 @@ router.post('/login',(req,res)=>{
 
 // 獲取個人資料
 router.get('/member/:eMail',(req,res)=>{
-  console.log('/member/:eMail (GET)');
+  // console.log('/member/:eMail (GET)');
   MongoClient.connect(MongoURL,(err,db)=>{
     if (err){
 			console.log("MongoDB Connect error ..." + err);
 		} else {
       let dbo = db.db("EC0507");
-      let eMail = req.params.eMail;
+			let eMail = req.params.eMail;
+			// console.log('eMail',eMail);
       let xEmail ={
         eMail: eMail,
       };
-      console.log('Query No : ' + xEmail);
+      // console.log('Query No : ' , xEmail);
       dbo.collection("customers").find(xEmail).toArray((err,result)=>{
         if(err){
           res.json({
             success:false,
-            message:"/customers/lmemberogin ... 找尋錯誤",
+            message:"/member/:eMail ... 找尋錯誤",
           });
         } else {
-            db.close();
-            // res.json({
-            //   success : true,
-            //   message : "找到人",
-            //   result : {
-            //     userName:result[0].userName, 
-            //     eMail:result[0].eMail,
-            //     id: result[0]._id
-            //   }
-            // });
-            res.json(result);
+					db.close();
+					res.json({
+						success : true,
+						message : "找到人",
+						userData : {
+							userName:result[0].userName, 
+							eMail:result[0].eMail,
+							id: result[0]._id,
+							telphone : result[0].telphone,
+							mobile : result[0].mobile,
+							address: result[0].address,
+							personalID: result[0].personalID
+						}
+					});
         }
-    })
+    	})
     }
   })
 })
 
 // 修改密碼
-router.put('/member/:eMail', (req,res)=>{
+router.put('/chpwd/:eMail', (req,res)=>{
 	// console.log('/member/:eMail (PUT)');
 	let myEmail = req.params.eMail;
 	// console.log('PUT', myEmail);   // 沒寫的話是 'null' (字串)

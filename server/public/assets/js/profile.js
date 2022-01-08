@@ -1,3 +1,32 @@
+// 要先取得個人資料
+$(document).ready(()=>{
+  let myEmail = sessionStorage.getItem('eMail');
+  if (!myEmail){
+    // 沒有 eMail 不執行
+    return false;
+  }
+  axios.get(`/customers/member/${myEmail}`)
+    .then(result =>{
+      // console.log(res);
+      if (result.data.success == true){
+        $('#myTel').val(result.data.userData.telphone);
+        $('#myPhone').val(result.data.userData.mobile);
+        $('#myAddress').val(result.data.userData.address);
+        $('#myPerson').val(result.data.userData.personalID);
+      }else{
+        $('#myTel').val('');
+        $('#myPhone').val('');
+        $('#myAddress').val('');
+        $('#myPerson').val('');
+      }
+    })
+    .catch(err =>{
+      console.log(err.message);
+    })
+
+});
+
+
 // 明碼暗碼switch
 $('#passOld01').on('click', function(){
   $('#passOld01').hide();
@@ -86,7 +115,7 @@ $('#myChange').on('click', function(){
         $('#myErrTxt').text('授權錯誤 請重新登入');
         return false
       }
-      axios.put(`/customers/member/${userEmail}`, upDatePassword)
+      axios.put(`/customers/chpwd/${userEmail}`, upDatePassword)
       .then(res=>{
         console.log(res.data);
         if (res.data.success == true){
