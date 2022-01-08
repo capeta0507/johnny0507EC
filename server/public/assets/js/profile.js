@@ -39,6 +39,11 @@ $('#myChange').on('click', function(){
     let myPasswordCheck = $('#myPasswordCheck').val();
 
     let userEmail = sessionStorage.getItem('eMail');
+      if (!userEmail){
+        alert('授權錯誤，必須先登入');
+        // window.location.href = "login.html";
+        return false;
+    }
 
     $('.form-control').removeClass('sign_error');
     if(!myOldPassword){
@@ -56,17 +61,17 @@ $('#myChange').on('click', function(){
     // console.log('upDatePassword', upDatePassword)
     axios.put(`/customers/member/${userEmail}`, upDatePassword)
     .then(res=>{
-        if (res.data.success == false){
-            alert('您的密碼設置錯誤');
-        }
         console.log(res.data);
-        setTimeout(() => {
+        if (res.data.success == true){
             sessionStorage.removeItem('userName');
             sessionStorage.removeItem('eMail');
             sessionStorage.removeItem('id');
             alert("修改完成請重新登入！");
             window.location.href = "login.html";
-        },50);
+            
+        }else {
+            alert('您的密碼設置錯誤 : ' + res.data.message);
+        }
     })
     .catch(error => {
         console.log(error.response);

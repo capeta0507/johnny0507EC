@@ -135,7 +135,7 @@ router.post('/login',(req,res)=>{
 
 					// 解密處理
 					let decrypted = my_Decrypt(result[0].password);
-
+					// console.log('密碼 ',decrypted);
 					if (decrypted !== password) {
 						// console.log('密碼錯誤');
 						res.json({
@@ -200,13 +200,25 @@ router.get('/member/:eMail',(req,res)=>{
 // 修改密碼
 router.put('/member/:eMail', (req,res)=>{
 	console.log('/member/:eMail (PUT)');
+	let myEmail = req.params.eMail;
+	// console.log('PUT', myEmail);   // 沒寫的話是 'null' (字串)
+	if(myEmail == 'null'){
+		res.json({
+			success:false,
+			message:"eMail 不存在",
+			result:''
+		});
+		return false;
+	}
+
 	MongoClient.connect(MongoURL,(err,db)=>{
 		if (err){
 			console.log("MongoDB Connect error ..." + err);
 		} else {
+			// TODO : 鮮驗證舊密碼是否正確
 			let dbo = db.db("EC0507");
-			let myEmail = req.params.eMail;
-			// console.log('PUT', myEmail);
+			
+			
 			let xPassword = req.body.password;
 			// 加密
 			xPassword = my_Encrypt(xPassword);
@@ -225,7 +237,11 @@ router.put('/member/:eMail', (req,res)=>{
 					});
 				} else {
           db.close();
-          res.json(result);
+          res.json({
+						success:true,
+						message:"密碼修改OK",
+						result:result
+					});
         }
 			})
 			

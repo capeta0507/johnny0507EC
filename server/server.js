@@ -23,6 +23,6 @@ app.listen(PORT,()=>{
 });
 
 // Customers Router
-const custRouter = require('./router/customers');
+const custRouter = require('./route/customers_route');
 app.use('/customers',custRouter);
 
