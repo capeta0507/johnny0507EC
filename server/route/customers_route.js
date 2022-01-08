@@ -199,7 +199,7 @@ router.get('/member/:eMail',(req,res)=>{
 
 // 修改密碼
 router.put('/member/:eMail', (req,res)=>{
-	console.log('/member/:eMail (PUT)');
+	// console.log('/member/:eMail (PUT)');
 	let myEmail = req.params.eMail;
 	// console.log('PUT', myEmail);   // 沒寫的話是 'null' (字串)
 	if(myEmail == 'null'){
@@ -215,10 +215,8 @@ router.put('/member/:eMail', (req,res)=>{
 		if (err){
 			console.log("MongoDB Connect error ..." + err);
 		} else {
-			// TODO : 鮮驗證舊密碼是否正確
+			// TODO : 先驗證舊密碼是否正確
 			let dbo = db.db("EC0507");
-			
-			
 			let xPassword = req.body.password;
 			// 加密
 			xPassword = my_Encrypt(xPassword);
@@ -244,7 +242,6 @@ router.put('/member/:eMail', (req,res)=>{
 					});
         }
 			})
-			
 		}
 	})
 })
