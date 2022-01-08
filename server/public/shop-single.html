@@ -764,7 +764,7 @@ https://templatemo.com/tm-559-zay-shop
     </script>
     <script>
         function loginSwitch(){
-            console.log('ready');
+            // console.log('ready');
             $('.userTag').on('click', function(){
                 $('.drapdown').stop().fadeToggle(300);
                 $('.down-arrow').toggleClass("arrow-up");
@@ -779,10 +779,10 @@ https://templatemo.com/tm-559-zay-shop
             });
             // 登入後
             let userName = sessionStorage.getItem('userName');
-            console.log('session', userName);
+            // console.log('session', userName);
             $('#myName').text(userName);
             if(userName){
-                console.log('find');
+                // console.log('find');
                 $('#mySign').hide();
                 $('#myUser').show();
             } else {
@@ -790,7 +790,7 @@ https://templatemo.com/tm-559-zay-shop
                 $('#mySign').show();
                 $('#myUser').hide();
             }
-            console.log('end')
+            // console.log('end')
         }
 
         function includeHTML() {

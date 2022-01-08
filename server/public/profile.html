@@ -77,6 +77,9 @@
                         <div id="passCheck02_1" class="pass_check" style="display: none;"><img src="assets/img/login_eyeLock.png" alt=""></div>
                     </div>
                 </div>
+                <div class="col-md-10 mg_canter md01 txt-center">
+                    <div id="myErrTxt" class="error_text"></div>
+                </div>
                 <div id="myChange" class="btnSubmit">修改</div>
             </div>
         </div>
@@ -109,6 +112,9 @@
                         <input id="myPerson" type="text" class="form-control" placeholder="" value=""/>
                     </div>
                 </div>
+                <div class="col-md-10 mg_canter md01 txt-center">
+                    <div id="myErrTxt" class="error_text"></div>
+                </div>
                 <div id="myUpdate" class="btnSubmit">修改</div>
             </div>
         </div>
@@ -137,7 +143,7 @@
     </script>
     <script>
         function loginSwitch(){
-            console.log('ready');
+            // console.log('ready');
             $('.userTag').on('click', function(){
                 $('.drapdown').stop().fadeToggle(300);
                 $('.down-arrow').toggleClass("arrow-up");
@@ -152,10 +158,10 @@
             });
             // 登入後
             let userName = sessionStorage.getItem('userName');
-            console.log('session', userName);
+            // console.log('session', userName);
             $('#myName').text(userName);
             if(userName){
-                console.log('find');
+                // console.log('find');
                 $('#mySign').hide();
                 $('#myUser').show();
             } else {
@@ -163,7 +169,7 @@
                 $('#mySign').show();
                 $('#myUser').hide();
             }
-            console.log('end')
+            // console.log('end')
         }
 
         function includeHTML() {
