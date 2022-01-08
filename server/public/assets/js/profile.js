@@ -83,8 +83,8 @@ $('#myChange').on('click', function(){
     .then(res=>{
       console.log(res.data);
       if (res.data.success === false){
-          alert('授權錯誤 請重新登入')
-          return false
+        $('#myErrTxt').text('授權錯誤 請重新登入');
+        return false
       }
       axios.put(`/customers/member/${userEmail}`, upDatePassword)
       .then(res=>{
@@ -98,7 +98,7 @@ $('#myChange').on('click', function(){
           window.location.href = "login.html";
             
         }else {
-          alert('您的密碼設置錯誤 : ' + res.data.message);
+          $('#myErrTxt').text('您的密碼設置錯誤 : ' + res.data.message);
         }
       })
       .catch(error => {
@@ -107,7 +107,7 @@ $('#myChange').on('click', function(){
     })
     .catch(error => {
       console.log(error.response);
-      alert('您輸入的帳號密碼有誤！')
+      $('#myErrTxt').text('您輸入的帳號密碼有誤！')
     });
 
     // axios.put(`/customers/member/${userEmail}`, upDatePassword)
