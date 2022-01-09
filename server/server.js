@@ -27,3 +27,6 @@ app.listen(PORT,()=>{
 const custRouter = require('./route/customers_route');
 app.use('/customers',custRouter);
 
+// Products router
+const prodRouter = require('./route/products_route');
+app.use('/products',prodRouter);
