@@ -3,4 +3,5 @@ node_modules/
 test.js
 auth/auth.js
 auth/auth_fun.js
+auth/jwt_fun.js
 .env
