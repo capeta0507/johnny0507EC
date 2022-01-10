@@ -72,7 +72,7 @@ var products = [
     "photo":"M001.jpg"
   },
   {
-    "category":"",
+    "category":"Movie",
     "no":"F004",
     "description" : "神力女超人1984",
     "star": 3,
