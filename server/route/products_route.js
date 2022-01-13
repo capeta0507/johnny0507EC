@@ -18,7 +18,7 @@ router.get('/category/:cat',(req,res)=>{
   // 參數 All 代表全部
   if (myCat == 'All'){
     xCategory = {
-      // 全部
+      // 全部 (無條件，顯示所有資料)
     }
   }
   // console.log(xCategory);
