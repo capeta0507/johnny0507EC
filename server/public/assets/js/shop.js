@@ -1,31 +1,61 @@
 var category = 'All';
 let shopCard = '';
 
+shop_list(category);
+
 function categories(tag){
   category = tag
   // console.log('category', category);
+  // $('.category_tag').removeClass('active');
+  // // $(this).addClass('active');
+  // if(category === 'All'){
+  //     $('#all_tag').addClass('active');
+  //     shop_list(category);
+  // }
+  // if(category === 'Fashion'){
+  //     $('#fasion_tag').addClass('active');
+  //     shop_list(category);
+  // }
+  // if(category === 'Toy'){
+  //     $('#toy_tag').addClass('active');
+  //     shop_list(category);
+  // }
+  // if(category === 'Movie'){
+  //     $('#movie_tag').addClass('active');
+  //     shop_list(category);
+  // }
+
+  // 改成 switch 大師班 第二版
+  // https://www.w3schools.com/js/js_switch.asp
+  // $('.category_tag').removeClass('active');
+  // switch(category){
+  //   case 'All':
+  //     $('#All_tag').addClass('active');
+  //     break;
+  //   case 'Fashion':
+  //     $('#Fasion_tag').addClass('active');
+  //     break;
+  //   case 'Toy':
+  //     $('#Toy_tag').addClass('active');
+  //     break;
+  //   case 'Movie':
+  //     $('#Movie_tag').addClass('active');
+  //     break;
+  //   default:
+  //     break;
+  // }
+  // shop_list(category);
+
+  // 改成 不用switch, category_tag 大師班 第三版
   $('.category_tag').removeClass('active');
-  // $(this).addClass('active');
-  if(category === 'All'){
-      $('#all_tag').addClass('active');
-      shop_list(category);
-  }
-  if(category === 'Fashion'){
-      $('#fasion_tag').addClass('active');
-      shop_list(category);
-  }
-  if(category === 'Toy'){
-      $('#toy_tag').addClass('active');
-      shop_list(category);
-  }
-  if(category === 'Movie'){
-      $('#movie_tag').addClass('active');
-      shop_list(category);
-  }
+  let myTagName = `#${category}_tag`;  // 類別 + _tag 組合
+  $(myTagName).addClass('active');  // 引用 類別 + _tag 組合
+  shop_list(category);
+
   // console.log('this',$(this))
   // console.log('cat', $('.category_tag'))
 }
-shop_list(category);
+
 function shop_list(myaCtegory){
   // console.log('myaCtegory', myaCtegory)
   axios.get(`/products/category/${myaCtegory}`)
