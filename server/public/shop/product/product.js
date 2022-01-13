@@ -2,7 +2,8 @@ var products = [
   {
     "category":"Toy",
     "no":"T001",
-    "description" : "戰艦大和 第2彈",
+    "name" : "戰艦大和",
+    "description" : "第2彈",
     "star": 4,
     "price": 800,
     "photo":"T001.jpg"
@@ -10,7 +11,8 @@ var products = [
   {
     "category":"Toy",
     "no":"T002",
-    "description" : "Q 怪醫黑傑克/間黑男 BLACK",
+    "name" : "Q 怪醫黑傑克/間黑男",
+    "description" : " BLACK",
     "star": 3,
     "price": 640,
     "photo":"T002.jpg"
@@ -18,7 +20,8 @@ var products = [
   {
     "category":"Toy",
     "no":"T003",
-    "description" : "艦隊collection 時雨 私服ver",
+    "name" : "時雨 私服ver",
+    "description" : "艦隊collection",
     "star": 5,
     "price": 2000,
     "photo":"T003.jpg"
@@ -26,7 +29,8 @@ var products = [
   {
     "category":"Toy",
     "no":"T004",
-    "description" : "Love Live! Superstar!! 澀谷香音景品手辦",
+    "name" : "澀谷香音景品手辦",
+    "description" : "Love Live! Superstar!!",
     "star": 4,
     "price": 640,
     "photo":"T004.jpg"
@@ -34,7 +38,8 @@ var products = [
   {
     "category":"Fashion",
     "no":"F001",
-    "description" : "男裝 休閒上衣(長袖) 444966",
+    "name" : "男裝 休閒上衣(長袖)",
+    "description" : "uniqlo 衣服",
     "star": 4,
     "price": 790,
     "photo":"F001.jpg"
@@ -42,7 +47,8 @@ var products = [
   {
     "category":"Fashion",
     "no":"F002",
-    "description" : "男速乾縱橫彈性聚酯纖維錐形褲 黑色XL",
+    "name" : "男速乾縱橫彈性聚酯纖維錐形褲",
+    "description" : "黑色XL",
     "star": 4,
     "price": 1390,
     "photo":"F002.jpg"
@@ -50,7 +56,8 @@ var products = [
   {
     "category":"Fashion",
     "no":"F003",
-    "description" : "addas SUPERSTAR 經典鞋",
+    "name" : "addas SUPERSTAR 經典鞋",
+    "description" : "addas",
     "star": 3,
     "price": 3090,
     "photo":"F003.jpg"
@@ -58,7 +65,8 @@ var products = [
   {
     "category":"Fashion",
     "no":"F004",
-    "description" : "Nike 休閒鞋 Zoom 2K 運動 男鞋",
+    "name" : "Nike 休閒鞋",
+    "description" : "Zoom 2K 運動 男鞋",
     "star": 4,
     "price": 2680,
     "photo":"F004.jpg"
@@ -66,7 +74,8 @@ var products = [
   {
     "category":"Movie",
     "no":"F004",
-    "description" : "黑寡婦",
+    "name" : "黑寡婦",
+    "description" : "2021 漫威電影",
     "star": 4,
     "price": 550,
     "photo":"M001.jpg"
@@ -74,7 +83,8 @@ var products = [
   {
     "category":"Movie",
     "no":"F004",
-    "description" : "神力女超人1984",
+    "name" : "神力女超人1984",
+    "description" : "2020 神力女超人",
     "star": 3,
     "price": 550,
     "photo":"M002.jpg"
@@ -82,7 +92,8 @@ var products = [
   {
     "category":"Movie",
     "no":"F004",
-    "description" : "沙丘",
+    "name" : "沙丘",
+    "description" : "2021 電影",
     "star": 3,
     "price": 550,
     "photo":"M003.jpg"
@@ -90,7 +101,8 @@ var products = [
   {
     "category":"Movie",
     "no":"F004",
-    "description" : "屍速列車 感染半島",
+    "name" : "屍速列車 感染半島",
+    "description" : "屍速列車 續集",
     "star": 4,
     "price": 550,
     "photo":"M004.jpg"

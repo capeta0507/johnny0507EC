@@ -79,6 +79,9 @@ body, ul, li, p, a, label, input, div {
 /* Accordion */
 .templatemo-accordion a { color: #000;}
 .templatemo-accordion a:hover { color: #333d4a;}
+.templatemo-accordion a.active{
+  color: red;
+}
 /* Shop */
 .shop-top-menu a:hover { color: #69bb7e !important;}
 /* Product */

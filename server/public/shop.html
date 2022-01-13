@@ -16,6 +16,7 @@
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
 <!--
     
@@ -25,7 +26,7 @@ https://templatemo.com/tm-559-zay-shop
 
 -->
 </head>
-
+<!-- attention：請更新資料庫，product.json有更新 -->
 <body>
     <!-- Start Top Nav -->
     <div w3-include-html="component/nav.html"></div>
@@ -85,56 +86,30 @@ https://templatemo.com/tm-559-zay-shop
                 <h1 class="h2 pb-4">Categories</h1>
                 <ul class="list-unstyled templatemo-accordion">
                     <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        <a id="all_tag" class="d-flex justify-content-between h3 text-decoration-none category_tag active" onclick="categories('All')" href="#">
+                            全部
+                        </a>
+                    </li>
+                    <li class="pb-3">
+                        <a id="fasion_tag" class="d-flex justify-content-between h3 text-decoration-none category_tag" onclick="categories('Fashion')" href="#">
                             潮流
-                            <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
-                        <ul class="collapse show list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Men</a></li>
-                            <li><a class="text-decoration-none" href="#">Women</a></li>
-                        </ul>
                     </li>
                     <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        <a id="toy_tag" class="d-flex justify-content-between h3 text-decoration-none category_tag" onclick="categories('Toy')" href="#">
                             玩具
-                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
-                        <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Sport</a></li>
-                            <li><a class="text-decoration-none" href="#">Luxury</a></li>
-                        </ul>
                     </li>
                     <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        <a id="movie_tag" class="d-flex justify-content-between h3 text-decoration-none category_tag" onclick="categories('Movie')" href="#">
                             影片
-                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
-                        <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Bag</a></li>
-                            <li><a class="text-decoration-none" href="#">Sweather</a></li>
-                            <li><a class="text-decoration-none" href="#">Sunglass</a></li>
-                        </ul>
                     </li>
                 </ul>
             </div>
 
             <div class="col-lg-9">
-                <div class="row">
-                    <div class="col-md-6">
-                        <ul class="list-inline shop-top-menu pb-3 pt-1">
-                            <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
+                <div id="myShop" class="row">
                     <div class="col-md-4">
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
@@ -469,7 +444,7 @@ https://templatemo.com/tm-559-zay-shop
                         </div>
                     </div>
                 </div>
-                <div div="row">
+                <!-- <div div="row">
                     <ul class="pagination pagination-lg justify-content-end">
                         <li class="page-item disabled">
                             <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">1</a>
@@ -481,7 +456,7 @@ https://templatemo.com/tm-559-zay-shop
                             <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
 
         </div>
@@ -602,6 +577,7 @@ https://templatemo.com/tm-559-zay-shop
     <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/shop.js"></script>
     <!-- End Script -->
     <script>
         $(document).ready(()=>{
