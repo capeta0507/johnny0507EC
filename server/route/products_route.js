@@ -47,4 +47,36 @@ router.get('/category/:cat',(req,res)=>{
   })
 });
 
+// 單一商品讀取
+router.get('/product/:no',(req,res)=>{
+  let myNo = req.params.no;
+  // 搜尋條件
+  let xNo = {
+    no: myNo
+  };
+
+  // 讀取資料
+  MongoClient.connect(MongoURL,(err,db)=>{
+    if (err){
+			console.log("MongoDB Connect error ..." + err);
+		} else{
+      let dbo = db.db("EC0507");
+      dbo.collection("products").find(xNo).toArray((err,result)=>{
+        if(err){
+          res.json({
+            success:false,
+            message:"/product/:no ... 找尋錯誤",
+          });
+        }else {
+          db.close();
+          res.json({
+            success:true,
+            message:"成功讀取商品資料",
+            result:result
+          });
+        }
+      })
+    }
+  })
+})
 module.exports = router;
