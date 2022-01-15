@@ -4,7 +4,9 @@ var sessionNo = sessionStorage.getItem('shop_no');
 // 商品
 let shopItem = ''
 // 相關
-let relatedCard = ''
+let relatedCard = '';
+// 分類
+let classification = '';
 
 console.log('url', sessionNo);
 
@@ -17,7 +19,18 @@ function shop_item(no){
   .then(result=>{
     if (result.data.success == true){
       // console.log(result.data.result[0].star)
+      console.log(result.data.result[0].category)
       category = result.data.result[0].category
+      // console.log('category', category)
+      if(category === 'Movie'){
+        classification = '電影/影片'
+      }
+      if(category === 'Fashion'){
+        classification = '潮流/品牌'
+      }
+      if(category === 'Toy'){
+        classification = '玩具/模型'
+      }
       shopItem = `
         <div class="row">
           <div id="myImg" class="col-lg-5 mt-5">
@@ -43,7 +56,7 @@ function shop_item(no){
                     <h6>分類:</h6>
                   </li>
                   <li class="list-inline-item">
-                    <p class="text-muted"><strong>玩具/模型</strong></p>
+                    <p class="text-muted"><strong>${classification}</strong></p>
                   </li>
                 </ul>
 
@@ -101,7 +114,7 @@ function related(cat){
                     <ul class="list-unstyled">
                       <li><a class="btn btn-success text-white" href="shop-single.html?no=${data.no}"><i class="far fa-heart"></i></a></li>
                       <li><a class="btn btn-success text-white mt-2" href="shop-single.html?no=${data.no}"><i class="far fa-eye"></i></a></li>
-                      <li><a class="btn btn-session text-white mt-2" href="#"><i class="far fa-eye"></i></a></li>
+                      <li><a class="btn btn-session text-white mt-2" href="shop-item.html" onclick="single_item('${data.no}')"><i class="far fa-eye"></i></a></li>
                       <li><a class="btn btn-success text-white mt-2" href="shop-single.html?no=${data.no}"><i class="fas fa-cart-plus"></i></a></li>
                     </ul>
                   </div>
@@ -142,4 +155,10 @@ function related(cat){
   .catch(err =>{
     console.log(err.message);
   })
+}
+
+function single_item(no){
+  // alert('no', no)
+  console.log('no', no)
+  sessionStorage.setItem('shop_no', no)
 }

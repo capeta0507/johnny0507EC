@@ -119,5 +119,4 @@ function single_item(no){
   // alert('no', no)
   console.log('no', no)
   sessionStorage.setItem('shop_no', no)
-  
 }
