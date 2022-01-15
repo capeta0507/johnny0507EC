@@ -1,22 +1,23 @@
 // 獲取網址參數
-var urlNo = window.location.search;
+var sessionNo = sessionStorage.getItem('shop_no');
 
-urlNo = urlNo.split('=');
-var itemNo = urlNo[1];
-
+// 商品
 let shopItem = ''
+// 相關
+let relatedCard = ''
 
-let itemStar = ''
+console.log('url', sessionNo);
 
-console.log('url', urlNo);
+var category = 'All';
 
-shop_item(itemNo)
+shop_item(sessionNo)
 
 function shop_item(no){
   axios.get(`/products/item/${no}`)
   .then(result=>{
     if (result.data.success == true){
-      console.log(result.data.result[0].star)
+      // console.log(result.data.result[0].star)
+      category = result.data.result[0].category
       shopItem = `
         <div class="row">
           <div id="myImg" class="col-lg-5 mt-5">
@@ -71,6 +72,69 @@ function shop_item(no){
         </div>
       `
       document.getElementById('myItem').innerHTML = shopItem;
+      // 相關
+      related(category);
+    } else {
+      console.log('查無資料');
+    }
+  })
+  .catch(err =>{
+    console.log(err.message);
+  })
+}
+
+// 相關
+function related(cat){
+  console.log('cat', cat)
+  axios.get(`/products/category/${cat}`)
+  .then(result=>{
+    if (result.data.success == true){
+      console.log(result.data.result)
+      result.data.result.map(data=>{
+        if(data.no !== sessionNo){
+          relatedCard += `
+            <div class="col-md-3">
+              <div class="card mb-4 product-wap rounded-0">
+                <div class="card rounded-0">
+                  <img class="card-img rounded-0 img-fluid" src="shop/product/${data.photo}">
+                  <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                    <ul class="list-unstyled">
+                      <li><a class="btn btn-success text-white" href="shop-single.html?no=${data.no}"><i class="far fa-heart"></i></a></li>
+                      <li><a class="btn btn-success text-white mt-2" href="shop-single.html?no=${data.no}"><i class="far fa-eye"></i></a></li>
+                      <li><a class="btn btn-session text-white mt-2" href="#"><i class="far fa-eye"></i></a></li>
+                      <li><a class="btn btn-success text-white mt-2" href="shop-single.html?no=${data.no}"><i class="fas fa-cart-plus"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <a href="shop-single.html" class="h3 text-decoration-none">${data.name}</a>
+                  <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                    <li>${data.description}</li>
+                    <li class="pt-2">
+                      <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
+                      <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
+                      <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
+                      <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
+                      <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+                    </li>
+                  </ul>
+                  <ul class="list-unstyled d-flex justify-content-center mb-1">
+                    <li>
+                      <i class="text-warning fa fa-star"></i>
+                      <i class="text-warning fa fa-star"></i>
+                      <i class="text-warning fa fa-star"></i>
+                      <i class="text-warning fa fa-star"></i>
+                      <i class="text-muted fa fa-star"></i>
+                    </li>
+                  </ul>
+                  <p class="text-center mb-0">NT$ ${data.price}</p>
+                </div>
+              </div>
+            </div>
+          `
+        }
+      });
+      document.getElementById('related').innerHTML = relatedCard
     } else {
       console.log('查無資料');
     }

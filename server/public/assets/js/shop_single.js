@@ -18,7 +18,7 @@ function shop_item(no){
   axios.get(`/products/item/${no}`)
   .then(result=>{
     if (result.data.success == true){
-      console.log(result.data.result[0].category)
+      // console.log(result.data.result[0].category)
       category = result.data.result[0].category
       shopItem = `
         <div class="row">
