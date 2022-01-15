@@ -48,7 +48,7 @@ router.get('/category/:cat',(req,res)=>{
 });
 
 // 單一商品讀取
-router.get('/product/:no',(req,res)=>{
+router.get('/item/:no',(req,res)=>{
   let myNo = req.params.no;
   // 搜尋條件
   let xNo = {

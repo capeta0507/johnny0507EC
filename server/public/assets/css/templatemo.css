@@ -62,6 +62,10 @@ body, ul, li, p, a, label, input, div {
   background-color: #59ab6e !important;
   border-color: #56ae6c !important;
 }
+.btn-session {
+  background-color: rgb(45, 143, 0) !important;
+  border-color: rgb(45, 143, 0) !important;
+}
 .pagination .page-link:hover {color: #000;}
 .pagination .page-link:hover, .pagination .page-link.active {
   background-color: #69bb7e;

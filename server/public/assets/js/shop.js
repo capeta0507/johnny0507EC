@@ -71,9 +71,10 @@ function shop_list(myaCtegory){
                   <img class="card-img rounded-0 img-fluid" src="shop/product/${data.photo}">
                   <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                       <ul class="list-unstyled">
-                          <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
-                          <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
-                          <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
+                          <li><a class="btn btn-success text-white" href="shop-single.html?no=${data.no}"><i class="far fa-heart"></i></a></li>
+                          <li><a class="btn btn-success text-white mt-2" href="shop-single.html?no=${data.no}"><i class="far fa-eye"></i></a></li>
+                          <li><a class="btn btn-session text-white mt-2" href="#"><i class="far fa-eye"></i></a></li>
+                          <li><a class="btn btn-success text-white mt-2" href="shop-single.html?no=${data.no}"><i class="fas fa-cart-plus"></i></a></li>
                       </ul>
                   </div>
                 </div>
@@ -112,4 +113,8 @@ function shop_list(myaCtegory){
     .catch(err =>{
       console.log(err.message);
     })
+}
+
+function single_item(no){
+  alert('no')
 }
