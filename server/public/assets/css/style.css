@@ -15,12 +15,49 @@
     position: absolute;
     top: 50px;
     left: 0;
-    width: 250px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     background-color: #fff;
     border: 1px solid black;
     z-index: 10;
     display: none;
+}
+.notification_single{
+    width: 100%;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eeeeee;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    text-decoration: none;
+}
+.notification_single:hover{
+    background-color: #eeeeee;
+}
+.notification_single .notleft{
+    width: 20%;
+}
+.notleft .notImg{
+    width: 80%;
+    margin: 0 auto;
+}
+.notleft .notImg img{
+    width: 100%;
+}
+.notification_single .notright{
+    width: 78%;
+    font-size: 14px;
+    display: block;
+}
+.notright div{
+    overflow: hidden;
+    width: 100%;
+    white-space: normal;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    font-size: 14px !important;
+    color: rgb(67, 67, 67) !important;
 }
 .active{
     display: block !important;

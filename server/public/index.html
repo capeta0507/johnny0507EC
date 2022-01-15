@@ -322,6 +322,9 @@ https://templatemo.com/tm-559-zay-shop
                 $('.notification_point').hide();
                 $('#myList').toggleClass("active");
             });
+            $('.notification_single').on('click', function(){
+                $('#myList').removeClass("active");
+            });
         }
 
         function includeHTML() {
