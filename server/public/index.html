@@ -317,6 +317,11 @@ https://templatemo.com/tm-559-zay-shop
                 $('#myUser').hide();
             }
             // console.log('end')
+            // 購物車
+            $('.shop_cart').on('click', function(){
+                $('.notification_point').hide();
+                $('#myList').toggleClass("active");
+            });
         }
 
         function includeHTML() {
