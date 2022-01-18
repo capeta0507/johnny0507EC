@@ -45,11 +45,8 @@ function shop_item(no){
                 <h1 class="h2">${result.data.result[0].name}</h1>
                 <p class="h3 py-2">NT$ ${result.data.result[0].price}</p>
                 <p id="itemStar" class="py-2">
-                  <i class="fa fa-star text-warning"></i>
-                  <i class="fa fa-star text-warning"></i>
-                  <i class="fa fa-star text-warning"></i>
-                  <i class="fa fa-star text-warning"></i>
-                  <i class="fa fa-star text-secondary"></i>
+                  ${'<i class="fa fa-star text-warning"></i>'.repeat(result.data.result[0].star)}
+                  ${'<i class="fa fa-star text-secondary"></i>'.repeat(5 - result.data.result[0].star)}
                 </p>
                 <ul class="list-inline">
                   <li class="list-inline-item">
