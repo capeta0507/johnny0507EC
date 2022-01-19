@@ -197,6 +197,9 @@
     text-align: right;
     line-height: 40px;
 }
+.myMap{
+    width: 100%;
+}
 @media screen and (max-width:992px){
     .sign_tag{
         border: none;
