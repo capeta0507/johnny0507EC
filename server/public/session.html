@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Home</title>
+</head>
+<body>
+  <h1>session 測試</h1>
+  <button onclick="sessionBtn()">載入1</button>
+  <button onclick="sessionBtn2()">載入2</button>
+  <button onclick="sessionBtn3()">載入3</button>
+  <!-- <button onclick="sessionRev()">移除</button> -->
+  <div class="myShopCount">0</div>
+  <script src="assets/js/jquery-1.11.0.min.js"></script>
+  <script>
+    let myArray = [];
+    let myItem = {
+        "no": "T001",
+        "count": 1
+    }
+    let myItem2 = {
+        "no": "T002",
+        "count": 1
+    }
+    let myItem3 = {
+        "no": "T003",
+        "count": 1
+    }
+    let sessionGet = ''
+    
+    let myShopCount = 0;
+    function sessionBtn(){
+        // myShopCount++
+        // $('.myShopCount').text(myShopCount)
+        myArray.push(myItem)
+        console.log('myArray', myArray)
+        window.sessionStorage.setItem('array', JSON.stringify(myArray));
+        sessionGet = JSON.parse(`${sessionStorage.getItem('array')}`)
+        console.log('sessionGet', sessionGet)
+    }
+    function sessionBtn2(){
+        // myShopCount++
+        // $('.myShopCount').text(myShopCount)
+        myArray.push(myItem2)
+        console.log('myArray', myArray)
+        window.sessionStorage.setItem('array', JSON.stringify(myArray));
+        sessionGet = JSON.parse(`${sessionStorage.getItem('array')}`)
+        console.log('sessionGet', sessionGet)
+    }
+    function sessionBtn3(){
+        // myShopCount++
+        // $('.myShopCount').text(myShopCount)
+        myArray.push(myItem3)
+        console.log('myArray', myArray)
+        window.sessionStorage.setItem('array', JSON.stringify(myArray));
+        sessionGet = JSON.parse(`${sessionStorage.getItem('array')}`)
+        console.log('sessionGet', sessionGet)
+    }
+  </script>
+</body>
+</html>
