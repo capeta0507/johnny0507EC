@@ -2,7 +2,7 @@ var category = 'All';
 let shopCard = '';
 let item_star = '';
 
-let session_category = window.sessionStorage.getItem('category');
+let session_category = sessionStorage.getItem('shop_cate');
 
 console.log('session_category', session_category)
 
