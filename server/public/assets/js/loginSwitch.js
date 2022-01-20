@@ -67,12 +67,10 @@ function includeHTML() {
     // 顯示註冊與登入
     loginSwitch();
     // 顯示購物車數量
-    let myCart = JSON.parse(`${sessionStorage.getItem('array')}`)
-    console.log('1', myCart)
+    let myCart = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+    let myShopCount = sessionStorage.getItem('shopCount')
     if(myCart){
-        let myCartCount = myCart.length;
-        console.log('myCartCount', myCartCount);
-        $('#myCart').text(myCartCount);
+        $('#myCart').text(myShopCount);
     }
 
 }

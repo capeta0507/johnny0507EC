@@ -10,13 +10,21 @@ let classification = '';
 // 相關
 let relatedCard = ''
 // 數量
-let myCount = 1;
-let myArray = [];
+let myShopCount = 0;
+let myBuyItem = [];
 let sessionGet = '';
+// 商品
+let myProductName = '';
+let myProductPrice = '';
+let myProductImg = '';
+let myProductTotal = '';
 
 // console.log('url', urlNo);
 
-var category = 'All';
+var category = 'All'
+
+let session_cart = JSON.parse(window.sessionStorage.getItem('shopArray'));
+console.log('session_cart', session_cart)
 
 shop_item(itemNo)
 
@@ -35,6 +43,9 @@ function shop_item(no){
       if(category === 'Toy'){
         classification = '玩具/模型'
       }
+      myProductName = result.data.result[0].name
+      myProductPrice = result.data.result[0].price
+      myProductImg = result.data.result[0].photo
       shopItem = `
         <div class="row">
           <div id="myImg" class="col-lg-5 mt-5">
@@ -97,16 +108,22 @@ function shop_item(no){
 
 // add cart
 function addCart(){
-  console.log('urlNo', urlNo[1], myCount);
+  myShopCount++
+  console.log('urlNo', urlNo[1], myShopCount);
   let myItem = {
     "no": urlNo[1],
-    "count": myCount
+    "name": myProductName,
+    "price": myProductPrice,
+    "qta": 1,
+    "total": myProductPrice * myShopCount,
+    "photo": myProductImg
   }
-  myArray.push(myItem)
-  window.sessionStorage.setItem('array', JSON.stringify(myArray));
-  sessionGet = JSON.parse(`${sessionStorage.getItem('array')}`)
+  myBuyItem.push(myItem)
+  window.sessionStorage.setItem('shopArray', JSON.stringify(myBuyItem));
+  window.sessionStorage.setItem('shopCount', myShopCount);
+  sessionGet = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
   console.log('sessionGet', sessionGet)
-  $('#myCart').text(sessionGet.length);
+  $('#myCart').text(myShopCount);
 }
 
 // 相關
