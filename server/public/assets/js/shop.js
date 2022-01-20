@@ -86,7 +86,6 @@ function shop_list(myaCtegory){
                       <ul class="list-unstyled">
                           <li><a class="btn btn-success text-white" href="shop-single.html?no=${data.no}"><i class="far fa-heart"></i></a></li>
                           <li><a class="btn btn-success text-white mt-2" href="shop-single.html?no=${data.no}"><i class="far fa-eye"></i></a></li>
-                          <li><a class="btn btn-session text-white mt-2" href="shop-item.html" onclick="single_item('${data.no}')"><i class="far fa-eye"></i></a></li>
                           <li><a class="btn btn-success text-white mt-2" href="shop-single.html?no=${data.no}"><i class="fas fa-cart-plus"></i></a></li>
                       </ul>
                   </div>
