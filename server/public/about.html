@@ -322,9 +322,10 @@ https://templatemo.com/tm-559-zay-shop
             // 顯示註冊與登入
             loginSwitch();
             // 顯示購物車數量
-            let myCartCount = JSON.parse(`${sessionStorage.getItem('array')}`)
-            if(myCartCount){
-                myCartCount = myCartCount.length;
+            let myCart = JSON.parse(`${sessionStorage.getItem('array')}`)
+            console.log('1', myCart)
+            if(myCart){
+                let myCartCount = myCart.length;
                 console.log('myCartCount', myCartCount);
                 $('#myCart').text(myCartCount);
             }
