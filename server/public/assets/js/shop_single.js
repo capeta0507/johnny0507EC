@@ -9,6 +9,10 @@ let shopItem = '';
 let classification = '';
 // 相關
 let relatedCard = ''
+// 數量
+let myCount = 1;
+let myArray = [];
+let sessionGet = '';
 
 console.log('url', urlNo);
 
@@ -66,16 +70,14 @@ function shop_item(no){
                   <li>${result.data.result[0].description}</li>
                 </ul>
 
-                <form action="" method="GET">
-                  <div class="row pb-3">
-                    <div class="col d-grid">
-                      <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
-                    </div>
-                    <div class="col d-grid">
-                      <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
-                    </div>
+                <div class="row pb-3">
+                  <div class="col d-grid">
+                    <button class="btn btn-success btn-lg" value="buy">Buy</button>
                   </div>
-                </form>
+                  <div class="col d-grid">
+                    <button class="btn btn-success btn-lg" value="addtocard" onclick="addCart()">Add To Cart</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -93,13 +95,27 @@ function shop_item(no){
   })
 }
 
+// add cart
+function addCart(){
+  console.log('urlNo', urlNo, myCount);
+  let myItem = {
+    "no": urlNo,
+    "count": myCount
+  }
+  myArray.push(myItem)
+  window.sessionStorage.setItem('array', JSON.stringify(myArray));
+  sessionGet = JSON.parse(`${sessionStorage.getItem('array')}`)
+  console.log('sessionGet', sessionGet)
+  $('#myCart').text(sessionGet.length);
+}
+
 // 相關
 function related(cat){
-  console.log('cat', cat)
+  // console.log('cat', cat)
   axios.get(`/products/category/${cat}`)
   .then(result=>{
     if (result.data.success == true){
-      console.log(result.data.result)
+      // console.log(result.data.result)
       result.data.result.map(data=>{
         if(data.no !== itemNo){
           relatedCard += `

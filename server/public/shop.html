@@ -314,6 +314,11 @@ https://templatemo.com/tm-559-zay-shop
             }
             // 顯示註冊與登入
             loginSwitch();
+            // 顯示購物車書量
+            let myCartCount = JSON.parse(`${sessionStorage.getItem('array')}`)
+            myCartCount = myCartCount.length;
+            console.log('myCartCount', myCartCount);
+            $('#myCart').text(myCartCount);
         }
     </script>
 </body>
