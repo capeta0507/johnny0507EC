@@ -14,7 +14,7 @@ let myCount = 1;
 let myArray = [];
 let sessionGet = '';
 
-console.log('url', urlNo);
+// console.log('url', urlNo);
 
 var category = 'All';
 
@@ -97,9 +97,9 @@ function shop_item(no){
 
 // add cart
 function addCart(){
-  console.log('urlNo', urlNo, myCount);
+  console.log('urlNo', urlNo[1], myCount);
   let myItem = {
-    "no": urlNo,
+    "no": urlNo[1],
     "count": myCount
   }
   myArray.push(myItem)

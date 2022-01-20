@@ -8,7 +8,7 @@ let relatedCard = '';
 // 分類
 let classification = '';
 
-console.log('url', sessionNo);
+// console.log('url', sessionNo);
 
 var category = 'All';
 
