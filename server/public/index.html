@@ -166,19 +166,19 @@ https://templatemo.com/tm-559-zay-shop
         </div>
         <div class="row">
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/2850777_1.jpeg" class="rounded-circle img-fluid border"></a>
+                <a><img src="./assets/img/2850777_1.jpeg" class="rounded-circle img-fluid border"></a>
                 <h5 class="text-center mt-3 mb-3">潮流</h5>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                <p class="text-center"><a href="shop.html" class="btn btn-success" onclick="shopCategoru('Fashion')">Go Shop</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/shigure.png" class="rounded-circle img-fluid border"></a>
+                <a><img src="./assets/img/shigure.png" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">玩具</h2>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                <p class="text-center"><a href="shop.html" class="btn btn-success" onclick="shopCategoru('Toy')">Go Shop</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="./assets/img/arvenger.png" class="rounded-circle img-fluid border"></a>
+                <a><img src="./assets/img/arvenger.png" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">影片</h2>
-                <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                <p class="text-center"><a href="shop.html" class="btn btn-success" onclick="shopCategoru('Movie')">Go Shop</a></p>
             </div>
         </div>
     </section>
@@ -365,6 +365,11 @@ https://templatemo.com/tm-559-zay-shop
                 console.log('myCartCount', myCartCount);
                 $('#myCart').text(myCartCount);
             }
+        }
+
+        function shopCategoru(category){
+            // console.log('category', category)
+            window.sessionStorage.setItem('category', category);
         }
     </script>
 </body>
