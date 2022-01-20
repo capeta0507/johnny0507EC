@@ -2,6 +2,18 @@ var category = 'All';
 let shopCard = '';
 let item_star = '';
 
+let session_category = window.sessionStorage.getItem('category');
+
+console.log('session_category', session_category)
+
+// 假如session有的話，從session抓
+if(session_category){
+  category = session_category
+  $('.category_tag').removeClass('active');
+  let myTagName = `#${category}_tag`;  // 類別 + _tag 組合
+  $(myTagName).addClass('active');  // 引用 類別 + _tag 組合
+}
+
 shop_list(category);
 
 function categories(tag){
@@ -115,6 +127,6 @@ function shop_list(myaCtegory){
 
 function single_item(no){
   // alert('no', no)
-  console.log('no', no)
+  // console.log('no', no)
   sessionStorage.setItem('shop_no', no)
 }

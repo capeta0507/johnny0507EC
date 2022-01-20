@@ -149,6 +149,13 @@
                 console.log('myCartCount', myCartCount);
                 $('#myCart').text(myCartCount);
             }
+            // 進入商店的類別選擇
+            shopCategoru();
+        }
+
+        function shopCategoru(category){
+            // console.log('category', category)
+            sessionStorage.setItem('category', category);
         }
     </script>
 </body>
