@@ -49,6 +49,10 @@
     font-size: 14px;
     display: block;
 }
+.notification_point{
+    background-color: rgb(255, 55, 55);
+    color: #fff;
+}
 .notright div{
     overflow: hidden;
     width: 100%;

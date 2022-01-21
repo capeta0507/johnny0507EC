@@ -24,7 +24,13 @@ let myProductTotal = '';
 var category = 'All'
 
 let session_cart = JSON.parse(window.sessionStorage.getItem('shopArray'));
+let session_count = window.sessionStorage.getItem('shopCount');
 console.log('session_cart', session_cart)
+// session裡 shopArray 假如有資料，將session 的資料帶入
+if(session_cart !== null){
+  myBuyItem = session_cart
+  myShopCount = session_count
+}
 
 shop_item(itemNo)
 
@@ -109,20 +115,20 @@ function shop_item(no){
 // add cart
 function addCart(){
   myShopCount++
-  console.log('urlNo', urlNo[1], myShopCount);
+  // console.log('urlNo', urlNo[1], myShopCount);
   let myItem = {
     "no": urlNo[1],
     "name": myProductName,
     "price": myProductPrice,
-    "qta": 1,
-    "total": myProductPrice * myShopCount,
+    "qty": 1,
+    "total": myProductPrice * 1,
     "photo": myProductImg
   }
   myBuyItem.push(myItem)
   window.sessionStorage.setItem('shopArray', JSON.stringify(myBuyItem));
   window.sessionStorage.setItem('shopCount', myShopCount);
   sessionGet = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
-  console.log('sessionGet', sessionGet)
+  // console.log('sessionGet', sessionGet)
   $('#myCart').text(myShopCount);
 }
 
