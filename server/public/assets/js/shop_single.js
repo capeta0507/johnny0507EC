@@ -9,10 +9,10 @@ let shopItem = '';
 let classification = '';
 // 相關
 let relatedCard = ''
-// 數量
+// 商品數量
 let myShopCount = 0;
 let myBuyItem = [];
-let sessionGet = '';
+let sessionBuyGet = '';
 // 商品
 let myProductName = '';
 let myProductPrice = '';
@@ -24,14 +24,11 @@ let myProductTotal = '';
 var category = 'All'
 
 let session_cart = JSON.parse(window.sessionStorage.getItem('shopArray'));
-let session_count = window.sessionStorage.getItem('shopCount');
-// console.log('session_cart', session_cart)
+let session_count =parseInt(window.sessionStorage.getItem('shopCount'));
 // session裡 shopArray 假如有資料，將session 的資料帶入
 if(session_cart !== null){
-  // console.log('session_cart', session_cart)
   myBuyItem = session_cart
   myShopCount = session_count
-  $('#myCart').removeClass('cart_none');
 }
 
 shop_item(itemNo)
@@ -130,8 +127,8 @@ function addCart(){
   myBuyItem.push(myItem)
   window.sessionStorage.setItem('shopArray', JSON.stringify(myBuyItem));
   window.sessionStorage.setItem('shopCount', myShopCount);
-  sessionGet = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
-  // console.log('sessionGet', sessionGet)
+  sessionBuyGet = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+  // console.log('sessionBuyGet', sessionBuyGet)
   $('#myCart').text(myShopCount);
 }
 

@@ -72,6 +72,9 @@ function includeHTML() {
     if(myCart){
         $('#myCart').text(myShopCount);
     }
+    if(myShopCount > 0){
+        $('#myCart').removeClass('cart_none');
+    }
 
 }
 
