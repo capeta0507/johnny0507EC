@@ -6,10 +6,10 @@ function loginSwitch(){
     });
     // 登出
     $('#myLogout').on('click', function(){
-        sessionStorage.removeItem('userName');
-        sessionStorage.removeItem('eMail');
-        sessionStorage.removeItem('id');
-        // sessionStorage.clear();
+        // sessionStorage.removeItem('userName');
+        // sessionStorage.removeItem('eMail');
+        // sessionStorage.removeItem('id');
+        sessionStorage.clear();
         window.location.href = "index.html";
     });
     // 登入後
