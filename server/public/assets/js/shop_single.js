@@ -25,11 +25,13 @@ var category = 'All'
 
 let session_cart = JSON.parse(window.sessionStorage.getItem('shopArray'));
 let session_count = window.sessionStorage.getItem('shopCount');
-console.log('session_cart', session_cart)
+// console.log('session_cart', session_cart)
 // session裡 shopArray 假如有資料，將session 的資料帶入
 if(session_cart !== null){
+  // console.log('session_cart', session_cart)
   myBuyItem = session_cart
   myShopCount = session_count
+  $('#myCart').removeClass('cart_none');
 }
 
 shop_item(itemNo)
@@ -115,6 +117,7 @@ function shop_item(no){
 // add cart
 function addCart(){
   myShopCount++
+  $('#myCart').removeClass('cart_none');
   // console.log('urlNo', urlNo[1], myShopCount);
   let myItem = {
     "no": urlNo[1],

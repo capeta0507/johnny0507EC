@@ -50,8 +50,11 @@
     display: block;
 }
 .notification_point{
-    background-color: rgb(255, 55, 55);
+    background-color: rgb(222, 24, 240);
     color: #fff;
+}
+.cart_none{
+    display: none;
 }
 .notright div{
     overflow: hidden;
