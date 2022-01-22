@@ -69,8 +69,27 @@ function includeHTML() {
     // 顯示購物車數量
     let myCart = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
     let myShopCount = sessionStorage.getItem('shopCount')
+    let cart_list = ''
+    console.log('myCart', myCart)
     if(myCart){
         $('#myCart').text(myShopCount);
+        myCart.map((data)=>{
+            cart_list += `
+                <a href="#" class="notification_single" target="_blank">
+                    <div class="notleft">
+                    <div class="notImg">
+                        <img src="shop/product/${data.photo}" alt="">
+                    </div>
+                    </div>
+                    <div class="notright">
+                    <div>名稱：${data.name}</div>
+                    <div>數量：${data.qty}</div>
+                    <div>價格：NT$ ${data.total}</div>
+                    </div>
+                </a>
+            `
+        });
+        document.getElementById('myList').innerHTML = cart_list
     }
     if(myShopCount > 0){
         $('#myCart').removeClass('cart_none');
