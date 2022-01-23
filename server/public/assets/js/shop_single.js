@@ -19,6 +19,8 @@ let myProductPrice = '';
 let myProductImg = '';
 let myProductTotal = '';
 
+let cart_list = '';
+
 // console.log('url', urlNo);
 
 var category = 'All'
@@ -129,6 +131,25 @@ function addCart(){
   window.sessionStorage.setItem('shopCount', myShopCount);
   sessionBuyGet = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
   // console.log('sessionBuyGet', sessionBuyGet)
+  cart_list = ''
+  sessionBuyGet.map(data => {
+    cart_list += `
+      <a href="#" class="notification_single" target="_blank">
+        <div class="notleft">
+        <div class="notImg">
+          <img src="shop/product/${data.photo}" alt="">
+        </div>
+        </div>
+        <div class="notright">
+        <div>名稱：${data.name}</div>
+        <div>數量：${data.qty}</div>
+        <div>價格：NT$ ${data.total}</div>
+        </div>
+      </a>
+    `
+  })
+  $('.cart_payBtn').show();
+  $('#myListContent').html(cart_list);
   $('#myCart').text(myShopCount);
 }
 

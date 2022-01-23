@@ -89,7 +89,8 @@ function includeHTML() {
                 </a>
             `
         });
-        document.getElementById('myList').innerHTML = cart_list
+        $('.cart_payBtn').show();
+        document.getElementById('myListContent').innerHTML = cart_list
     }
     if(myShopCount > 0){
         $('#myCart').removeClass('cart_none');

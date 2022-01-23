@@ -19,7 +19,7 @@
     height: 300px;
     background-color: #fff;
     border-radius: 5px;
-    overflow: hidden;
+    overflow: scroll;
     box-shadow: 0 0 10px rgba(0, 0, 0, .5);
     z-index: 10;
     display: none;
@@ -29,6 +29,17 @@
     text-align: center;
     font-size: 20px;
     font-weight: bold;
+}
+.cart_payBtn{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    display: none;
+}
+.cart_payBtn a{
+    width: 100%;
+    text-align: center;
+    display: block;
 }
 .notification_single{
     width: 100%;
