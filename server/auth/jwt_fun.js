@@ -26,7 +26,7 @@ const my_UserJWTToken = (userName, eMail, userID, userIP) =>{
 // 寫給前端 Cookies : _EC0507_UserToken
 const myWriteClientCookies = (req,res,jwt_token) =>{
   // console.log('myWriteClientCookies',jwt_token);
-  res.cookie('_EC0507_UserToken',jwt_token,{
+  res.cookie('_EC0507_JWTToken',jwt_token,{
     maxAge: 1000 * 60 * 60 * 24,  // 24小時
     httpOnly: true,
   });
@@ -34,7 +34,7 @@ const myWriteClientCookies = (req,res,jwt_token) =>{
 }
 // 清除前端 Cookies : _EC0507_UserToken
 const myClearClientCookies = (req,res) =>{
-  res.clearCookie('_EC0507_UserToken');
+  res.clearCookie('_EC0507_JWTToken');
   return true;
 }
 

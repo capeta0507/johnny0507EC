@@ -1,12 +1,19 @@
 // Customers 處理 Router
 const express = require('express');
+const app = express();
+const RequestIp = require('@supercharge/request-ip'); // get User IP
 require('dotenv').config('../.env'); // 引用 .env 環境變數
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const MongoURL = process.env.MONGODB_URL
+// cookie-parser middleware 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 // 加密函式
 const {my_Encrypt, my_Decrypt} = require('../auth/auth_fun');
+// JWT
+const {my_UserJWTToken,myWriteClientCookies,myClearClientCookies} = require('../auth/jwt_fun');
 
 // 客戶註冊/登入
 // Database : EC0507
@@ -145,6 +152,12 @@ router.post('/login',(req,res)=>{
 						});
 						return false;
 					}
+					// 將 JWT Token _EC0507_JWTToken 寫到 Client Cookies
+					let userIP = createUserIP(req,res);
+					// 取得 JWT Token
+					let myToken = my_UserJWTToken(result[0].userName,result[0].eMail,result[0]._id,userIP);
+					// 寫到 Client 端 Cookies // 24小時有效
+					myWriteClientCookies(req,res,myToken);
 					// 正常回傳紀錄
 					res.json({
 						success : true,
@@ -160,6 +173,15 @@ router.post('/login',(req,res)=>{
 		}
   })
 })
+
+// 登出，清除 Client Cookies : _EC0507_JWTToken
+router.post('/logout',(req,res) => {
+	myClearClientCookies(req,res);
+	res.json({
+		success : true,
+		message : "成功登出",
+	});
+});
 
 // 獲取個人資料
 router.get('/member/:eMail',(req,res)=>{
@@ -251,5 +273,18 @@ router.put('/chpwd/:eMail', (req,res)=>{
 	})
 })
 
+// 取得使用者的 IP Address
+const createUserIP = (req, res) => {
+	const ip = RequestIp.getClientIp(req);
+	let ipStr = "";
+	if(ip === "::1") {
+		ipStr = 'localhost';
+	}
+	else{
+		// ::ffff:192.168.0.155 切出 ip
+		ipStr = ip.split(':')[3];
+	}
+	return ipStr;
+}
 
 module.exports = router;

@@ -10,7 +10,18 @@ function loginSwitch(){
         // sessionStorage.removeItem('eMail');
         // sessionStorage.removeItem('id');
         sessionStorage.clear();
-        window.location.href = "index.html";
+        // 登出
+        axios.post('/customers/logout')
+            .then(res =>{
+                console.log(res.data);
+                if(res.data.success === true){
+                    window.location.href = "index.html";
+                }
+            })
+            .catch(err =>{
+                alert('登出錯誤:' + res.data.message);
+            })
+        
     });
     // 登入後
     let userName = sessionStorage.getItem('userName');
