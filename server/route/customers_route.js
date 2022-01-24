@@ -3,12 +3,14 @@ const express = require('express');
 const app = express();
 const RequestIp = require('@supercharge/request-ip'); // get User IP
 require('dotenv').config('../.env'); // 引用 .env 環境變數
-const router = express.Router();
+// const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const MongoURL = process.env.MONGODB_URL
 // cookie-parser middleware 
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+// const cookieParser = require('cookie-parser');
+// app.use(cookieParser());
+
+const router = express.Router();
 
 // 加密函式
 const {my_Encrypt, my_Decrypt} = require('../auth/auth_fun');
@@ -197,7 +199,7 @@ router.post('/logout',(req,res) => {
 });
 
 // Who am I : 取得 Cookies : _EC0507_JWTToken 資料
-router.post('client_whoami',(req,res)=>{
+router.post('/client_whoami',(req,res)=>{
 	let JWTInfo = myJWTVerify(req,res);
 	// console.log(JWTInfo);
 	if (JWTInfo.success == true){
@@ -215,8 +217,6 @@ router.post('client_whoami',(req,res)=>{
 		});
 	}
 });
-
-
 
 // 獲取個人資料
 router.get('/member/:eMail',(req,res)=>{

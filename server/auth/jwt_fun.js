@@ -52,8 +52,9 @@ const myClearClientCookies = (req,res) =>{
   return true;
 }
 // 驗證、取得 JWT 資料
-const myJWTVerify = (req,res) =>{
-  let cookieStr = req.headers.cookie;
+const myJWTVerify = (req,res)=>{
+  let cookieStr = req.cookies;
+  // console.log(cookieStr);
   let myJWTStr = "";
   let myInfo = {};
   if(!cookieStr){
@@ -64,20 +65,11 @@ const myJWTVerify = (req,res) =>{
     };
   }
   else{
-    let strArr = cookieStr.split(';');
-    for(let i = 0; i < strArr.length; i++){
-      // console.log(strArr[i]);
-      let strCookie = strArr[i].split("=");
-      let cookie_KEY = strCookie[0].trim();
-      let cookie_VALUE = strCookie[1].trim();
-      // console.log(cookie_KEY);
-      // console.log(cookie_VALUE);
-      if (cookie_KEY === "_EC0507_JWTToken") {
-        myJWTStr = cookie_VALUE;
-        // break;
-      }
-    }
-    if (myJWTStr.length == 0){
+    let cookie_KEY = "_EC0507_JWTToken";
+    let cookie_VALUE = cookieStr._EC0507_JWTToken
+    // console.log(cookie_KEY, cookie_VALUE);
+    // myJWTStr = cookie_VALUE;
+    if (cookie_VALUE.length == 0){
       // console.log("JWT Error... No JWT Token");
       myInfo = {
         success: false,
@@ -85,7 +77,7 @@ const myJWTVerify = (req,res) =>{
       };
     }
     else{
-      jwt.verify(myJWTStr,myJWTSecutit,(err,decoded) =>{
+      jwt.verify(cookie_VALUE,myJWTSecutit,(err,decoded) =>{
         if (err){
           // console.log("JWT Error...驗證錯誤");
           myInfo = {
@@ -112,6 +104,6 @@ module.exports = {
   my_UserJWTToken,
   myWriteClientCookies,
   myClearClientCookies,
-  myJWTVerify
+  myJWTVerify,
 }
 

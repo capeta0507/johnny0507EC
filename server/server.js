@@ -7,6 +7,9 @@ const app = express();
 //setting middleware
 app.use(express.static(__dirname + '/public')); //主機資源設定為 public 資料夾
 app.use(express.json());
+// cookie-parser middleware 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 // Server listen
 const PORT = process.env.PORT || 8080;
