@@ -1,4 +1,8 @@
-// const express = require('express');
+const express = require('express');
+const app = express();
+// cookie-parser middleware 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 // 載入 jwt 函式庫協助處理建立/驗證 token
 const jwt = require('jsonwebtoken');
 const {myJWTSecutit} = require('./auth');
@@ -30,17 +34,59 @@ const myWriteClientCookies = (req,res,jwt_token) =>{
     maxAge: 1000 * 60 * 60 * 24,  // 24小時
     httpOnly: true,
   });
+  res.cookie('_EC0507_xCode',"JOHNNY_EC0507",{
+    maxAge: 1000 * 60 * 60 * 24,  // 24小時
+    httpOnly: true,
+  });
+  res.cookie('_EC0507_xMethod',"FrontEnd-BackEnd",{
+    maxAge: 1000 * 60 * 60 * 24,  // 24小時
+    httpOnly: true,
+  });
   return true;
 }
 // 清除前端 Cookies : _EC0507_UserToken
 const myClearClientCookies = (req,res) =>{
   res.clearCookie('_EC0507_JWTToken');
+  res.clearCookie('_EC0507_xCode');
+  res.clearCookie('_EC0507_xMethod');
   return true;
+}
+// 驗證、取得 JWT 資料
+const myJWTVerify = (req,res) =>{
+  let cookieStr = req.headers.cookie;
+  let myJWTStr = "";
+  if(!cookieStr){
+    console.log('No Cookies');
+  }
+  else{
+    let strArr = cookieStr.split(';');
+    for(let i = 0; i < strArr.length; i++){
+      // console.log(strArr[i]);
+      let strCookie = strArr[i].split("=");
+      let cookie_KEY = strCookie[0].trim();
+      let cookie_VALUE = strCookie[1].trim();
+      console.log(cookie_KEY);
+      console.log(cookie_VALUE);
+      if (cookie_KEY === "_EC0507_JWTToken") {
+        myJWTStr = cookie_VALUE;
+        // break;
+      }
+    }
+    jwt.verify(myJWTStr,myJWTSecutit,(err,decoded) =>{
+      if (err){
+        console.log("JWT Error...");
+      }
+      else{
+        console.log('JWT Token',decoded);
+      }
+    })
+  }
 }
 
 module.exports = {
   my_UserJWTToken,
   myWriteClientCookies,
-  myClearClientCookies
+  myClearClientCookies,
+  myJWTVerify
 }
 

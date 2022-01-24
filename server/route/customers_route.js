@@ -13,7 +13,7 @@ app.use(cookieParser());
 // 加密函式
 const {my_Encrypt, my_Decrypt} = require('../auth/auth_fun');
 // JWT
-const {my_UserJWTToken,myWriteClientCookies,myClearClientCookies} = require('../auth/jwt_fun');
+const {my_UserJWTToken,myWriteClientCookies,myClearClientCookies,myJWTVerify} = require('../auth/jwt_fun');
 
 // 客戶註冊/登入
 // Database : EC0507
@@ -107,6 +107,8 @@ router.post('/add',(req,res)=>{
 // Database : EC0507
 // Collection : customers -> userName , eMail , password
 router.post('/login',(req,res)=>{
+	// myJWTVerify
+	// myJWTVerify(req,res);
   // 根據前端 eMail + password 讀取資料來判斷帳密是否正確
 	// 回傳 _id , userName
 	const{eMail,password} = req.body;
@@ -176,6 +178,7 @@ router.post('/login',(req,res)=>{
 
 // 登出，清除 Client Cookies : _EC0507_JWTToken
 router.post('/logout',(req,res) => {
+	myJWTVerify(req,res);
 	myClearClientCookies(req,res);
 	res.json({
 		success : true,
