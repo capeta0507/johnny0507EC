@@ -11,3 +11,7 @@
 1. [Demo](https://templatemo.com/live/templatemo_559_zay_shop)
 2. [Download](https://themewagon.com/themes/free-bootstrap-5-html-5-ecommerce-website-template-zay-shop/)
 
+### 專案說明
+1. 前端 : HTML + CSS + JavaScript + jQuery + Bootstrap 4
+2. 後端 : Node.js + Express + MongoDB + AWS EC2
+
