@@ -55,8 +55,13 @@ const myClearClientCookies = (req,res) =>{
 const myJWTVerify = (req,res) =>{
   let cookieStr = req.headers.cookie;
   let myJWTStr = "";
+  let myInfo = {};
   if(!cookieStr){
-    console.log('No Cookies');
+    // console.log('No Cookies');
+    myInfo = {
+      success: false,
+      message: 'No cookies'
+    };
   }
   else{
     let strArr = cookieStr.split(';');
@@ -65,22 +70,42 @@ const myJWTVerify = (req,res) =>{
       let strCookie = strArr[i].split("=");
       let cookie_KEY = strCookie[0].trim();
       let cookie_VALUE = strCookie[1].trim();
-      console.log(cookie_KEY);
-      console.log(cookie_VALUE);
+      // console.log(cookie_KEY);
+      // console.log(cookie_VALUE);
       if (cookie_KEY === "_EC0507_JWTToken") {
         myJWTStr = cookie_VALUE;
         // break;
       }
     }
-    jwt.verify(myJWTStr,myJWTSecutit,(err,decoded) =>{
-      if (err){
-        console.log("JWT Error...");
-      }
-      else{
-        console.log('JWT Token',decoded);
-      }
-    })
+    if (myJWTStr.length == 0){
+      // console.log("JWT Error... No JWT Token");
+      myInfo = {
+        success: false,
+        message: 'JWT Error... No JWT Token'
+      };
+    }
+    else{
+      jwt.verify(myJWTStr,myJWTSecutit,(err,decoded) =>{
+        if (err){
+          // console.log("JWT Error...驗證錯誤");
+          myInfo = {
+            success: false,
+            message: 'JWT Error... 驗證錯誤'
+          };
+        }
+        else{
+          // console.log('JWT Token',decoded);
+          myInfo = {
+            success: true,
+            message: 'JWT Yes... 驗證錯誤',
+            JWTInfo: decoded
+          };
+        }
+      });
+    }
   }
+  // console.log(myInfo);
+  return myInfo;
 }
 
 module.exports = {

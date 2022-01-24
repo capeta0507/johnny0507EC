@@ -178,13 +178,45 @@ router.post('/login',(req,res)=>{
 
 // 登出，清除 Client Cookies : _EC0507_JWTToken
 router.post('/logout',(req,res) => {
-	myJWTVerify(req,res);
-	myClearClientCookies(req,res);
-	res.json({
-		success : true,
-		message : "成功登出",
-	});
+	let JWTInfo = myJWTVerify(req,res);
+	// console.log(JWTInfo);
+	if (JWTInfo.success == true){
+		myClearClientCookies(req,res);
+		res.json({
+			success : true,
+			message : "成功登出"
+		});
+	}
+	else{
+		myClearClientCookies(req,res);
+		res.json({
+			success : false,
+			message : "登出錯誤 ..." + JWTInfo.message
+		});
+	}
 });
+
+// Who am I : 取得 Cookies : _EC0507_JWTToken 資料
+router.post('client_whoami',(req,res)=>{
+	let JWTInfo = myJWTVerify(req,res);
+	// console.log(JWTInfo);
+	if (JWTInfo.success == true){
+		res.json({
+			success : true,
+			message : "JWT資料",
+			token:JWTInfo
+		});
+	}
+	else{
+		res.json({
+			success : false,
+			message : "JWT資料...尚未登入",
+			token:""
+		});
+	}
+});
+
+
 
 // 獲取個人資料
 router.get('/member/:eMail',(req,res)=>{

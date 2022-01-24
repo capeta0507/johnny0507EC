@@ -17,6 +17,9 @@ function loginSwitch(){
                 if(res.data.success === true){
                     window.location.href = "index.html";
                 }
+                else{
+                    window.location.href = "index.html";
+                }
             })
             .catch(err =>{
                 alert('登出錯誤:' + res.data.message);
