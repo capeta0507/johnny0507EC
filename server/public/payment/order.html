@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+  <h1>訂購單</h1>
+
+  <form id="orderForm">
+    <label for="lname">商店訂單編號:</label><br>
+    <input type="text" id="MerchantOrderNo" name="MerchantOrderNo" size="25" value="F1122" > (20個字以內)<br>
+    <label for="fname">商品名稱:</label><br>
+    <input type="text" id="ItemDesc" name="ItemDesc" value="EC T001 F1模型 1/18" ><br>
+    <label for="fname">訂單金額:</label><br>
+    <input type="text" id="Amt" name="Amt" value="2150"><br><br>
+    <input id="orderYes" type="button" value="訂購單確認(綠界)" >
+  </form>
+  <div id="payForm" >
+
+  </div>
+</body>
+<script>
+  $(document).ready(function(){
+    let xNo = x_orderNo();
+    console.log(xNo);
+    $("#MerchantOrderNo").val(xNo)
+    $("#orderYes").click(function(){
+      // alert('訂購單確認');
+      // console.log($("#MerchantOrderNo").val());
+      let data = {
+        "MerchantOrderNo" : $("#MerchantOrderNo").val(),
+        "ItemDesc" : $("#ItemDesc").val(),
+        "Amt" : $("#Amt").val(),
+      }
+      console.log(data);
+      $.post('/payment/ecpay',data,(result,status)=>{
+        console.log(status);
+        console.log(result.result);
+        $("#payForm").html(result.result);  // 執行付款
+      })
+    });
+  });
+  function x_orderNo(){
+    // 產生訂單編號 
+    var m = new Date();
+    console.log(Date.now());
+    var dateString =
+      m.getUTCFullYear() + "" +
+      ("0" + (m.getUTCMonth()+1)).slice(-2) + "" +
+      ("0" + m.getUTCDate()).slice(-2) + "" +
+      ("0" + m.getHours()).slice(-2) + "" +
+      ("0" + m.getMinutes()).slice(-2) + "" +
+      ("0" + m.getSeconds()).slice(-2) + "" + 
+      ("00" + m.getMilliseconds()).slice(-3);
+    var xOrderNO = 'ECx';
+    // xOrderNO += + Date.now();
+    xOrderNO += dateString;
+
+    return xOrderNO;
+  }
+</script>
+</html>

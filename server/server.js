@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config(); // 引用 .env 環境變數
 const MongoURL = process.env.MONGODB_URL
@@ -10,6 +11,10 @@ app.use(express.json());
 // cookie-parser middleware 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
 
 // Server listen
 const PORT = process.env.PORT || 8080;
@@ -33,3 +38,7 @@ app.use('/customers',custRouter);
 // Products router
 const prodRouter = require('./route/products_route');
 app.use('/products',prodRouter);
+
+// 付款處理 (綠界)
+const ecpayRouter = require('./route/payment_rout');
+app.use('/payment',ecpayRouter);
