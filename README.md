@@ -13,5 +13,5 @@
 
 ### 專案說明
 1. 前端 : HTML + CSS + JavaScript + jQuery + Bootstrap 4
-2. 後端 : Node.js + Express + MongoDB + AWS EC2
+2. 後端 : Node.js + Express + MongoDB + AWS EC2 Windows 2019 Server Instance
 
