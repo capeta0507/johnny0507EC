@@ -34,21 +34,21 @@ const myWriteClientCookies = (req,res,jwt_token) =>{
     maxAge: 1000 * 60 * 60 * 24,  // 24小時
     httpOnly: true,
   });
-  res.cookie('_EC0507_xCode',"JOHNNY_EC0507",{
-    maxAge: 1000 * 60 * 60 * 24,  // 24小時
-    httpOnly: true,
-  });
-  res.cookie('_EC0507_xMethod',"FrontEnd-BackEnd",{
-    maxAge: 1000 * 60 * 60 * 24,  // 24小時
-    httpOnly: true,
-  });
+  // res.cookie('_EC0507_xCode',"JOHNNY_EC0507",{
+  //   maxAge: 1000 * 60 * 60 * 24,  // 24小時
+  //   httpOnly: true,
+  // });
+  // res.cookie('_EC0507_xMethod',"FrontEnd-BackEnd",{
+  //   maxAge: 1000 * 60 * 60 * 24,  // 24小時
+  //   httpOnly: true,
+  // });
   return true;
 }
 // 清除前端 Cookies : _EC0507_UserToken
 const myClearClientCookies = (req,res) =>{
   res.clearCookie('_EC0507_JWTToken');
-  res.clearCookie('_EC0507_xCode');
-  res.clearCookie('_EC0507_xMethod');
+  // res.clearCookie('_EC0507_xCode');
+  // res.clearCookie('_EC0507_xMethod');
   return true;
 }
 // 驗證、取得 JWT 資料
@@ -89,7 +89,7 @@ const myJWTVerify = (req,res)=>{
           // console.log('JWT Token',decoded);
           myInfo = {
             success: true,
-            message: 'JWT Yes... 驗證錯誤',
+            message: 'JWT Yes... 驗證OK',
             JWTInfo: decoded
           };
         }

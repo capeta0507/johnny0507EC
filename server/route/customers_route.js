@@ -212,7 +212,26 @@ router.post('/client_whoami',(req,res)=>{
 	else{
 		res.json({
 			success : false,
-			message : "JWT資料...尚未登入",
+			message : "JWT資料...尚未登入 : " + JWTInfo.message,
+			token:""
+		});
+	}
+});
+
+router.get('/client_whoami',(req,res)=>{
+	let JWTInfo = myJWTVerify(req,res);
+	// console.log(JWTInfo);
+	if (JWTInfo.success == true){
+		res.json({
+			success : true,
+			message : "JWT資料",
+			token:JWTInfo
+		});
+	}
+	else{
+		res.json({
+			success : false,
+			message : "JWT資料...尚未登入 : " + JWTInfo.message,
 			token:""
 		});
 	}
