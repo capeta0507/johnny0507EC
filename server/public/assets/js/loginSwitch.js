@@ -42,8 +42,12 @@ function loginSwitch(){
     // console.log('end')
     // 購物車
     $('.shop_cart').on('click', function(){
-        // $('.notification_point').hide();
+        $('.notification_block').show();
         $('#myList').toggleClass("active");
+    });
+    $('.notification_block').on('click', function(){
+        $('.notification_block').hide();
+        $('#myList').removeClass("active");
     });
     $('.notification_single').on('click', function(){
         $('#myList').removeClass("active");
