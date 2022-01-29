@@ -189,11 +189,8 @@ function related(cat){
                   </ul>
                   <ul class="list-unstyled d-flex justify-content-center mb-1">
                     <li>
-                      <i class="text-warning fa fa-star"></i>
-                      <i class="text-warning fa fa-star"></i>
-                      <i class="text-warning fa fa-star"></i>
-                      <i class="text-warning fa fa-star"></i>
-                      <i class="text-muted fa fa-star"></i>
+                      ${'<i class="text-warning fa fa-star"></i>'.repeat(data.star)}
+                      ${'<i class="text-muted fa fa-star"></i>'.repeat(5 - data.star)}
                     </li>
                   </ul>
                   <p class="text-center mb-0">NT$ ${data.price}</p>
