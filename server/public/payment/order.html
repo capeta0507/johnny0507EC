@@ -17,7 +17,7 @@
     <input type="text" id="ItemDesc" name="ItemDesc" value="EC T001 F1模型 1/18" ><br>
     <label for="fname">訂單金額:</label><br>
     <input type="text" id="Amt" name="Amt" value="2150"><br><br>
-    <input id="orderYes" type="button" value="訂購單確認(綠界)" >
+    <input id="orderYes" type="button" value="訂購單確認 (綠界 - 信用卡付款)" >
   </form>
   <div id="payForm" >
 
@@ -50,7 +50,7 @@
     });
   });
   function x_orderNo(){
-    // 產生訂單編號 
+    // 產生訂單編號 : ECxYYYYMMDDhhmmss###
     var m = new Date();
     console.log(Date.now());
     var dateString =

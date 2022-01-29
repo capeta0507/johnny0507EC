@@ -17,7 +17,7 @@ const crypto = require('crypto');  // AES , SHA256 加密
 let MerchantID = "2000132";//綠界,商店代號
 let HashKey = "5294y06JbISpM5x9";//綠界 HashKey
 let HashIV = "v77hoKGq4kWxNNIS";//綠界 HashIV
-let OperationMode = "Test";//綠界 HashIV
+let OperationMode = "Test";//綠界 測試環境
 
 // 前端：order.html -> 訂購單確認 --> 處理資料加密 --> 回傳
 router.post('/ecpay',(req,res)=>{
@@ -25,7 +25,7 @@ router.post('/ecpay',(req,res)=>{
   console.log('將交易資料送給綠界進行加密與產生 html 結果。');
   let base_param = {
     MerchantTradeNo: req.body.MerchantOrderNo, //20碼內 訂單編號
-    MerchantTradeDate: getFromFormat('yyyy/mm/dd hh:ii:ss'), //ex: 2018/02/13 15:45:30
+    MerchantTradeDate: getFromFormat('yyyy/mm/dd hh:ii:ss'), //ex: 2022/01/29 12:15:36
     TotalAmount: req.body.Amt, //200
     TradeDesc: "購物車網站商品購買", //*
     ItemName: req.body.ItemDesc, //產品名稱
@@ -51,7 +51,7 @@ router.post('/ecpay',(req,res)=>{
   let inv_params = {};
   // 綠界 交易資料加密 -> html 結果
   var htm = create.payment_client.aio_check_out_all(base_param, inv_params);
-  // console.log(htm);
+  console.log(htm);
   res.json({
     statue : true,
     result : htm
