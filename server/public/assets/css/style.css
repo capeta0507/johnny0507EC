@@ -239,13 +239,55 @@
 .myMap{
     width: 100%;
 }
-.order_form{
-    margin: 20px 0;
-    border: 1px solid black;
-    padding: 20px;
+.order_content{
+    width: 100%;
+    padding: 30px 0;
 }
-.order_form h1{
+.order_form{
+    margin: 0 0 20px 0;
+    /* border: 1px solid black; */
+    padding: 20px 0;
+}
+.order_content h1{
     text-align: center;
+}
+.order_title, .order_list{
+    width: 100%;
+    display: flex;
+}
+.order_title div, .order_list div{
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+.order_list .d_no, .order_title .d_no{
+    width: 5%;
+}
+.order_list .d_name, .order_title .d_name{
+    width: 55%;
+}
+.order_list .d_count, .order_title .d_count{
+    width: 20%;
+}
+.order_list .d_price, .order_title .d_price{
+    width: 20%;
+}
+.order_total{
+    text-align: right;
+    margin-bottom: 30px;
+}
+.order_total span{
+    color: red;
+    font-size: 30px;
+    font-weight: bolder;
+}
+.orderBtn{
+    width: 285px;
+    margin: auto;
+}
+.orderBtn #orderYes{
+    width: 100%;
+    display: block;
 }
 @media screen and (max-width:992px){
     .sign_tag{
