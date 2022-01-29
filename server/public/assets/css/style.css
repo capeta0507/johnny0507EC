@@ -300,4 +300,16 @@
     #signUp{
         width: 100%;
     }
+    .order_list .d_no, .order_title .d_no{
+        width: 15%;
+    }
+    .order_list .d_name, .order_title .d_name{
+        width: 45%;
+    }
+    .order_list .d_count, .order_title .d_count{
+        width: 20%;
+    }
+    .order_list .d_price, .order_title .d_price{
+        width: 20%;
+    }
 }
