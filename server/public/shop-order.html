@@ -93,6 +93,9 @@ https://templatemo.com/tm-559-zay-shop
         <div class="orderBtn">
           <input id="orderYes" class="btn btn-success btn-lg" type="button" value="訂購單確認 (綠界 - 信用卡付款)" >
         </div>
+        <div id="payForm" >
+
+        </div>
       </div>
     </div>
     <!-- Start Footer -->
@@ -116,6 +119,22 @@ https://templatemo.com/tm-559-zay-shop
           let xNo = x_orderNo();
           console.log(xNo);
           $("#MerchantOrderNo").text(xNo);
+          // 綠界送出訂單
+          $("#orderYes").click(function(){
+            // alert('訂購單確認');
+            // console.log($("#MerchantOrderNo").val());
+            let data = {
+              "MerchantOrderNo" : $("#MerchantOrderNo").text(),
+              "ItemDesc" : "戰艦大和 x 1個 #Nike 休閒鞋 x 2雙 #神力女超人1984 x 1",
+              "Amt" : $("#Amt").text(),
+            }
+            console.log(data);
+            $.post('/payment/ecpay',data,(result,status)=>{
+              console.log(status);
+              console.log(result.result);
+              $("#payForm").html(result.result);  // 執行付款
+            })
+          });
       });
       function x_orderNo(){
         // 產生訂單編號 : ECxYYYYMMDDhhmmss###
