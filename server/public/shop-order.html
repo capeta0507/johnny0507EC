@@ -89,6 +89,7 @@ https://templatemo.com/tm-559-zay-shop
             </div> -->
           </div>
         </div>
+        <div id="orderDesc" class="order_Desc">EC購物商品</div>
         <div class="order_total">總共：<span>NT$</span> <span id="Amt">2000</span>元</div>
         <div class="orderBtn">
           <input id="orderYes" class="btn btn-success btn-lg" type="button" value="訂購單確認 (綠界 - 信用卡付款)" >
@@ -116,26 +117,48 @@ https://templatemo.com/tm-559-zay-shop
     <script src="assets/js/loginSwitch.js"></script>
     <script>
       $(document).ready(function(){
-          let xNo = x_orderNo();
-          console.log(xNo);
-          $("#MerchantOrderNo").text(xNo);
-          // 綠界送出訂單
-          $("#orderYes").click(function(){
-            // alert('訂購單確認');
-            // console.log($("#MerchantOrderNo").val());
-            let data = {
-              "MerchantOrderNo" : $("#MerchantOrderNo").text(),
-              "ItemDesc" : "戰艦大和 x 1個 #Nike 休閒鞋 x 2雙 #神力女超人1984 x 1",
-              "Amt" : $("#Amt").text(),
-            }
-            console.log(data);
-            $.post('/payment/ecpay',data,(result,status)=>{
-              console.log(status);
-              console.log(result.result);
-              $("#payForm").html(result.result);  // 執行付款
-            })
-          });
+        let xNo = x_orderNo();
+        console.log(xNo);
+        orderList();
+        $("#MerchantOrderNo").text(xNo);
+        // 綠界送出訂單
+        $("#orderYes").click(function(){
+          // alert('訂購單確認');
+          // console.log($("#MerchantOrderNo").val());
+          let data = {
+            "MerchantOrderNo" : $("#MerchantOrderNo").text(),
+            // "ItemDesc" : "戰艦大和 x 1個 #Nike 休閒鞋 x 2雙 #神力女超人1984 x 1",
+            "ItemDesc" : $('#orderDesc').text(),
+            "Amt" : $("#Amt").text(),
+          }
+          console.log(data);
+          $.post('/payment/ecpay',data,(result,status)=>{
+            console.log(status);
+            console.log(result.result);
+            $("#payForm").html(result.result);  // 執行付款
+          })
+        });
       });
+
+      function orderList(){
+        let paylist = '';
+        let pay_no = 0;
+        // 從購物車過來
+        let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+        console.log(myShopItem)
+        myShopItem.map((data)=>{
+          pay_no++
+          paylist += `
+            <div class="order_list">
+              <div class="d_no">${pay_no}</div>
+              <div class="d_name">${data.name}</div>
+              <div class="d_count">1</div>
+              <div class="d_price">NT$ ${data.price}</div>
+            </div>
+          `
+        })
+        $('#order_list').html(paylist);
+      }
       function x_orderNo(){
         // 產生訂單編號 : ECxYYYYMMDDhhmmss###
         var m = new Date();
