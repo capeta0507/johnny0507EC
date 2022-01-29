@@ -64,36 +64,36 @@ https://templatemo.com/tm-559-zay-shop
     </nav>
     <!-- Close Header -->
     <div class="container">
-        <div class="order_content">
-            <h1>訂單</h1>
-            <div class="order_form">
-                <span>訂單編號: ECx20220129165402392</span>
-                <div class="order_title">
-                    <div class="d_no">編號</div>
-                    <div class="d_name">商品名稱</div>
-                    <div class="d_count">數量</div>
-                    <div class="d_price">價格</div>
-                </div>
-                <div id="order_list">
-                    <div class="order_list">
-                        <div class="d_no">1</div>
-                        <div class="d_name">艦隊collection 時雨 私服ver</div>
-                        <div class="d_count">1</div>
-                        <div class="d_price">NT$ 2000</div>
-                    </div>
-                    <div class="order_list">
-                        <div class="d_no">2</div>
-                        <div class="d_name">Love Live! Superstar!! 澀谷香音景品手辦</div>
-                        <div class="d_count">1</div>
-                        <div class="d_price">NT$ 640</div>
-                    </div>
-                </div>
+      <div class="order_content">
+        <h1>訂單</h1>
+        <div class="order_form">
+          <span>訂單編號: <span id="MerchantOrderNo">ECx20220129165402392</span></span>
+          <div class="order_title">
+            <div class="d_no">編號</div>
+            <div class="d_name">商品名稱</div>
+            <div class="d_count">數量</div>
+            <div class="d_price">價格</div>
+          </div>
+          <div id="order_list">
+            <div class="order_list">
+              <div class="d_no">1</div>
+              <div class="d_name">艦隊collection 時雨 私服ver</div>
+              <div class="d_count">1</div>
+              <div class="d_price">NT$ 2000</div>
             </div>
-            <div class="order_total">總共：<span>NT$</span> <span>2640</span>元</div>
-            <div class="orderBtn">
-                <input id="orderYes" class="btn btn-success btn-lg" type="button" value="訂購單確認 (綠界 - 信用卡付款)" >
-            </div>
+            <!-- <div class="order_list">
+              <div class="d_no">2</div>
+              <div class="d_name">Love Live! Superstar!! 澀谷香音景品手辦</div>
+              <div class="d_count">1</div>
+              <div class="d_price">NT$ 640</div>
+            </div> -->
+          </div>
         </div>
+        <div class="order_total">總共：<span>NT$</span> <span id="Amt">2000</span>元</div>
+        <div class="orderBtn">
+          <input id="orderYes" class="btn btn-success btn-lg" type="button" value="訂購單確認 (綠界 - 信用卡付款)" >
+        </div>
+      </div>
     </div>
     <!-- Start Footer -->
     <div w3-include-html="component/footer.html"></div>
@@ -105,12 +105,37 @@ https://templatemo.com/tm-559-zay-shop
     <script src="assets/js/templatemo.js"></script>
     <!-- End Script -->
     <script>
-        $(document).ready(()=>{
-            // w3.includeHTML();
-            includeHTML();
-        });
+      $(document).ready(()=>{
+        // w3.includeHTML();
+        includeHTML();
+      });
     </script>
     <script src="assets/js/loginSwitch.js"></script>
+    <script>
+      $(document).ready(function(){
+          let xNo = x_orderNo();
+          console.log(xNo);
+          $("#MerchantOrderNo").text(xNo);
+      });
+      function x_orderNo(){
+        // 產生訂單編號 : ECxYYYYMMDDhhmmss###
+        var m = new Date();
+        console.log(Date.now());
+        var dateString =
+          m.getUTCFullYear() + "" +
+          ("0" + (m.getUTCMonth()+1)).slice(-2) + "" +
+          ("0" + m.getUTCDate()).slice(-2) + "" +
+          ("0" + m.getHours()).slice(-2) + "" +
+          ("0" + m.getMinutes()).slice(-2) + "" +
+          ("0" + m.getSeconds()).slice(-2) + "" + 
+          ("00" + m.getMilliseconds()).slice(-3);
+        var xOrderNO = 'ECx';
+        // xOrderNO += + Date.now();
+        xOrderNO += dateString;
+
+        return xOrderNO;
+      }
+    </script>
 </body>
 
 </html>
