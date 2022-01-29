@@ -88,7 +88,7 @@ function includeHTML() {
     let myCart = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
     let myShopCount = sessionStorage.getItem('shopCount')
     let cart_list = ''
-    console.log('myCart', myCart)
+    // console.log('myCart', myCart)
     if(myCart){
         $('#myCart').text(myShopCount);
         myCart.map((data)=>{

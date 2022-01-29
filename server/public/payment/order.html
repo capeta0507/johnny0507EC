@@ -25,6 +25,11 @@
 </body>
 <script>
   $(document).ready(function(){
+    // 從購物車過來
+    // let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+    // console.log('myShopItem', myShopItem[0])
+    // $('#ItemDesc').val(myShopItem[0].name)
+    // $('#Amt').val(myShopItem[0].total)
     let xNo = x_orderNo();
     console.log(xNo);
     $("#MerchantOrderNo").val(xNo)

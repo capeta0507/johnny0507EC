@@ -46,10 +46,11 @@
     padding: 10px;
     display: none;
 }
-.cart_payBtn a{
-    width: 100%;
+.cart_payBtn > .btn{
+    width: 60%;
     text-align: center;
-    display: block;
+    margin: auto;
+    color: #fff ;
 }
 .notification_single{
     width: 100%;
@@ -69,6 +70,8 @@
 .notleft .notImg{
     width: 80%;
     margin: 0 auto;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+    overflow: hidden;
 }
 .notleft .notImg img{
     width: 100%;
