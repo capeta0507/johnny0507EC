@@ -106,7 +106,7 @@ function includeHTML() {
                         <div>數量：${data.qty}</div>
                         <div>價格：NT$ ${data.total}</div>
                     </div>
-                    <div class="notdelete" onclick="order_delete('${pay_no}')">X</div>
+                    <div class="notdelete" onclick="order_delete('${pay_no}')"><i class="fa fa-trash-alt"></i></div>
                 </div>
             `
         });
@@ -162,7 +162,7 @@ function order_delete(x){
           <div>數量：${data.qty}</div>
           <div>價格：NT$ ${data.total}</div>
         </div>
-        <div class="notdelete" onclick="order_delete('${pay_no}')">X</div>
+        <div class="notdelete" onclick="order_delete('${pay_no}')"><i class="fa fa-trash-alt"></i></div>
       </div>
     `
   })
