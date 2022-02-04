@@ -93,18 +93,19 @@ function includeHTML() {
         $('#myCart').text(myShopCount);
         myCart.map((data)=>{
             cart_list += `
-                <a href="#" class="notification_single" target="_blank">
+                <div class="notification_single" target="_blank">
                     <div class="notleft">
                     <div class="notImg">
                         <img src="shop/product/${data.photo}" alt="">
                     </div>
                     </div>
                     <div class="notright">
-                    <div>名稱：${data.name}</div>
-                    <div>數量：${data.qty}</div>
-                    <div>價格：NT$ ${data.total}</div>
+                        <div>名稱：${data.name}</div>
+                        <div>數量：${data.qty}</div>
+                        <div>價格：NT$ ${data.total}</div>
                     </div>
-                </a>
+                    <div class="notdelete">X</div>
+                </div>
             `
         });
         $('.cart_payBtn').show();

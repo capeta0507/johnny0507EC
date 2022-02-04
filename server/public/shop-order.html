@@ -68,26 +68,28 @@ https://templatemo.com/tm-559-zay-shop
         <h1>訂單</h1>
         <div class="order_form">
           <span>訂單編號: <span id="MerchantOrderNo">ECx20220129165402392</span></span>
-          <div class="order_title">
-            <div class="d_no">編號</div>
-            <div class="d_name">商品名稱</div>
-            <div class="d_count">數量</div>
-            <div class="d_price">價格</div>
-          </div>
-          <div id="order_list">
-            <div class="order_list">
-              <div class="d_no">1</div>
-              <div class="d_name">艦隊collection 時雨 私服ver</div>
-              <div class="d_count">1</div>
-              <div class="d_price">NT$ 2000</div>
-            </div>
-            <!-- <div class="order_list">
-              <div class="d_no">2</div>
-              <div class="d_name">Love Live! Superstar!! 澀谷香音景品手辦</div>
-              <div class="d_count">1</div>
-              <div class="d_price">NT$ 640</div>
-            </div> -->
-          </div>
+          <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th class="text-center" scope="col">編號</th>
+                <th class="text-center" scope="col">商品名稱</th>
+                <th class="text-center" scope="col">單價</th>
+                <th class="text-center" scope="col">數量</th>
+                <th class="text-center" scope="col">價格</th>
+                <th class="text-center" scope="col">刪除</th>
+              </tr>
+            </thead>
+            <tbody id="order_list">
+              <tr>
+                <th class="text-center" scope="row">1</th>
+                <td class="text-center">艦隊collection 時雨 私服ver</td>
+                <td class="text-center">NT$ 2000</td>
+                <td class="text-center">1</td>
+                <td class="text-center">NT$ 2000</td>
+                <td class="text-center">Ｘ</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div id="orderDesc" class="order_Desc">EC購物商品</div>
         <div class="order_total">總共：<span>NT$</span> <span id="Amt">2000</span>元</div>
@@ -149,15 +151,23 @@ https://templatemo.com/tm-559-zay-shop
         myShopItem.map((data)=>{
           pay_no++
           paylist += `
-            <div class="order_list">
-              <div class="d_no">${pay_no}</div>
-              <div class="d_name">${data.name}</div>
-              <div class="d_count">1</div>
-              <div class="d_price">NT$ ${data.price}</div>
-            </div>
+            <tr>
+              <th class="text-center" scope="row">${pay_no}</th>
+              <td class="text-center">${data.name}</td>
+              <td class="text-center">NT$ ${data.price}</td>
+              <td class="text-center">1</td>
+              <td class="text-center">NT$ ${data.price}</td>
+              <td class="text-center tab_del">Ｘ</td>
+            </tr>
           `
         })
         $('#order_list').html(paylist);
+
+        // 金額加總
+        var price_arr = myShopItem.map(el=>el.price);
+        var price_tatal = price_arr.reduce((a,b)=>a+b);
+        // console.log(price_tatal)
+        $('#Amt').text(price_tatal);
       }
       function x_orderNo(){
         // 產生訂單編號 : ECxYYYYMMDDhhmmss###

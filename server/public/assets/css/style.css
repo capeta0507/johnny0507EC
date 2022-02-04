@@ -77,9 +77,23 @@
     width: 100%;
 }
 .notification_single .notright{
-    width: 78%;
+    width: 70%;
     font-size: 14px;
     display: block;
+}
+.notification_single .notright > div{
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+}
+.notification_single .notdelete{
+    width: 5%;
+    font-size: 14px;
+    display: block;
+    line-height: 60px;
+    cursor: pointer;
 }
 .notification_point{
     background-color: rgb(222, 24, 240);
@@ -288,6 +302,9 @@
 .orderBtn #orderYes{
     width: 100%;
     display: block;
+}
+.tab_del{
+    cursor: pointer;
 }
 @media screen and (max-width:992px){
     .sign_tag{
