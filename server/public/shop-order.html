@@ -118,10 +118,13 @@ https://templatemo.com/tm-559-zay-shop
     </script>
     <script src="assets/js/loginSwitch.js"></script>
     <script>
+      let cart_list = '';
       $(document).ready(function(){
         let xNo = x_orderNo();
         console.log(xNo);
-        orderList();
+        let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+        console.log(myShopItem)
+        orderList(myShopItem);
         $("#MerchantOrderNo").text(xNo);
         // 綠界送出訂單
         $("#orderYes").click(function(){
@@ -142,12 +145,12 @@ https://templatemo.com/tm-559-zay-shop
         });
       });
 
-      function orderList(){
+      function orderList(myShopItem){
         let paylist = '';
         let pay_no = 0;
         // 從購物車過來
-        let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
-        console.log(myShopItem)
+        console.log('myShopItem', myShopItem);
+        paylist = ''
         myShopItem.map((data)=>{
           pay_no++
           paylist += `
@@ -157,7 +160,7 @@ https://templatemo.com/tm-559-zay-shop
               <td class="text-center">NT$ ${data.price}</td>
               <td class="text-center">1</td>
               <td class="text-center">NT$ ${data.price}</td>
-              <td class="text-center tab_del">Ｘ</td>
+              <td class="text-center tab_del" onclick="order_delete('${pay_no}')">Ｘ</td>
             </tr>
           `
         })
@@ -165,9 +168,58 @@ https://templatemo.com/tm-559-zay-shop
 
         // 金額加總
         var price_arr = myShopItem.map(el=>el.price);
-        var price_tatal = price_arr.reduce((a,b)=>a+b);
-        // console.log(price_tatal)
-        $('#Amt').text(price_tatal);
+        // console.log(price_arr)
+        if(myShopItem.length > 1){
+          var price_tatal = price_arr.reduce((a,b)=>a+b);
+          // console.log(price_tatal)
+          $('#Amt').text(price_tatal);
+        } else {
+          $('#Amt').text(price_arr[0])
+        }
+        if(myShopItem.length == 0){
+          $('#Amt').text(0);
+          $('#myCart').hide();
+          $('.cart_payBtn').hide();
+        }
+      }
+      function order_delete(x){
+        // console.log('x', x);
+        let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+        let myShopCount = sessionStorage.getItem('shopCount')
+        // console.log('myShopItem', myShopItem)
+        myShopItem.splice(x-1,1);
+        myShopCount = myShopCount-1
+        // console.log('myShopItem2', myShopItem)
+        // console.log('myShopCount', myShopCount)
+        $('#myCart').text(myShopCount);
+        orderList(myShopItem);
+        window.sessionStorage.setItem('shopArray', JSON.stringify(myShopItem));
+        window.sessionStorage.setItem('shopCount', myShopCount);
+        let pay_no = 0;
+        cart_list = ''
+        myShopItem.map(data => {
+          pay_no++
+          cart_list += `
+            <div class="notification_single">
+              <div class="notleft">
+              <div class="notImg">
+                <img src="shop/product/${data.photo}" alt="">
+              </div>
+              </div>
+              <div class="notright">
+                <div>名稱：${data.name}</div>
+                <div>數量：${data.qty}</div>
+                <div>價格：NT$ ${data.total}</div>
+              </div>
+              <div class="notdelete" onclick="order_delete('${pay_no}')">X</div>
+            </div>
+          `
+        })
+        $('#myListContent').html(cart_list);
+        // if(myShopItem.length == 0){
+        //   $('#myCart').hide();
+        //   $('.cart_payBtn').hide();
+        // }
       }
       function x_orderNo(){
         // 產生訂單編號 : ECxYYYYMMDDhhmmss###
