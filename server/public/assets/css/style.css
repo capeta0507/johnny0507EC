@@ -306,6 +306,22 @@
 .tab_del{
     cursor: pointer;
 }
+.cart_num{
+    width: 50%;
+    margin: auto;
+}
+.counyBtn{
+    width: 15%;
+}
+.iptNum{
+    width: 70%;
+    text-align: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 @media screen and (max-width:992px){
     .sign_tag{
         border: none;
