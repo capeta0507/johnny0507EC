@@ -157,7 +157,9 @@ https://templatemo.com/tm-559-zay-shop
         // 從購物車過來
         // console.log('myShopItem', myShopItem);
         paylist = ''
+        let xTTL = 0;
         myShopItem.map((data)=>{
+          xTTL += data.total;
           pay_no++
           paylist += `
             <tr>
@@ -177,22 +179,22 @@ https://templatemo.com/tm-559-zay-shop
           `
         })
         $('#order_list').html(paylist);
-
+        $('#Amt').text(xTTL);
         // 金額加總
-        var price_arr = myShopItem.map(el=>el.total);
-        // console.log(price_arr)
-        if(myShopItem.length > 1){
-          var price_tatal = price_arr.reduce((a,b)=>a+b);
-          // console.log(price_tatal)
-          $('#Amt').text(price_tatal);
-        } else {
-          $('#Amt').text(price_arr[0])
-        }
-        if(myShopItem.length == 0){
-          $('#Amt').text(0);
-          $('#myCart').hide();
-          $('.cart_payBtn').hide();
-        }
+        // var price_arr = myShopItem.map(el=>el.total);
+        // // console.log(price_arr)
+        // if(myShopItem.length > 1){
+        //   var price_tatal = price_arr.reduce((a,b)=>a+b);
+        //   // console.log(price_tatal)
+        //   $('#Amt').text(price_tatal);
+        // } else {
+        //   $('#Amt').text(price_arr[0])
+        // }
+        // if(myShopItem.length == 0){
+        //   $('#Amt').text(0);
+        //   $('#myCart').hide();
+        //   $('.cart_payBtn').hide();
+        // }
       }
       function order_delete(x){
         // console.log('x', x);

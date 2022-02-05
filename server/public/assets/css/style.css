@@ -341,6 +341,22 @@ input::-webkit-inner-spin-button {
 #order_list .d_trash{
     width: 10%;
 }
+.qty_span{
+    display: block;
+    width: 100%;
+    padding: 0.175rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
 @media screen and (max-width:992px){
     .sign_tag{
         border: none;
