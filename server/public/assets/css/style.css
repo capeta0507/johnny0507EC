@@ -50,7 +50,7 @@
     width: 60%;
     text-align: center;
     margin: auto;
-    color: #fff !important;
+    color: rgb(255, 255, 255) !important;
 }
 .notification_single{
     width: 100%;

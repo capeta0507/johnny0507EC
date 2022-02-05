@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>EC0507 Shop - Product Detail Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Slick -->
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+<!--
+    
+TemplateMo 559 Zay Shop
+
+https://templatemo.com/tm-559-zay-shop
+
+-->
+</head>
+
+<body>
+    <!-- Start Top Nav -->
+    <div w3-include-html="component/nav.html"></div>
+    <!-- Close Top Nav -->
+
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+                EC0507
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <div w3-include-html="component/header_link_cart.html"></div>
+                </div>
+                <div class="navbar align-self-center d-flex">
+                     <!-- 登入 -->
+                     <div w3-include-html="component/header_login.html"></div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Close Header -->
+    <div class="container">
+      <div class="order_content">
+        <h1>訂單</h1>
+        <div class="order_form">
+          <span>訂單編號: <span id="MerchantOrderNo">ECx20220129165402392</span></span>
+          <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th class="text-center" scope="col">編號</th>
+                <th class="text-center" scope="col">商品名稱</th>
+                <th class="text-center" scope="col">單價</th>
+                <th class="text-center" scope="col">數量</th>
+                <th class="text-center" scope="col">小計</th>
+                <th class="text-center" scope="col">刪除</th>
+              </tr>
+            </thead>
+            <tbody id="order_list">
+              <tr>
+                <th class="text-center d_no" scope="row">1</th>
+                <td class="text-center d_name">艦隊collection 時雨 私服ver</td>
+                <td class="text-center d_price">NT$ 2000</td>
+                <td class="text-center d_count">
+                  <div class="cart_num">
+                    <button class="counyBtn reduceBtn btn btn-warning" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
+                    <div class="iptNum"><input class="form-control" type="number" value="1" min="1"></div>
+                    <button class="counyBtn plusBtn btn btn-success" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
+                  </div>
+                </td>
+                <td class="text-center d_total">NT$ 2000</td>
+                <td class="text-center d_trash"><i class="fa fa-trash-alt"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="orderDesc" class="order_Desc" style="opacity: 0;">EC購物商品</div>
+        <div class="order_total">總共：<span>NT$</span> <span id="Amt">2000</span>元</div>
+        <div class="orderBtn">
+          <input id="orderYes" class="btn btn-success btn-lg" type="button" value="訂購單確認 (綠界 - 信用卡付款)" >
+        </div>
+        <div id="payForm" >
+
+        </div>
+      </div>
+    </div>
+    <!-- Start Footer -->
+    <div w3-include-html="component/footer.html"></div>
+    <!-- End Footer -->
+    <!-- Start Script -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <!-- End Script -->
+    <script>
+      $(document).ready(()=>{
+        // w3.includeHTML();
+        includeHTML();
+      });
+    </script>
+    <script src="assets/js/loginSwitch.js"></script>
+    <script>
+      let cart_list = '';
+      $(document).ready(function(){
+        let xNo = x_orderNo();
+        console.log(xNo);
+        let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+        // console.log(myShopItem)
+        orderList(myShopItem);
+        $("#MerchantOrderNo").text(xNo);
+        // 綠界送出訂單
+        $("#orderYes").click(function(){
+          // alert('訂購單確認');
+          // console.log($("#MerchantOrderNo").val());
+          let data = {
+            "MerchantOrderNo" : $("#MerchantOrderNo").text(),
+            // "ItemDesc" : "戰艦大和 x 1個 #Nike 休閒鞋 x 2雙 #神力女超人1984 x 1",
+            "ItemDesc" : $('#orderDesc').text(),
+            "Amt" : $("#Amt").text(),
+          }
+          console.log(data);
+          $.post('/payment/ecpay',data,(result,status)=>{
+            console.log(status);
+            console.log(result.result);
+            $("#payForm").html(result.result);  // 執行付款
+          })
+        });
+      });
+
+      function orderList(myShopItem){
+        let paylist = '';
+        let pay_no = 0;
+        // 從購物車過來
+        // console.log('myShopItem', myShopItem);
+        paylist = '';
+        // let xTTL = 0;
+        myShopItem.map((data)=>{
+          // xTTL += data.total;  // 小計加總
+          pay_no++
+          paylist += `
+            <tr>
+              <th class="text-center d_no" scope="row">${pay_no}</th>
+              <td class="text-center d_name">${data.name}</td>
+              <td class="text-center d_price">NT$ ${data.price}</td>
+              <td class="text-center d_count">
+                <div class="cart_num">
+                  <button class="counyBtn reduceBtn btn btn-warning" onclick="change_qty(${pay_no}, -1)">-</button>
+                  <div class="iptNum"><span id="qty-${pay_no}" class="form-control" >${data.qty}</span></div>
+                  <button class="counyBtn plusBtn btn btn-success" onclick="change_qty(${pay_no}, +1)">+</button>
+                </div>
+              </td>
+              <td class="text-center d_total">NT$ <span id="ttl-${pay_no}"> ${data.total} </span></td>
+              <td class="text-center tab_del d_trash" onclick="order_delete('${pay_no}')"><i class="fa fa-trash-alt"></i></td>
+            </tr>
+          `
+        })
+        $('#order_list').html(paylist);
+        // $('#Amt').text(xTTL);
+        amtTotal(myShopItem);  // 重算總計
+        
+        // // 金額加總
+        // var price_arr = myShopItem.map(el=>el.total);
+        // // console.log(price_arr)
+        // if(myShopItem.length > 1){
+        //   var price_tatal = price_arr.reduce((a,b)=>a+b);
+        //   // console.log(price_tatal)
+        //   $('#Amt').text(price_tatal);
+        // } else {
+        //   $('#Amt').text(price_arr[0])
+        // }
+        // if(myShopItem.length == 0){
+        //   $('#Amt').text(0);
+        //   $('#myCart').hide();
+        //   $('.cart_payBtn').hide();
+        // }
+      }
+      function order_delete(x){
+        // console.log('x', x);
+        let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+        let myShopCount = sessionStorage.getItem('shopCount')
+        // console.log('myShopItem', myShopItem)
+        myShopItem.splice(x-1,1);
+        myShopCount = myShopCount-1
+        // console.log('myShopItem2', myShopItem)
+        // console.log('myShopCount', myShopCount)
+        $('#myCart').text(myShopCount);
+        orderList(myShopItem);
+        window.sessionStorage.setItem('shopArray', JSON.stringify(myShopItem));
+        window.sessionStorage.setItem('shopCount', myShopCount);
+      }
+      function x_orderNo(){
+        // 產生訂單編號 : ECxYYYYMMDDhhmmss###
+        var m = new Date();
+        console.log(Date.now());
+        var dateString =
+          m.getUTCFullYear() + "" +
+          ("0" + (m.getUTCMonth()+1)).slice(-2) + "" +
+          ("0" + m.getUTCDate()).slice(-2) + "" +
+          ("0" + m.getHours()).slice(-2) + "" +
+          ("0" + m.getMinutes()).slice(-2) + "" +
+          ("0" + m.getSeconds()).slice(-2) + "" + 
+          ("00" + m.getMilliseconds()).slice(-3);
+        var xOrderNO = 'ECx';
+        // xOrderNO += + Date.now();
+        xOrderNO += dateString;
+
+        return xOrderNO;
+      }
+
+      function change_qty(x, value){
+        let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`);
+        let item_qty = myShopItem[x-1].qty;
+        item_qty += value;
+        if(item_qty == 0){
+          alert('商品數量不得小於1喔！')
+          return false
+        }
+        myShopItem[x-1].qty = item_qty;
+        myShopItem[x-1].total = myShopItem[x-1].price * item_qty;
+        // orderList(myShopItem);
+        $('#qty-' + x).text(item_qty);
+        $('#ttl-' + x).text(myShopItem[x-1].price * item_qty);
+        amtTotal(myShopItem);  // 重算總計
+
+        window.sessionStorage.setItem('shopArray', JSON.stringify(myShopItem));
+      }
+
+      function amtTotal(myShopItem){
+        let xTTL = 0;
+        myShopItem.forEach(item =>{
+          // console.log(item.total);
+          xTTL += item.total;
+        })
+        $('#Amt').text(xTTL);
+      }
+    </script>
+</body>
+
+</html>
