@@ -81,14 +81,18 @@ https://templatemo.com/tm-559-zay-shop
             </thead>
             <tbody id="order_list">
               <tr>
-                <th class="text-center" scope="row">1</th>
-                <td class="text-center">艦隊collection 時雨 私服ver</td>
-                <td class="text-center">NT$ 2000</td>
-                <td class="text-center">
-                  <div class="cart_num"><button class="counyBtn">-</button><input class="iptNum" type="number" value="1" min="1"><button class="counyBtn">+</button></div>
+                <th class="text-center d_no" scope="row">1</th>
+                <td class="text-center d_name">艦隊collection 時雨 私服ver</td>
+                <td class="text-center d_price">NT$ 2000</td>
+                <td class="text-center d_count">
+                  <div class="cart_num">
+                    <button class="counyBtn reduceBtn btn btn-warning" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
+                    <div class="iptNum"><input class="form-control" type="number" value="1" min="1"></div>
+                    <button class="counyBtn plusBtn btn btn-success" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
+                  </div>
                 </td>
-                <td class="text-center">NT$ 2000</td>
-                <td class="text-center">Ｘ</td>
+                <td class="text-center d_total">NT$ 2000</td>
+                <td class="text-center d_trash"><i class="fa fa-trash-alt"></i></td>
               </tr>
             </tbody>
           </table>
@@ -157,12 +161,18 @@ https://templatemo.com/tm-559-zay-shop
           pay_no++
           paylist += `
             <tr>
-              <th class="text-center" scope="row">${pay_no}</th>
-              <td class="text-center">${data.name}</td>
-              <td class="text-center">NT$ ${data.price}</td>
-              <td class="text-center">1</td>
-              <td class="text-center">NT$ ${data.price}</td>
-              <td class="text-center tab_del" onclick="order_delete('${pay_no}')"><i class="fa fa-trash-alt"></i></td>
+              <th class="text-center d_no" scope="row">${pay_no}</th>
+              <td class="text-center d_name">${data.name}</td>
+              <td class="text-center d_price">NT$ ${data.price}</td>
+              <td class="text-center d_count">
+                <div class="cart_num">
+                  <button class="counyBtn reduceBtn btn btn-warning" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
+                  <div class="iptNum"><input class="form-control" type="number" value="1" min="1"></div>
+                  <button class="counyBtn plusBtn btn btn-success" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
+                </div>
+              </td>
+              <td class="text-center d_total">NT$ ${data.price}</td>
+              <td class="text-center tab_del d_trash" onclick="order_delete('${pay_no}')"><i class="fa fa-trash-alt"></i></td>
             </tr>
           `
         })

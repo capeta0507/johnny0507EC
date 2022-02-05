@@ -274,18 +274,6 @@
     padding: 10px;
     text-align: center;
 }
-.order_list .d_no, .order_title .d_no{
-    width: 5%;
-}
-.order_list .d_name, .order_title .d_name{
-    width: 55%;
-}
-.order_list .d_count, .order_title .d_count{
-    width: 20%;
-}
-.order_list .d_price, .order_title .d_price{
-    width: 20%;
-}
 .order_total{
     text-align: right;
     margin-bottom: 30px;
@@ -307,20 +295,51 @@
     cursor: pointer;
 }
 .cart_num{
-    width: 50%;
+    width: 60%;
     margin: auto;
+    display: flex;
 }
 .counyBtn{
-    width: 15%;
+    width: 30%;
+    font-size: 18px;
+    padding: 0.075rem 0.75rem !important;
+}
+.counyBtn.reduceBtn{
+    border-radius:  0.25rem 0 0 0.25rem;
+}
+.counyBtn.plusBtn{
+    border-radius: 0 0.25rem 0.25rem 0;
 }
 .iptNum{
-    width: 70%;
+    width: 40%;
+}
+.iptNum input{
     text-align: center;
+    border-radius: 0 !important;
+    padding: 0.075rem 0.75rem !important;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+#order_list .d_no{
+    width: 5%;
+}
+#order_list .d_name{
+    width: 40%;
+}
+#order_list .d_price{
+    width: 10%;
+}
+#order_list .d_count{
+    width: 20%;
+}
+#order_list .d_total{
+    width: 15%;
+}
+#order_list .d_trash{
+    width: 10%;
 }
 @media screen and (max-width:992px){
     .sign_tag{
