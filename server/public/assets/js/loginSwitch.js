@@ -136,6 +136,7 @@ function order_delete(x){
   }
   // console.log('myShopItem', myShopItem)
   myShopItem.splice(x-1,1);
+  // 原始的陣列  
   myBuyItem.splice(x-1,1);
   myShopCount = myShopCount-1
   // console.log('myShopItem2', myShopItem)
