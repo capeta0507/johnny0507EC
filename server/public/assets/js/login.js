@@ -39,6 +39,10 @@ $('#mySubmit').on('click', function(){
         return false
     }
 
+    // 是否有 Call back URL ?
+    
+    // 取得 Call back URL 位址
+
     axios.post('/customers/login', loginData)
         .then(res => {
             console.log(res.data);
@@ -51,6 +55,7 @@ $('#mySubmit').on('click', function(){
                 sessionStorage.setItem('userName', userName);
                 sessionStorage.setItem('eMail', eMail);
                 sessionStorage.setItem('id', id);
+                // 前往 call back URL 位址
                 window.location.href = "index.html";
             }else{
 							// alert('您輸入的帳密有誤，請重新輸入！')
