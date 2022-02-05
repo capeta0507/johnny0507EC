@@ -129,7 +129,7 @@ https://templatemo.com/tm-559-zay-shop
         let xNo = x_orderNo();
         console.log(xNo);
         let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
-        console.log(myShopItem)
+        // console.log(myShopItem)
         orderList(myShopItem);
         $("#MerchantOrderNo").text(xNo);
         // 綠界送出訂單
@@ -155,7 +155,7 @@ https://templatemo.com/tm-559-zay-shop
         let paylist = '';
         let pay_no = 0;
         // 從購物車過來
-        console.log('myShopItem', myShopItem);
+        // console.log('myShopItem', myShopItem);
         paylist = ''
         myShopItem.map((data)=>{
           pay_no++
@@ -166,12 +166,12 @@ https://templatemo.com/tm-559-zay-shop
               <td class="text-center d_price">NT$ ${data.price}</td>
               <td class="text-center d_count">
                 <div class="cart_num">
-                  <button class="counyBtn reduceBtn btn btn-warning" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
-                  <div class="iptNum"><input class="form-control" type="number" value="1" min="1"></div>
-                  <button class="counyBtn plusBtn btn btn-success" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
+                  <button class="counyBtn reduceBtn btn btn-warning" onclick="minusSign_count('${pay_no}')">-</button>
+                  <div class="iptNum"><input class="form-control" type="number" value="${data.qty}" min="1"></div>
+                  <button class="counyBtn plusBtn btn btn-success" onclick="plus_count('${pay_no}')">+</button>
                 </div>
               </td>
-              <td class="text-center d_total">NT$ ${data.price}</td>
+              <td class="text-center d_total">NT$ ${data.total}</td>
               <td class="text-center tab_del d_trash" onclick="order_delete('${pay_no}')"><i class="fa fa-trash-alt"></i></td>
             </tr>
           `
@@ -179,8 +179,8 @@ https://templatemo.com/tm-559-zay-shop
         $('#order_list').html(paylist);
 
         // 金額加總
-        var price_arr = myShopItem.map(el=>el.price);
-        console.log(price_arr)
+        var price_arr = myShopItem.map(el=>el.total);
+        // console.log(price_arr)
         if(myShopItem.length > 1){
           var price_tatal = price_arr.reduce((a,b)=>a+b);
           // console.log(price_tatal)
@@ -250,6 +250,52 @@ https://templatemo.com/tm-559-zay-shop
         xOrderNO += dateString;
 
         return xOrderNO;
+      }
+
+      function minusSign_count(x){
+        // this.parentNode.querySelector('input[type=number]').stepDown()
+        let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+        // console.log(myShopItem[x-1], '-')
+        let item_qty = myShopItem[x-1].qty
+        if(item_qty == 1){
+          alert('商品數量不得小於1喔！')
+          return false
+        }
+        item_qty--
+        let myItem = {
+          "no": myShopItem[x-1].no,
+          "name": myShopItem[x-1].name,
+          "price": myShopItem[x-1].price,
+          "qty": item_qty,
+          "total": myShopItem[x-1].price * item_qty,
+          "photo": myShopItem[x-1].photo
+        }
+        myShopItem.splice(x-1,1,myItem)
+        // console.log(myShopItem);
+        orderList(myShopItem);
+        window.sessionStorage.setItem('shopArray', JSON.stringify(myShopItem));
+      }
+
+      
+      function plus_count(x){
+        // this.parentNode.querySelector('input[type=number]').stepUp()
+        let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+        // console.log(myShopItem[x-1], '+')
+        let item_qty = myShopItem[x-1].qty
+        item_qty++
+        let myItem = {
+          "no": myShopItem[x-1].no,
+          "name": myShopItem[x-1].name,
+          "price": myShopItem[x-1].price,
+          "qty": item_qty,
+          "total": myShopItem[x-1].price * item_qty,
+          "photo": myShopItem[x-1].photo
+        }
+        // console.log(myItem)
+        myShopItem.splice(x-1,1,myItem)
+        // console.log(myShopItem);
+        orderList(myShopItem);
+        window.sessionStorage.setItem('shopArray', JSON.stringify(myShopItem));
       }
     </script>
 </body>
