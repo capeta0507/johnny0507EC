@@ -166,9 +166,9 @@ https://templatemo.com/tm-559-zay-shop
               <td class="text-center d_price">NT$ ${data.price}</td>
               <td class="text-center d_count">
                 <div class="cart_num">
-                  <button class="counyBtn reduceBtn btn btn-warning" onclick="minusSign_count('${pay_no}')">-</button>
-                  <div class="iptNum"><input class="form-control" type="number" value="${data.qty}" min="1"></div>
-                  <button class="counyBtn plusBtn btn btn-success" onclick="plus_count('${pay_no}')">+</button>
+                  <button class="counyBtn reduceBtn btn btn-warning" onclick="change_qty(${pay_no}, -1)">-</button>
+                  <div class="iptNum"><input class="form-control" type="number" value=${data.qty} min="1"></div>
+                  <button class="counyBtn plusBtn btn btn-success" onclick="change_qty(${pay_no}, +1)">+</button>
                 </div>
               </td>
               <td class="text-center d_total">NT$ ${data.total}</td>
@@ -207,6 +207,8 @@ https://templatemo.com/tm-559-zay-shop
         orderList(myShopItem);
         window.sessionStorage.setItem('shopArray', JSON.stringify(myShopItem));
         window.sessionStorage.setItem('shopCount', myShopCount);
+
+        // 購物車圖示藏起
         // let pay_no = 0;
         // cart_list = ''
         // myShopItem.map(data => {
@@ -262,16 +264,19 @@ https://templatemo.com/tm-559-zay-shop
           return false
         }
         item_qty--
-        let myItem = {
-          "no": myShopItem[x-1].no,
-          "name": myShopItem[x-1].name,
-          "price": myShopItem[x-1].price,
-          "qty": item_qty,
-          "total": myShopItem[x-1].price * item_qty,
-          "photo": myShopItem[x-1].photo
-        }
-        myShopItem.splice(x-1,1,myItem)
+        // let myItem = {
+        //   "no": myShopItem[x-1].no,
+        //   "name": myShopItem[x-1].name,
+        //   "price": myShopItem[x-1].price,
+        //   "qty": item_qty,
+        //   "total": myShopItem[x-1].price * item_qty,
+        //   "photo": myShopItem[x-1].photo
+        // }
+        // myShopItem.splice(x-1,1,myItem)
         // console.log(myShopItem);
+
+        myShopItem[x-1].qty = item_qty;
+        myShopItem[x-1].total = myShopItem[x-1].price * item_qty;
         orderList(myShopItem);
         window.sessionStorage.setItem('shopArray', JSON.stringify(myShopItem));
       }
@@ -283,17 +288,33 @@ https://templatemo.com/tm-559-zay-shop
         // console.log(myShopItem[x-1], '+')
         let item_qty = myShopItem[x-1].qty
         item_qty++
-        let myItem = {
-          "no": myShopItem[x-1].no,
-          "name": myShopItem[x-1].name,
-          "price": myShopItem[x-1].price,
-          "qty": item_qty,
-          "total": myShopItem[x-1].price * item_qty,
-          "photo": myShopItem[x-1].photo
-        }
-        // console.log(myItem)
-        myShopItem.splice(x-1,1,myItem)
+        // let myItem = {
+        //   "no": myShopItem[x-1].no,
+        //   "name": myShopItem[x-1].name,
+        //   "price": myShopItem[x-1].price,
+        //   "qty": item_qty,
+        //   "total": myShopItem[x-1].price * item_qty,
+        //   "photo": myShopItem[x-1].photo
+        // }
+        // // console.log(myItem)
+        // myShopItem.splice(x-1,1,myItem)
         // console.log(myShopItem);
+        myShopItem[x-1].qty = item_qty;
+        myShopItem[x-1].total = myShopItem[x-1].price * item_qty;
+        orderList(myShopItem);
+        window.sessionStorage.setItem('shopArray', JSON.stringify(myShopItem));
+      }
+
+      function change_qty(x, value){
+        let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`);
+        let item_qty = myShopItem[x-1].qty;
+        item_qty += value;
+        if(item_qty == 0){
+          alert('商品數量不得小於1喔！')
+          return false
+        }
+        myShopItem[x-1].qty = item_qty;
+        myShopItem[x-1].total = myShopItem[x-1].price * item_qty;
         orderList(myShopItem);
         window.sessionStorage.setItem('shopArray', JSON.stringify(myShopItem));
       }
