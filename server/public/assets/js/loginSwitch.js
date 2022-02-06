@@ -169,3 +169,12 @@ function order_delete(x){
   })
   $('#myListContent').html(cart_list);
 }
+
+function cartBtn(){
+    let userName = sessionStorage.getItem('userName');
+    if(userName){
+        window.location.href = 'shop-order-master.html'
+    } else {
+        window.location.href = 'login.html?backurl=shop-order-master.html'
+    }
+}

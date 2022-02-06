@@ -40,7 +40,10 @@ $('#mySubmit').on('click', function(){
     }
 
     // 是否有 Call back URL ?
-    
+    let backURL = window.location.search;
+    backURL = backURL.split('=');
+    backURL = backURL[1]
+    console.log('backURL', backURL)
     // 取得 Call back URL 位址
 
     axios.post('/customers/login', loginData)
@@ -56,7 +59,7 @@ $('#mySubmit').on('click', function(){
                 sessionStorage.setItem('eMail', eMail);
                 sessionStorage.setItem('id', id);
                 // 前往 call back URL 位址
-                window.location.href = "index.html";
+                window.location.href = backURL;
             }else{
 							// alert('您輸入的帳密有誤，請重新輸入！')
 							alert('登入產生錯誤:' + res.data.message);
