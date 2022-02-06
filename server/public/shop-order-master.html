@@ -143,11 +143,19 @@ https://templatemo.com/tm-559-zay-shop
             "Amt" : $("#Amt").text(),
           }
           console.log(data);
-          $.post('/payment/ecpay',data,(result,status)=>{
-            console.log(status);
-            console.log(result.result);
-            $("#payForm").html(result.result);  // 執行付款
-          })
+
+          // 1. eMail 確認書
+
+          // 2. 簡訊(SMS)確認
+
+          // 3. 儲存訂單資料 MongoDB
+
+          // 前往第3方付款(綠界)
+          // $.post('/payment/ecpay',data,(result,status)=>{
+          //   console.log(status);
+          //   console.log(result.result);
+          //   $("#payForm").html(result.result);  // 執行付款
+          // })
         });
       });
 
