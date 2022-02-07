@@ -149,6 +149,16 @@ https://templatemo.com/tm-559-zay-shop
           // 2. 簡訊(SMS)確認
 
           // 3. 儲存訂單資料 MongoDB
+          let order_data = {
+            "eMail": `${sessionStorage.getItem('eMail')}`,
+            "userName" : `${sessionStorage.getItem('userName')}`,
+            "orderNo": $('#MerchantOrderNo').text(),
+            "description" : $('#orderDesc').text(),
+            "shopCount": parseInt(`${sessionStorage.getItem('shopCount')}`),
+            "amt": parseInt($("#Amt").text()),
+            "shopArray":JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+          }
+          console.log('order_data', order_data)
 
           // 前往第3方付款(綠界)
           // $.post('/payment/ecpay',data,(result,status)=>{

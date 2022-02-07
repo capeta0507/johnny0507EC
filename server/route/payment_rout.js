@@ -19,6 +19,9 @@ let HashKey = "5294y06JbISpM5x9";//綠界 HashKey
 let HashIV = "v77hoKGq4kWxNNIS";//綠界 HashIV
 let OperationMode = "Test";//綠界 測試環境
 
+const MongoClient = require('mongodb').MongoClient;
+const MongoURL = process.env.MONGODB_URL;
+
 // 前端：order.html -> 訂購單確認 --> 處理資料加密 --> 回傳
 router.post('/ecpay',(req,res)=>{
   console.log(req.body);
@@ -58,6 +61,49 @@ router.post('/ecpay',(req,res)=>{
   });
 
 });
+
+// 訂購確認 order_confirm
+router.post('/order_confirm', (req,res)=>{
+  // 寫到MongoDB 去 orders 的 collections
+  const{userName, eMail, orderNo, description, shopCount, amt, shopArray} = req.body;
+
+  let xOrder = {
+    "eMail": eMail,
+    "userName" : userName,
+    "orderNo": orderNo,
+    "description" : description,
+    "shopCount": shopCount,
+    "amt": amt,
+    "shopArray": shopArray
+  }
+  MongoClient.connect(MongoURL,(err,db)=>{
+    if (err){
+			console.log("MongoDB Connect error ..." + err);
+		} else {
+      let dbo = db.db("EC0507");
+      dbo.collection('orders').insertOne(xOrder,(err, result)=>{
+        if (err){
+          // 新增訂單錯誤
+          res.json({
+            success : false,
+            message:"/payment/order_confirm ... 新增錯誤",
+            error : err                                                              
+          });
+        }
+        // 新增訂單OK
+        else {
+          db.close();
+          res.json({
+            success:true,
+            message:"/payment/order_confirm ... 新增OK",
+            result : result
+          });
+        }
+      })
+    }
+  })
+
+})
 
 // 綠界 API 交易時間格式
 function getFromFormat(format) {

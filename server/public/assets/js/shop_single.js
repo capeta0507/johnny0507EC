@@ -132,25 +132,70 @@ function addCart(){
   sessionBuyGet = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
   // console.log('sessionBuyGet', sessionBuyGet)
   cart_list = ''
+  let pay_no = 0;
   sessionBuyGet.map(data => {
+    pay_no++
     cart_list += `
       <a href="#" class="notification_single" target="_blank">
         <div class="notleft">
-        <div class="notImg">
-          <img src="shop/product/${data.photo}" alt="">
-        </div>
+          <div class="notImg">
+            <img src="shop/product/${data.photo}" alt="">
+          </div>
         </div>
         <div class="notright">
-        <div>名稱：${data.name}</div>
-        <div>數量：${data.qty}</div>
-        <div>價格：NT$ ${data.total}</div>
+          <div>名稱：${data.name}</div>
+          <div>數量：${data.qty}</div>
+          <div>價格：NT$ ${data.total}</div>
         </div>
+        <div class="notdelete" onclick="order_delete('${pay_no}')"><i class="fa fa-trash-alt"></i></div>
       </a>
     `
   })
   $('.cart_payBtn').show();
   $('#myListContent').html(cart_list);
   $('#myCart').text(myShopCount);
+}
+
+function order_delete(x){
+  // console.log('x', x);
+  let myShopItem = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+  if(myShopCount > 0){
+    myShopCount = sessionStorage.getItem('shopCount')
+  }
+  // console.log('myShopItem', myShopItem)
+  myShopItem.splice(x-1,1);
+  // 原始的陣列  
+  myBuyItem.splice(x-1,1);
+  myShopCount = myShopCount-1
+  // console.log('myShopItem2', myShopItem)
+  // console.log('myShopCount', myShopCount)
+  // console.log('myShopItem', myShopItem)
+  // console.log('myBuyItem', myBuyItem)
+  $('#myCart').text(myShopCount);
+  window.sessionStorage.setItem('shopArray', JSON.stringify(myShopItem));
+  window.sessionStorage.setItem('shopCount', myShopCount);
+
+  let pay_no = 0;
+  cart_list = ''
+  myShopItem.map(data => {
+    pay_no++
+    cart_list += `
+      <div class="notification_single">
+        <div class="notleft">
+        <div class="notImg">
+          <img src="shop/product/${data.photo}" alt="">
+        </div>
+        </div>
+        <div class="notright">
+          <div>名稱：${data.name}</div>
+          <div>數量：${data.qty}</div>
+          <div>價格：NT$ ${data.total}</div>
+        </div>
+        <div class="notdelete" onclick="order_delete('${pay_no}')"><i class="fa fa-trash-alt"></i></div>
+      </div>
+    `
+  })
+  $('#myListContent').html(cart_list);
 }
 
 // 相關
