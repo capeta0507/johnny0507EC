@@ -1,0 +1,29 @@
+[
+  {
+    
+    "eMail":"aaa@aaa.com",
+    "userName" : "詹森安",
+    "orderNo":"ECx20220207153113000",
+    "description" : "EC購物商品",
+    "shopCount": 4,
+    "amt": 4030,
+    "shopArray":[
+      {"no":"T001","name":"戰艦大和","price":800,"qty":3,"total":2400,"photo":"T001.jpg"},
+      {"no":"F004","name":"Nike 休閒鞋","price":2680,"qty":2,"total":5360,"photo":"F004.jpg"},
+      {"no":"M004","name":"屍速列車 感染半島","price":550,"qty":1,"total":550,"photo":"M004.jpg"}
+    ]
+  },
+  {
+    "eMail":"bbb@aaa.com",
+    "userName" : "Johnnt",
+    "orderNo":"ECx20220207153133000",
+    "description" : "EC購物商品",
+    "shopCount": 4,
+    "amt": 4030,
+    "shopArray":[
+      {"no":"T001","name":"戰艦大和","price":800,"qty":3,"total":2400,"photo":"T001.jpg"},
+      {"no":"F004","name":"Nike 休閒鞋","price":2680,"qty":2,"total":5360,"photo":"F004.jpg"},
+      {"no":"M004","name":"屍速列車 感染半島","price":550,"qty":1,"total":550,"photo":"M004.jpg"}
+    ]
+  }
+]

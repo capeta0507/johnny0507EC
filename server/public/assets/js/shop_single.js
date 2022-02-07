@@ -126,7 +126,7 @@ function addCart(){
     "total": myProductPrice * 1,
     "photo": myProductImg
   }
-  myBuyItem.push(myItem)
+  myBuyItem.push(myItem);
   window.sessionStorage.setItem('shopArray', JSON.stringify(myBuyItem));
   window.sessionStorage.setItem('shopCount', myShopCount);
   sessionBuyGet = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
