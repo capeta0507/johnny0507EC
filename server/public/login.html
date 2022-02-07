@@ -128,10 +128,10 @@
             }
             // 顯示購物車數量
             let myCart = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
-            console.log('1', myCart)
+            // console.log('1', myCart)
             if(myCart){
                 let myCartCount = myCart.length;
-                console.log('myCartCount', myCartCount);
+                // console.log('myCartCount', myCartCount);
                 $('#myCart').text(myCartCount);
             }
 

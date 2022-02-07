@@ -10,6 +10,32 @@ $('#passCheck01_1').on('click', function(){
     $('#myPassword').attr('type', 'password');
 });
 
+// backurl 測試
+// let searchURL = window.location.search;
+// let searchVal = '';
+// let urlval = ''
+// let backURL = '';
+// if(searchURL){
+//     searchURL = searchURL.split('?')[1]
+//     // console.log('yes')
+//     searchVal = searchURL.split('&');
+//     if(searchVal.length > 1){
+//         for(let x = 0;x<searchVal.length;x++){
+//             urlval = searchVal[x].split('=')
+//             // console.log('urlval', urlval)
+//             if(urlval[0] == 'backurl'){
+//                 backURL = urlval[1]
+//             }
+//         }
+//     } else {
+//         backURL = searchURL.split('=');
+//         backURL = backURL[1];
+//     }
+// }
+// console.log('searchURL', searchURL)
+// console.log('searchVal', searchVal)
+// console.log('backURL', backURL)
+
 $('#mySubmit').on('click', function(){
     let emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 
@@ -40,10 +66,32 @@ $('#mySubmit').on('click', function(){
     }
 
     // 是否有 Call back URL ?
-    let backURL = window.location.search;
-    backURL = backURL.split('=');
-    backURL = backURL[1]
-    console.log('backURL', backURL)
+    // let backURL = window.location.search;
+    // backURL = backURL.split('=');
+    // backURL = backURL[1]
+    // console.log('backURL', backURL)
+
+    let searchURL = window.location.search;
+    let searchVal = '';
+    let urlval = ''
+    let backURL = '';
+    if(searchURL){
+        searchURL = searchURL.split('?')[1]
+        // console.log('yes')
+        searchVal = searchURL.split('&');
+        if(searchVal.length > 1){
+            for(let x = 0;x<searchVal.length;x++){
+                urlval = searchVal[x].split('=')
+                // console.log('urlval', urlval)
+                if(urlval[0] == 'backurl'){
+                    backURL = urlval[1]
+                }
+            }
+        } else {
+            backURL = searchURL.split('=');
+            backURL = backURL[1];
+        }
+    }
     // 取得 Call back URL 位址
 
     axios.post('/customers/login', loginData)
@@ -59,7 +107,11 @@ $('#mySubmit').on('click', function(){
                 sessionStorage.setItem('eMail', eMail);
                 sessionStorage.setItem('id', id);
                 // 前往 call back URL 位址
-                window.location.href = backURL;
+                if(searchURL){
+                    window.location.href = backURL;
+                } else {
+                    window.location.href = 'index.html';
+                }
             }else{
 							// alert('您輸入的帳密有誤，請重新輸入！')
 							alert('登入產生錯誤:' + res.data.message);
