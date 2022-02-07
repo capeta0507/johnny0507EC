@@ -91,6 +91,8 @@ $('#mySubmit').on('click', function(){
             backURL = searchURL.split('=');
             backURL = backURL[1];
         }
+    } else {
+        backURL = 'index.html'
     }
     // 取得 Call back URL 位址
 
@@ -107,11 +109,7 @@ $('#mySubmit').on('click', function(){
                 sessionStorage.setItem('eMail', eMail);
                 sessionStorage.setItem('id', id);
                 // 前往 call back URL 位址
-                if(searchURL){
-                    window.location.href = backURL;
-                } else {
-                    window.location.href = 'index.html';
-                }
+                window.location.href = backURL;
             }else{
 							// alert('您輸入的帳密有誤，請重新輸入！')
 							alert('登入產生錯誤:' + res.data.message);
