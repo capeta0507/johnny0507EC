@@ -67,6 +67,11 @@ router.post('/order_confirm', (req,res)=>{
   // 寫到MongoDB 去 orders 的 collections
   const{userName, eMail, orderNo, description, shopCount, amt, shopArray} = req.body;
 
+  // console.log(req.body)
+  // console.log(shopArray)
+  let myShopArray = JSON.parse(shopArray)
+  // console.log(myShopArray);
+
   let xOrder = {
     "eMail": eMail,
     "userName" : userName,
@@ -74,8 +79,9 @@ router.post('/order_confirm', (req,res)=>{
     "description" : description,
     "shopCount": shopCount,
     "amt": amt,
-    "shopArray": shopArray
+    "shopArray": myShopArray
   }
+  // x
   MongoClient.connect(MongoURL,(err,db)=>{
     if (err){
 			console.log("MongoDB Connect error ..." + err);

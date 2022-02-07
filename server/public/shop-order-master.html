@@ -156,9 +156,20 @@ https://templatemo.com/tm-559-zay-shop
             "description" : $('#orderDesc').text(),
             "shopCount": parseInt(`${sessionStorage.getItem('shopCount')}`),
             "amt": parseInt($("#Amt").text()),
-            "shopArray":JSON.parse(`${sessionStorage.getItem('shopArray')}`)
+            "shopArray":sessionStorage.getItem('shopArray')
           }
           console.log('order_data', order_data)
+          console.log('order_data', order_data.shopArray)
+          // console.log('myShopItem', myShopItem)
+
+          $.post('/payment/order_confirm', order_data,(result,status)=>{
+            console.log(status);
+            console.log(result.result);
+            sessionStorage.removeItem('shopArray');
+            sessionStorage.removeItem('shopCount');
+            alert('已成功送出訂單');
+            window.location.href = 'index.html';
+          })
 
           // 前往第3方付款(綠界)
           // $.post('/payment/ecpay',data,(result,status)=>{
