@@ -11,30 +11,8 @@ $('#passCheck01_1').on('click', function(){
 });
 
 // backurl 測試
-// let searchURL = window.location.search;
-// let searchVal = '';
-// let urlval = ''
-// let backURL = '';
-// if(searchURL){
-//     searchURL = searchURL.split('?')[1]
-//     // console.log('yes')
-//     searchVal = searchURL.split('&');
-//     if(searchVal.length > 1){
-//         for(let x = 0;x<searchVal.length;x++){
-//             urlval = searchVal[x].split('=')
-//             // console.log('urlval', urlval)
-//             if(urlval[0] == 'backurl'){
-//                 backURL = urlval[1]
-//             }
-//         }
-//     } else {
-//         backURL = searchURL.split('=');
-//         backURL = backURL[1];
-//     }
-// }
-// console.log('searchURL', searchURL)
-// console.log('searchVal', searchVal)
-// console.log('backURL', backURL)
+let backURL = "index.html";
+backURL = getBackURL();  // 找出 backURL 
 
 $('#mySubmit').on('click', function(){
     let emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
@@ -65,37 +43,8 @@ $('#mySubmit').on('click', function(){
         return false
     }
 
-    // 是否有 Call back URL ?
-    // let backURL = window.location.search;
-    // backURL = backURL.split('=');
-    // backURL = backURL[1]
-    // console.log('backURL', backURL)
-
-    let searchURL = window.location.search;
-    let searchVal = '';
-    let urlval = ''
-    let backURL = '';
-    if(searchURL){
-        searchURL = searchURL.split('?')[1]
-        // console.log('yes')
-        searchVal = searchURL.split('&');
-        if(searchVal.length > 1){
-            for(let x = 0;x<searchVal.length;x++){
-                urlval = searchVal[x].split('=')
-                // console.log('urlval', urlval)
-                if(urlval[0] == 'backurl'){
-                    backURL = urlval[1]
-                }
-            }
-        } else {
-            backURL = searchURL.split('=');
-            backURL = backURL[1];
-        }
-    } else {
-        backURL = 'index.html'
-    }
-    // 取得 Call back URL 位址
-
+    // backURL = getBackURL();  // 找出 backURL : 再找一次
+    
     axios.post('/customers/login', loginData)
         .then(res => {
             console.log(res.data);
@@ -120,3 +69,36 @@ $('#mySubmit').on('click', function(){
             alert('您輸入的帳號密碼有誤！')
         });
 })
+
+// 找出 BackURL = ????
+function getBackURL(){
+    let xbackURL = "index.html"
+    let searchURL = window.location.search;
+    // 有沒有參數？
+    if(searchURL.length == 0){
+        // 沒有
+        console.log('網址 search 沒有參數... go to ' + backURL);
+    }
+    else {
+        // 有參數
+        let xHref = window.location.href;  // 網址
+        console.log(xHref);
+        let xSearch = xHref.split('?')[1];  // Search 參數 String
+        console.log(xSearch);
+        xSearchArray = xSearch.split('&');  // Search 參數 Array
+        console.log(xSearchArray);
+        // 巡迴 Search 參數 Array
+        xSearchArray.forEach(key_value =>{
+            console.log(key_value);
+            // key vs value 比對
+            let key_value_array = key_value.split('=');
+            if(key_value_array[0] == 'backurl'){
+                xbackURL = key_value_array[1];
+                console.log("找到 " + xbackURL);
+            }
+        });
+    }
+    console.log('function final : ' + xbackURL);
+    return xbackURL;
+    
+}
