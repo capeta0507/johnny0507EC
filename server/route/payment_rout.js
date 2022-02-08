@@ -22,6 +22,10 @@ let OperationMode = "Test";//綠界 測試環境
 const MongoClient = require('mongodb').MongoClient;
 const MongoURL = process.env.MONGODB_URL;
 
+// node 寄送email (測試)
+const nodemailer = require('nodemailer');
+const fs = require('fs');
+
 // 前端：order.html -> 訂購單確認 --> 處理資料加密 --> 回傳
 router.post('/ecpay',(req,res)=>{
   console.log(req.body);
@@ -71,6 +75,37 @@ router.post('/order_confirm', (req,res)=>{
   // console.log(shopArray)
   let myShopArray = JSON.parse(shopArray)
   // console.log(myShopArray);
+
+  var mailTransport = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: 'nintendof1@gmail.com',
+      pass: 'hikxxzzpsaadumqk' // 認證密碼
+    }
+  });
+
+  fs.readFile('public/mail/index.html', {encoding: 'utf-8'}, function(err, html){
+    if (err) {
+      console.log(error);
+    } else {
+      var mailOptions = {
+        from: '<nintendof1@gmail.com>',
+        to: eMail,
+        subject: "您的EC0507訂單",
+        html: html
+      };
+      // 寄出
+      mailTransport.sendMail(mailOptions,(err,result)=>{
+          if (err){
+            console.log(err);
+          }else{
+            console.log('eMail 寄送完成...');
+            console.log(result);
+          }
+        }
+      );
+    }
+  });
 
   let xOrder = {
     "eMail": eMail,

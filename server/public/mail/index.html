@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br>
+    <div style="font-size: 24px;">感謝您購買EC0507的商品</div>
+    <br>
+    <div>您的訂單編號：<span id="myOrderNo">ECx20220207153113000</span></div>
+    <table style="border: 1px solid #dddddd; border-collapse: collapse;">
+        <thead>
+            <tr style="border: 1px solid #dddddd;">
+                <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="col">編號</th>
+                <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="col">商品名稱</th>
+                <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="col">單價</th>
+                <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="col">數量</th>
+                <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="col">小計</th>
+              </tr>
+        </thead>
+        <tbody id="myOrderList">
+            <tr style="border: 1px solid #dddddd;">
+                <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="row">1</th>
+                <td style="text-align: center; border: 1px solid #dddddd; padding: 10px;">艦隊collection 時雨 私服ver</td>
+                <td style="text-align: center; border: 1px solid #dddddd; padding: 10px;">NT$ 2000</td>
+                <td style="text-align: center; border: 1px solid #dddddd; padding: 10px;">1</td>
+                <td  style="text-align: center; border: 1px solid #dddddd; padding: 10px;">NT$ 2000</td>
+            </tr>
+            <tr style="border: 1px solid #dddddd;">
+                <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="row">2</th>
+                <td style="text-align: center; border: 1px solid #dddddd; padding: 10px;">Nike 休閒鞋</td>
+                <td style="text-align: center; border: 1px solid #dddddd; padding: 10px;">NT$ 2680</td>
+                <td style="text-align: center; border: 1px solid #dddddd; padding: 10px;">2</td>
+                <td  style="text-align: center; border: 1px solid #dddddd; padding: 10px;">NT$ 5360</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>總共<span style="color: red; font-weight: bolder; font-size: 20px;">NT$</span> <span style="color: red; font-weight: bolder; font-size: 20px;" id="Amt">7360</span>元</div>
+    <script>
+        // let order_data = [
+        //     {
+                
+        //         "eMail":"aaa@aaa.com",
+        //         "userName" : "詹森安",
+        //         "orderNo":"ECx20220207153113000",
+        //         "description" : "EC購物商品",
+        //         "shopCount": 3,
+        //         "amt": 4030,
+        //         "shopArray":[
+        //             {"no":"T001","name":"戰艦大和","price":800,"qty":3,"total":2400,"photo":"T001.jpg"},
+        //             {"no":"F004","name":"Nike 休閒鞋","price":2680,"qty":2,"total":5360,"photo":"F004.jpg"},
+        //             {"no":"M004","name":"屍速列車 感染半島","price":550,"qty":1,"total":550,"photo":"M004.jpg"}
+        //         ]
+        //     }
+        // ]
+        // console.log(order_data[0].shopArray)
+        // document.getElementById('myOrderNo').innerText = 'ECx20220207153113222';
+    </script>
+</body>
+</html>
