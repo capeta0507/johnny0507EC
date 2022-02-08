@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂單查詢</title>
+    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <!-- Start Top Nav -->
+    <div w3-include-html="component/nav.html"></div>
+    <!-- Close Top Nav -->
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+                EC0507
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <div w3-include-html="component/header_link.html"></div>
+                </div>
+                <div class="navbar align-self-center d-flex">
+                    <!-- 登入 -->
+                    <div w3-include-html="component/header_login.html"></div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Close Header -->
+    <div class="container">
+      <div class="order_content">
+        <h1>訂單查詢</h1>
+        <!-- 訂單 -->
+        <div id="myorders" class="order_form">
+          <table class="table table-bordered table_list">
+            <thead class="table-secondary">
+              <tr>
+                <th class="text-center" scope="col">訂單編號</th>
+                <th class="text-center" scope="col">日期</th>
+                <th class="text-center" scope="col">名稱</th>
+                <th class="text-center" scope="col">總價</th>
+              </tr>
+            </thead>
+            <tbody id="order_list">
+              <tr>
+                <th class="text-center" scope="row">ECx20220207153133000</th>
+                <td class="text-center">2022/02/07</td>
+                <td class="text-center">EC購物商品</td>
+                <td class="text-center">NT$ 7760</td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+            明細
+          </button>
+          <!-- 明細 -->
+          <div class="collapse" id="collapseExample1">
+            <div class="shop_array_order">
+              <table id="myShopArray" class="table table-bordered table-hover table-dark">
+                <thead>
+                  <tr>
+                    <th class="text-center" scope="col">商品編號</th>
+                    <th class="text-center" scope="col">商品名稱</th>
+                    <th class="text-center" scope="col">數量</th>
+                    <th class="text-center" scope="col">價格</th>
+                  </tr>
+                </thead>
+                <tbody id="shop_list">
+                  <tr>
+                    <td class="text-center">T001</td>
+                    <td class="text-center">戰艦大和</td>
+                    <td class="text-center">3件</td>
+                    <td class="text-center">NT$ 2400</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">F004</td>
+                    <td class="text-center">Nike 休閒鞋</td>
+                    <td class="text-center">2件</td>
+                    <td class="text-center">NT$ 5360</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!--  -->
+          <table class="table table-bordered table_list">
+            <thead class="table-secondary">
+              <tr>
+                <th class="text-center" scope="col">訂單編號</th>
+                <th class="text-center" scope="col">日期</th>
+                <th class="text-center" scope="col">名稱</th>
+                <th class="text-center" scope="col">總價</th>
+              </tr>
+            </thead>
+            <tbody id="order_list">
+              <tr>
+                <th class="text-center" scope="row">ECx20220207153133000</th>
+                <td class="text-center">2022/02/07</td>
+                <td class="text-center">EC購物商品</td>
+                <td class="text-center">NT$ 7760</td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+            明細
+          </button>
+          <!-- 明細 -->
+          <div class="collapse" id="collapseExample2">
+            <div class="shop_array_order">
+              <table id="myShopArray" class="table table-bordered table-hover table-dark">
+                <thead>
+                  <tr>
+                    <th class="text-center" scope="col">商品編號</th>
+                    <th class="text-center" scope="col">商品名稱</th>
+                    <th class="text-center" scope="col">數量</th>
+                    <th class="text-center" scope="col">價格</th>
+                  </tr>
+                </thead>
+                <tbody id="shop_list">
+                  <tr>
+                    <td class="text-center">T001</td>
+                    <td class="text-center">戰艦大和</td>
+                    <td class="text-center">3件</td>
+                    <td class="text-center">NT$ 2400</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center">F004</td>
+                    <td class="text-center">Nike 休閒鞋</td>
+                    <td class="text-center">2件</td>
+                    <td class="text-center">NT$ 5360</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!--  -->
+        </div>
+      </div>
+    </div>
+    <!-- Start Footer -->
+    <div w3-include-html="component/footer.html"></div>
+    <!-- End Footer -->
+    <!-- Start Script -->
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <!-- <script src="assets/js/bootstrap.bundle.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/templatemo.js"></script>
+    <script src="assets/js/myorders.js"></script>
+    <!-- End Script -->
+    <script>
+        $(document).ready(()=>{
+            let userEmail = sessionStorage.getItem('eMail');
+            if (!userEmail){
+                // alert('授權錯誤，必須先登入');
+                window.location.href = "login.html";
+                return false;
+            }
+            // w3.includeHTML();
+            includeHTML();
+        });
+    </script>
+    <script src="assets/js/loginSwitch.js"></script>
+</body>
+</html>

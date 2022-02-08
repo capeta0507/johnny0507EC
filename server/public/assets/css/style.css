@@ -357,6 +357,14 @@ input::-webkit-inner-spin-button {
     appearance: none;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+.shop_array_order{
+    margin-top: 5px;
+    width: 90%;
+    margin: auto;
+}
+.table_list{
+    margin-top: 10px;
+}
 @media screen and (max-width:992px){
     .sign_tag{
         border: none;
