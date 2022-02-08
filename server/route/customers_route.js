@@ -341,4 +341,37 @@ const createUserIP = (req, res) => {
 	return ipStr;
 }
 
+// 訂單查詢
+router.get('/myorders/:eMail', (req,res)=>{
+	let eMail = req.params.eMail;
+
+	// 搜尋條件
+	let xEmail = {
+		eMail: eMail
+	};
+	// console.log(xEmail)
+	MongoClient.connect(MongoURL,(err,db)=>{
+		if (err){
+			console.log("MongoDB Connect error ..." + err);
+		} else {
+			let dbo = db.db("EC0507");
+			dbo.collection("orders").find(xEmail).toArray((err,result)=>{
+				if(err){
+					res.json({
+					  success:false,
+					  message:"/myorders/:eMail ... 找尋錯誤",
+					});
+				} else {
+					db.close();
+					res.json({
+					  success:true,
+					  message:"成功讀取訂單",
+					  result:result
+					});
+				}
+			})
+		}
+	})
+})
+
 module.exports = router;
