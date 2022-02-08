@@ -69,8 +69,9 @@ router.post('/ecpay',(req,res)=>{
 // 訂購確認 order_confirm
 router.post('/order_confirm', (req,res)=>{
   // 寫到MongoDB 去 orders 的 collections
-  const{userName, eMail, orderNo, description, shopCount, amt, shopArray} = req.body;
-
+  var {userName, eMail, orderNo, description, shopCount, amt, shopArray} = req.body;
+  // 測試email
+  let x_eMail = 'nintendof1@gmail.com;davidtpe99@gmail.com;'
   // console.log(req.body)
   // console.log(shopArray)
   let myShopArray = JSON.parse(shopArray)
@@ -84,28 +85,60 @@ router.post('/order_confirm', (req,res)=>{
     }
   });
 
-  fs.readFile('public/mail/index.html', {encoding: 'utf-8'}, function(err, html){
-    if (err) {
-      console.log(error);
-    } else {
-      var mailOptions = {
-        from: '<nintendof1@gmail.com>',
-        to: eMail,
-        subject: "您的EC0507訂單",
-        html: html
-      };
-      // 寄出
-      mailTransport.sendMail(mailOptions,(err,result)=>{
-          if (err){
-            console.log(err);
-          }else{
-            console.log('eMail 寄送完成...');
-            console.log(result);
-          }
-        }
-      );
-    }
+  let x_html = `
+    <body>
+      <br>
+      <div style="font-size: 24px;">感謝您購買EC0507的商品 (測試資料 請忽略)</div>
+      <br>
+      <div>您的訂單編號：<span id="myOrderNo">${orderNo}</span></div>
+      <table style="border: 1px solid #dddddd; border-collapse: collapse;">
+        <thead>
+          <tr style="border: 1px solid #dddddd;">
+            <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="col">編號</th>
+            <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="col">商品名稱</th>
+            <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="col">單價</th>
+            <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="col">數量</th>
+            <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="col">小計</th>
+          </tr>
+        </thead>
+        <tbody id="myOrderList">
+  `
+  let x_no = 0
+  myShopArray.map(data=>{
+    x_no++;
+    x_html += `
+      <tr style="border: 1px solid #dddddd;">
+        <th style="text-align: center; border: 1px solid #dddddd; padding: 10px;" scope="row">${x_no}</th>
+        <td style="text-align: center; border: 1px solid #dddddd; padding: 10px;">${data.name}</td>
+        <td style="text-align: center; border: 1px solid #dddddd; padding: 10px;">NT$ ${data.price}</td>
+        <td style="text-align: center; border: 1px solid #dddddd; padding: 10px;">${data.qty}</td>
+        <td  style="text-align: center; border: 1px solid #dddddd; padding: 10px;">NT$ ${data.total}</td>
+      </tr>
+    `
   });
+  x_html += `
+        </tbody>
+      </table>
+      <div>總共<span style="color: red; font-weight: bolder; font-size: 20px;">NT$</span> <span style="color: red; font-weight: bolder; font-size: 20px;" id="Amt">${amt}</span>元</div>
+    </body>
+  `
+  // console.log(x_html)
+  var mailOptions = {
+    from: '<nintendof1@gmail.com>',
+    to: x_eMail,
+    subject: "您的EC0507訂單",
+    html: x_html
+  };
+  // 寄出
+  mailTransport.sendMail(mailOptions,(err,result)=>{
+      if (err){
+        console.log(err);
+      }else{
+        console.log('eMail 寄送完成...');
+        console.log(result);
+      }
+    }
+  );
 
   let xOrder = {
     "eMail": eMail,
