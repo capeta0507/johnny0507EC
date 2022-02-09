@@ -23,8 +23,7 @@ const MongoClient = require('mongodb').MongoClient;
 const MongoURL = process.env.MONGODB_URL;
 
 // node 寄送email (測試)
-const nodemailer = require('nodemailer');
-const fs = require('fs');
+// const nodemailer = require('nodemailer');
 
 // 前端：order.html -> 訂購單確認 --> 處理資料加密 --> 回傳
 router.post('/ecpay',(req,res)=>{
@@ -70,20 +69,23 @@ router.post('/ecpay',(req,res)=>{
 router.post('/order_confirm', (req,res)=>{
   // 寫到MongoDB 去 orders 的 collections
   var {userName, eMail, orderNo, description, shopCount, amt, shopArray} = req.body;
+  
   // 測試email
-  let x_eMail = 'nintendof1@gmail.com;davidtpe99@gmail.com;'
+  // let x_eMail = 'nintendof1@gmail.com;davidtpe99@gmail.com;'
+
   // console.log(req.body)
   // console.log(shopArray)
   let myShopArray = JSON.parse(shopArray)
   // console.log(myShopArray);
 
-  var mailTransport = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: 'nintendof1@gmail.com',
-      pass: 'hikxxzzpsaadumqk' // 認證密碼
-    }
-  });
+  // 測試email
+  // var mailTransport = nodemailer.createTransport({
+  //   service: "Gmail",
+  //   auth: {
+  //     user: 'nintendof1@gmail.com',
+  //     pass: 'hikxxzzpsaadumqk' // 認證密碼
+  //   }
+  // });
 
   let x_html = `
     <body>
@@ -123,22 +125,24 @@ router.post('/order_confirm', (req,res)=>{
     </body>
   `
   // console.log(x_html)
-  var mailOptions = {
-    from: '<nintendof1@gmail.com>',
-    to: x_eMail,
-    subject: "您的EC0507訂單",
-    html: x_html
-  };
-  // 寄出
-  mailTransport.sendMail(mailOptions,(err,result)=>{
-      if (err){
-        console.log(err);
-      }else{
-        console.log('eMail 寄送完成...');
-        console.log(result);
-      }
-    }
-  );
+
+  // 測試email
+  // var mailOptions = {
+  //   from: '<nintendof1@gmail.com>',
+  //   to: x_eMail,
+  //   subject: "您的EC0507訂單",
+  //   html: x_html
+  // };
+  // 寄出(測試email)
+  // mailTransport.sendMail(mailOptions,(err,result)=>{
+  //     if (err){
+  //       console.log(err);
+  //     }else{
+  //       console.log('eMail 寄送完成...');
+  //       console.log(result);
+  //     }
+  //   }
+  // );
 
   let xOrder = {
     "eMail": eMail,
