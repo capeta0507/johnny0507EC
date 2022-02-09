@@ -1,12 +1,3 @@
-// let myNo = 'ECx20220207153113000';
-// let myNo2 = myNo.slice(3,11)
-// console.log(myNo2)
-// let myYear = myNo2.slice(0, 4)
-// let myMonth = myNo2.slice(4, 6)
-// let myDate = myNo2.slice(6, 8)
-// let order_date = myYear + '/' + myMonth + '/' + myDate
-// console.log(order_date)
-
 let myOrder = ''
 let myEmail = sessionStorage.getItem('eMail');
 // console.log('myEmail', myEmail)
@@ -15,10 +6,10 @@ axios.get(`/customers/myorders/${myEmail}`)
   .then(result=>{
     if (result.data.success == true){
      result.data.result.map((data, oerder_key)=>{
-      let myDateString = data.orderNo.slice(3,11);
-      let myYear = myDateString.slice(0, 4);
-      let myMonth = myDateString.slice(4, 6);
-      let myDate = myDateString.slice(6, 8);
+      let myDateString = data.orderNo.substring(3,11);
+      let myYear = myDateString.substring(0, 4);
+      let myMonth = myDateString.substring(4, 6);
+      let myDate = myDateString.substring(6, 8);
       let order_date = myYear + '/' + myMonth + '/' + myDate;
       // console.log(oerder_key)
       // console.log(data)
