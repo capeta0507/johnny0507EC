@@ -153,10 +153,10 @@ router.post('/order_confirm', (req,res)=>{
   let myMobile = '0983720128';
   let message = `親愛的客戶:\n您的訂單編號: ${orderNo} \n總計: ${amt}元`;
 
-  let myUrl = `http://api.twsms.com/json/sms_send.php?username=${myUsername}&password=${myPassword}&mobile=${myMobile}&message=${encodeURI(message)}`
+  let myUrl = `http://api.twsms.com/json/sms_send.php?username=${myUsername}&password=${myPassword}&mobile=${myMobile}&message=${message}`
 
   // 簡訊傳送
-  axios.get(myUrl)
+  axios.get(encodeURI(myUrl))
   .then(result=>{
       console.log(result);
   })
