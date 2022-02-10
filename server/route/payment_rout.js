@@ -4,6 +4,8 @@ const express = require('express');
 const router = express.Router();
 const ecpay_payment = require('../ECPAY_Payment_node_js');  // 綠界 API
 // const bodyParser = require('body-parser');
+const axios = require('axios');
+// const { myUsername, myPassword } = require('../auth/twSMS');
 
 // app.use(express.json());
 // var jsonParser = bodyParser.json();
@@ -144,6 +146,23 @@ router.post('/order_confirm', (req,res)=>{
   //     }
   //   }
   // );
+
+  // 簡訊寄送
+  let myUsername = 'ec0507';
+  let myPassword = 'johnnyec0507';
+  let myMobile = '0983720128';
+  let message = `親愛的客戶:\n您的訂單編號: ${orderNo} \n總計: ${amt}元`;
+
+  let myUrl = `http://api.twsms.com/json/sms_send.php?username=${myUsername}&password=${myPassword}&mobile=${myMobile}&message=${encodeURI(message)}`
+
+  // 簡訊傳送
+  axios.get(myUrl)
+  .then(result=>{
+      console.log(result);
+  })
+  .catch(err =>{
+      console.log('error', err.message);
+  })
 
   let xOrder = {
     "eMail": eMail,
