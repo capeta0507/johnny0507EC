@@ -148,8 +148,8 @@ router.post('/order_confirm', (req,res)=>{
   // );
 
   // 簡訊寄送
-  let myUsername = 'ec0507';
-  let myPassword = 'johnnyec0507';
+  let myUsername = process.env.SMS_USER_NAME;
+  let myPassword = process.env.SMS_PASSWORD;
   let myMobile = '0983720128';
   let message = `親愛的客戶:\n您的訂單編號: ${orderNo} \n總計: ${amt}元`;
 
