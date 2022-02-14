@@ -81,17 +81,17 @@ https://templatemo.com/tm-559-zay-shop
 
     <!-- Start Banner Hero -->
     <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
+        <ol id="myCarouselList" class="carousel-indicators">
+            <!-- <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
-            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
+            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li> -->
         </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
+        <div id="myCarousel" class="carousel-inner">
+            <!-- <div class="carousel-item active">
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="./assets/img/banner/banner.jpg" alt="">
+                            <img class="img-fluid" src="./assets/img/banner/banner01.jpg" alt="">
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left align-self-center">
@@ -141,7 +141,7 @@ https://templatemo.com/tm-559-zay-shop
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="prev">
             <i class="fas fa-chevron-left"></i>
@@ -284,6 +284,60 @@ https://templatemo.com/tm-559-zay-shop
         });
     </script>
     <script src="assets/js/loginSwitch.js"></script>
+    <script>
+        let banner_list = '';
+        let carousel_link_list = '';
+         axios.get(`/banners/banner`)
+         .then(result=>{
+            if (result.data.success == true){
+                console.log(result.data.result)
+                result.data.result.map((data, idx)=>{
+                    let banner_active = '';
+                    let bannerBtn = '';
+                    if(idx == 0){
+                        banner_active = 'active';
+                        bannerBtn = 'class="active"';
+                    } else {
+                        banner_active = '';
+                        bannerBtn = '';
+                    }
+                    console.log(data.display)
+                    if(data.display == true){
+                        banner_list += `
+                            <div class="carousel-item ${banner_active}">
+                                <div class="container">
+                                    <div class="row p-5">
+                                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                            <img class="img-fluid" src="./assets/img/banner/${data.img}" alt="">
+                                        </div>
+                                        <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                            <div class="text-align-left align-self-center">
+                                                <h1 class="h1">${data.title}</h1>
+                                                <h3 class="h2">${data.subTitle}</h3>
+                                                <p>
+                                                    ${data.content}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                        carousel_link_list += `
+                            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="${idx}" ${bannerBtn}></li>
+                        `   
+                    }
+                    $('#myCarousel').html(banner_list);
+                    $('#myCarouselList').html(carousel_link_list);
+                })
+            } else {
+                console.log('查無資料');
+            }
+         })
+         .catch(err=>{
+            console.log(err.message);
+         })
+    </script>
 </body>
 
 </html>

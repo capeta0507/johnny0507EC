@@ -3,18 +3,35 @@
     "title":"潮流/服飾",
     "subTitle" : "各種名牌服裝隨你選",
     "content":"現代風潮鞋子、上衣、長褲，各種頂級知名品牌Nike、Adidas、PUMA、UNIQLO、無印良品 等等在這裡都找得到！",
-    "img" : "banner.jpg"
+    "img" : "banner01.jpg",
+    "display": true
   },
   {
     "title":"玩具/模型",
     "subTitle" : "動漫公仔、模型任你挑",
     "content":"集合各種動漫角色，LoveLive、艦隊collection、黑傑克等等各種動漫角色齊聚一堂。",
-    "img" : "banner02.png"
+    "img" : "banner02.png",
+    "display": true
   },
   {
     "title":"電影",
     "subTitle" : "新片 經典片隨你選",
     "content":"新上映的電影、經典電影在這裡都找得到！",
-    "img" : "banner03.png"
+    "img" : "banner03.png",
+    "display": true
+  },
+  {
+    "title":"新片",
+    "subTitle" : "新片強檔上映",
+    "content":"漫威大師級新作，快來關注最新的影片！",
+    "img" : "banner04.png",
+    "display": true
+  },
+  {
+    "title":"PVC",
+    "subTitle" : "睦月 改二 PVC",
+    "content":"艦隊collection 睦月型1號艦 睦月改二 帥氣登場",
+    "img" : "banner05.png",
+    "display": false
   }
 ]
