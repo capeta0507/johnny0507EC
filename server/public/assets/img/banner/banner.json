@@ -1,0 +1,20 @@
+[
+  {
+    "title":"潮流/服飾",
+    "subTitle" : "各種名牌服裝隨你選",
+    "content":"現代風潮鞋子、上衣、長褲，各種頂級知名品牌Nike、Adidas、PUMA、UNIQLO、無印良品 等等在這裡都找得到！",
+    "img" : "banner.jpg"
+  },
+  {
+    "title":"玩具/模型",
+    "subTitle" : "動漫公仔、模型任你挑",
+    "content":"集合各種動漫角色，LoveLive、艦隊collection、黑傑克等等各種動漫角色齊聚一堂。",
+    "img" : "banner02.png"
+  },
+  {
+    "title":"電影",
+    "subTitle" : "新片 經典片隨你選",
+    "content":"新上映的電影、經典電影在這裡都找得到！",
+    "img" : "banner03.png"
+  }
+]

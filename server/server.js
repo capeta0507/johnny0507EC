@@ -42,3 +42,7 @@ app.use('/products',prodRouter);
 // 付款處理 (綠界)
 const ecpayRouter = require('./route/payment_rout');
 app.use('/payment',ecpayRouter);
+
+// banner Router
+const bannerRouter = require('./route/banner_route');
+app.use('/banners', bannerRouter);
