@@ -25,7 +25,7 @@ const MongoClient = require('mongodb').MongoClient;
 const MongoURL = process.env.MONGODB_URL;
 
 // node 寄送email (測試)
-// const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 
 // 前端：order.html -> 訂購單確認 --> 處理資料加密 --> 回傳
 router.post('/ecpay',(req,res)=>{
@@ -70,7 +70,7 @@ router.post('/ecpay',(req,res)=>{
 // 訂購確認 order_confirm
 router.post('/order_confirm', (req,res)=>{
   // 寫到MongoDB 去 orders 的 collections
-  var {userName, eMail, orderNo, description, shopCount, amt, shopArray} = req.body;
+  var {userName, eMail, orderNo, description, shopCount, amt, shopArray, myEmail_check, myPhone} = req.body;
   
   // 測試email
   // let x_eMail = 'nintendof1@gmail.com;davidtpe99@gmail.com;'
@@ -81,13 +81,13 @@ router.post('/order_confirm', (req,res)=>{
   // console.log(myShopArray);
 
   // 測試email
-  // var mailTransport = nodemailer.createTransport({
-  //   service: "Gmail",
-  //   auth: {
-  //     user: 'nintendof1@gmail.com',
-  //     pass: 'hikxxzzpsaadumqk' // 認證密碼
-  //   }
-  // });
+  var mailTransport = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: 'nintendof1@gmail.com',
+      pass: 'hikxxzzpsaadumqk' // 認證密碼
+    }
+  });
 
   // 測試email
   let x_html = `
@@ -130,27 +130,27 @@ router.post('/order_confirm', (req,res)=>{
   // console.log(x_html)
 
   // 測試email
-  // var mailOptions = {
-  //   from: '<nintendof1@gmail.com>',
-  //   to: x_eMail,
-  //   subject: "您的EC0507訂單",
-  //   html: x_html
-  // };
+  var mailOptions = {
+    from: '<nintendof1@gmail.com>',
+    to: myEmail_check,
+    subject: "您的EC0507訂單",
+    html: x_html
+  };
   // 寄出(測試email)
-  // mailTransport.sendMail(mailOptions,(err,result)=>{
-  //     if (err){
-  //       console.log(err);
-  //     }else{
-  //       console.log('eMail 寄送完成...');
-  //       console.log(result);
-  //     }
-  //   }
-  // );
+  mailTransport.sendMail(mailOptions,(err,result)=>{
+      if (err){
+        console.log(err);
+      }else{
+        console.log('eMail 寄送完成...');
+        console.log(result);
+      }
+    }
+  );
 
   // 簡訊寄送
   let myUsername = process.env.SMS_USER_NAME;
   let myPassword = process.env.SMS_PASSWORD;
-  let myMobile = '0983720128';
+  let myMobile = myPhone;
   let message = `親愛的客戶:\n您的訂單編號: ${orderNo} \n總計: ${amt}元`;
 
   let myUrl = `http://api.twsms.com/json/sms_send.php?username=${myUsername}&password=${myPassword}&mobile=${myMobile}&message=${message}`

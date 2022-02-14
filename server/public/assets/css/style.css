@@ -365,6 +365,19 @@ input::-webkit-inner-spin-button {
 .table_list{
     margin-top: 10px;
 }
+.check_content{
+    width: 80%;
+    margin: auto;
+    /* border: 1px solid black; */
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.check_content h3{
+    text-align: center;
+}
+.check_data{
+    width: 100%;
+}
 @media screen and (max-width:992px){
     .sign_tag{
         border: none;
