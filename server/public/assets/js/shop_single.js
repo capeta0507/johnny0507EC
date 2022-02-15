@@ -91,7 +91,7 @@ function shop_item(no){
 
                 <div class="row pb-3">
                   <div class="col d-grid">
-                    <button class="btn btn-success btn-lg" value="buy">Buy</button>
+                    <button class="btn btn-success btn-lg" value="buy" onclick="goOrder()">Buy</button>
                   </div>
                   <div class="col d-grid">
                     <button class="btn btn-success btn-lg" value="addtocard" onclick="addCart()">Add To Cart</button>
@@ -116,20 +116,21 @@ function shop_item(no){
 
 // add cart
 function addCart(){
-  myShopCount++
-  $('#myCart').removeClass('cart_none');
-  // console.log('urlNo', urlNo[1], myShopCount);
-  let myItem = {
-    "no": urlNo[1],
-    "name": myProductName,
-    "price": myProductPrice,
-    "qty": 1,
-    "total": myProductPrice * 1,
-    "photo": myProductImg
-  }
-  myBuyItem.push(myItem);
-  window.sessionStorage.setItem('shopArray', JSON.stringify(myBuyItem));
-  window.sessionStorage.setItem('shopCount', myShopCount);
+  // myShopCount++
+  // $('#myCart').removeClass('cart_none');
+  // // console.log('urlNo', urlNo[1], myShopCount);
+  // let myItem = {
+  //   "no": urlNo[1],
+  //   "name": myProductName,
+  //   "price": myProductPrice,
+  //   "qty": 1,
+  //   "total": myProductPrice * 1,
+  //   "photo": myProductImg
+  // }
+  // myBuyItem.push(myItem);
+  // window.sessionStorage.setItem('shopArray', JSON.stringify(myBuyItem));
+  // window.sessionStorage.setItem('shopCount', myShopCount);
+  addSession();
   sessionBuyGet = JSON.parse(`${sessionStorage.getItem('shopArray')}`)
   // console.log('sessionBuyGet', sessionBuyGet)
   cart_list = ''
@@ -155,6 +156,50 @@ function addCart(){
   $('.cart_payBtn').show();
   $('#myListContent').html(cart_list);
   $('#myCart').text(myShopCount);
+}
+
+function goOrder(){
+  // myShopCount++
+  // $('#myCart').removeClass('cart_none');
+  // // console.log('urlNo', urlNo[1], myShopCount);
+  // let myItem = {
+  //   "no": urlNo[1],
+  //   "name": myProductName,
+  //   "price": myProductPrice,
+  //   "qty": 1,
+  //   "total": myProductPrice * 1,
+  //   "photo": myProductImg
+  // }
+  // myBuyItem.push(myItem);
+  // window.sessionStorage.setItem('shopArray', JSON.stringify(myBuyItem));
+  // window.sessionStorage.setItem('shopCount', myShopCount);
+  addSession();
+
+  $('#myCart').text(myShopCount);
+  let userName = sessionStorage.getItem('userName');
+  if(userName){
+      window.location.href = 'shop-order-master.html'
+  } else {
+      window.location.href = 'login.html?backurl=shop-order-master.html'
+  }
+}
+
+// 加到session
+function addSession(){
+  myShopCount++
+  $('#myCart').removeClass('cart_none');
+  // console.log('urlNo', urlNo[1], myShopCount);
+  let myItem = {
+    "no": urlNo[1],
+    "name": myProductName,
+    "price": myProductPrice,
+    "qty": 1,
+    "total": myProductPrice * 1,
+    "photo": myProductImg
+  }
+  myBuyItem.push(myItem);
+  window.sessionStorage.setItem('shopArray', JSON.stringify(myBuyItem));
+  window.sessionStorage.setItem('shopCount', myShopCount);
 }
 
 // function order_delete(x){
