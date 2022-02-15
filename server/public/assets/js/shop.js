@@ -3,20 +3,21 @@ let shopCard = '';
 let item_star = '';
 
 // 商品數量
-let myShopCount = 0;
-let myBuyItem = [];
+// let myShopCount = 0;
+// let myBuyItem = [];
 
 let session_category = sessionStorage.getItem('shop_cate');
 
 // console.log('session_category', session_category)
 
-let session_cart = JSON.parse(window.sessionStorage.getItem('shopArray'));
-let session_count =parseInt(window.sessionStorage.getItem('shopCount'));
-// session裡 shopArray 假如有資料，將session 的資料帶入
-if(session_cart !== null){
-  myBuyItem = session_cart
-  myShopCount = session_count
-}
+// 獲取session資料
+// let session_cart = JSON.parse(window.sessionStorage.getItem('shopArray'));
+// let session_count =parseInt(window.sessionStorage.getItem('shopCount'));
+// // session裡 shopArray 假如有資料，將session 的資料帶入
+// if(session_cart !== null){
+//   myBuyItem = session_cart
+//   myShopCount = session_count
+// }
 
 let cart_list = '';
 
