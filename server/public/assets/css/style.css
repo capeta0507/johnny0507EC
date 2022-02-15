@@ -378,6 +378,9 @@ input::-webkit-inner-spin-button {
 .check_data{
     width: 100%;
 }
+.trash_hover:hover{
+    color: red;
+}
 @media screen and (max-width:992px){
     .sign_tag{
         border: none;

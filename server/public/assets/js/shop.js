@@ -183,7 +183,7 @@ function related_cart(cart_no, cart_name, cart_price, cart_photo){
           <div>數量：${data.qty}</div>
           <div>價格：NT$ ${data.total}</div>
         </div>
-        <div class="notdelete" onclick="order_delete('${pay_no}')"><i class="fa fa-trash-alt"></i></div>
+        <div class="notdelete" onclick="order_delete('${pay_no}')"><i class="fa fa-trash-alt trash_hover"></i></div>
       </div>
     `
   })
