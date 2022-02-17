@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "pm2EC": "pm2 start server.js --name 'EC0507' --watch",
+    "pm2App": "pm2 start app.js --name 'APP' --watch"
   },
   "keywords": [],
   "author": "",
