@@ -349,13 +349,16 @@ router.get('/myorders/:eMail', (req,res)=>{
 	let xEmail = {
 		eMail: eMail
 	};
+	let xSort = {
+		orderNo: -1
+	};
 	// console.log(xEmail)
 	MongoClient.connect(MongoURL,(err,db)=>{
 		if (err){
 			console.log("MongoDB Connect error ..." + err);
 		} else {
 			let dbo = db.db("EC0507");
-			dbo.collection("orders").find(xEmail).toArray((err,result)=>{
+			dbo.collection("orders").find(xEmail).sort(xSort).toArray((err,result)=>{
 				if(err){
 					res.json({
 					  success:false,

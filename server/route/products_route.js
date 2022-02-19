@@ -15,6 +15,11 @@ router.get('/category/:cat',(req,res)=>{
   let xCategory = {
     category: myCat,
   };
+  let xSort = {
+		category: 1,
+    // price: -1,
+    no: 1
+	};
   // 參數 All 代表全部
   if (myCat == 'All'){
     xCategory = {
@@ -28,7 +33,7 @@ router.get('/category/:cat',(req,res)=>{
 			console.log("MongoDB Connect error ..." + err);
 		} else{
       let dbo = db.db("EC0507");
-			dbo.collection("products").find(xCategory).toArray((err,result)=>{
+			dbo.collection("products").find(xCategory).sort(xSort).toArray((err,result)=>{
         if(err){
           res.json({
             success:false,
