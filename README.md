@@ -16,6 +16,6 @@
 2. 後端 : Node.js + Express + MongoDB
 3. 簡訊：台灣簡訊 twsms API
 4. 郵件：Google Mail Service
-5. 雲端 : AWS EC2 Windows 2019 Server Instance
-6. 運轉 : PM2
-7. 付款 : 綠界 ECPay API
+5. 付款 : 綠界 ECPay API
+6. 雲端 : AWS EC2 Windows 2019 Server Instance
+7. 運轉 : PM2
