@@ -14,6 +14,8 @@
 ### 專案說明
 1. 前端 : HTML + CSS + JavaScript + jQuery + Bootstrap 4
 2. 後端 : Node.js + Express + MongoDB
-3. 雲端 : AWS EC2 Windows 2019 Server Instance
-4. 運轉 : PM2
-5. 付款 : 綠界 ECPay API
+3. 簡訊：台灣簡訊 twsms API
+4. 郵件：Google Mail Service
+5. 雲端 : AWS EC2 Windows 2019 Server Instance
+6. 運轉 : PM2
+7. 付款 : 綠界 ECPay API
