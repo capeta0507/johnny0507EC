@@ -138,7 +138,7 @@ function addCart(){
   sessionBuyGet.map(data => {
     pay_no++
     cart_list += `
-      <a href="#" class="notification_single" target="_blank">
+      <a href="#" class="notification_single">
         <div class="notleft">
           <div class="notImg">
             <img src="shop/product/${data.photo}" alt="">
@@ -267,7 +267,7 @@ function related(cat){
                   </div>
                 </div>
                 <div class="card-body">
-                  <a href="shop-single.html" class="h3 text-decoration-none">${data.name}</a>
+                  <a href="shop-single.html?no=${data.no}" class="h3 text-decoration-none">${data.name}</a>
                   <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                     <li>${data.description}</li>
                     <li class="pt-2">

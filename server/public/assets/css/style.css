@@ -381,6 +381,9 @@ input::-webkit-inner-spin-button {
 .trash_hover:hover{
     color: red;
 }
+.about_list li{
+    font-size: 22px !important;
+}
 @media screen and (max-width:992px){
     .sign_tag{
         border: none;
